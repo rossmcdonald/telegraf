@@ -1,0 +1,39 @@
+---
+- name: Install any necessary dependencies [Debian/Ubuntu]
+  apt: 
+    name: "{{ item }}" 
+    state: present 
+    update_cache: yes 
+    cache_valid_time: 3600
+  with_items:
+    - python-httplib2
+    - python-apt
+    - curl
+
+- name: Import InfluxData GPG signing key [Debian/Ubuntu]
+  apt_key:
+    url: https://repos.influxdata.com/influxdb.key
+    state: present
+  when: telegraf_install_url is not defined or telegraf_install_url == None
+
+- name: Add InfluxData repository [Debian/Ubuntu]
+  apt_repository:
+    repo: deb https://repos.influxdata.com/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ telegraf_install_version }}
+    state: present
+  when: telegraf_install_url is not defined or telegraf_install_url == None
+
+- name: Install Telegraf packages [Debian/Ubuntu]
+  apt: 
+    name: telegraf
+    state: latest
+  when: telegraf_install_url is not defined or telegraf_install_url == None
+  
+- name: Download Telegraf package via URL [Debian/Ubuntu]
+  command: curl -o /tmp/telegraf-ansible-download.deb {{ telegraf_install_url }}
+  when: telegraf_install_url is defined and telegraf_install_url != None
+
+- name: Install downloaded Telegraf package [Debian/Ubuntu]
+  apt:
+    deb: /tmp/telegraf-ansible-download.deb
+    state: present
+  when: telegraf_install_url is defined and telegraf_install_url != None

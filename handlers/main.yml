@@ -1,0 +1,9 @@
+---
+- name: restart telegraf
+  service: 
+    name: telegraf
+    state: restarted
+
+- name: pause
+  pause:
+    seconds: 3

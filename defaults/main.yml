@@ -1,0 +1,5 @@
+---
+# Channel of Telegraf to install
+telegraf_install_version: stable
+
+

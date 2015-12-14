@@ -1,0 +1,36 @@
+---
+- name: Set templatized Telegraf configuration
+  template: 
+    src: telegraf.conf.j2 
+    dest: "{{ telegraf_configuration_dir }}/telegraf.conf"
+    force: yes
+    backup: yes
+    owner: telegraf
+    group: telegraf
+    mode: 0744
+  when: telegraf_template_configuration
+  
+- name: Start the Telegraf service
+  service:
+    name: telegraf
+    state: restarted
+    enabled: yes
+  register: telegraf_started
+  when: telegraf_start_service
+
+- name: Pause to ensure Telegraf service is up
+  pause:
+    seconds: 3
+  when: telegraf_started.changed and telegraf_start_service
+  
+- name: Collect service status
+  command: service telegraf status
+  register: telegraf_service_status
+  when: telegraf_start_service
+  ignore_errors: yes
+
+- name: Assert status of Telegraf service
+  assert:
+    that:
+      - "telegraf_service_status.rc == 0"
+  when: telegraf_start_service

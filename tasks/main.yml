@@ -1,0 +1,6 @@
+---
+- include: install.yml
+  tags: [telegraf, install]
+
+- include: configure.yml
+  tags: [telegraf, configure]

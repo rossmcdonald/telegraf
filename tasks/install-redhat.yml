@@ -1,0 +1,28 @@
+---
+- name: Install any necessary dependencies [RedHat/CentOS]
+  yum: 
+    name: "{{ item }}" 
+    state: present
+  with_items:
+    - curl
+
+- name: Add InfluxData repository file [RHEL/CentOS]
+  template:
+    src: etc/yum.repos.d/influxdata.repo.j2
+    dest: /etc/yum.repos.d/influxdata.repo
+    force: yes
+    backup: yes
+  when: telegraf_install_url is not defined or telegraf_install_url == None
+
+- name: Install Telegraf packages [RHEL/CentOS]
+  yum: 
+    name: telegraf
+    state: latest
+  when: telegraf_install_url is not defined or telegraf_install_url == None
+
+- name: Install Telegraf from URL [RHEL/CentOS]
+  yum: 
+    name: "{{ telegraf_install_url }}"
+    state: present
+  when: telegraf_install_url is defined and telegraf_install_url != None
+  
