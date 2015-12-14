@@ -44,7 +44,7 @@ Contributions and Feedback
 
 Any contributions are welcome. For any bugs or feature requests, please open an issue through Github.
 
-Licensex
+License
 -------
 
 MIT

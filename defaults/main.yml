@@ -3,3 +3,50 @@
 telegraf_install_version: stable
 
 
+# Configuration Variables
+telegraf_tags:
+  dc: us-east-1
+
+telegraf_agent_interval: 10s
+telegraf_round_interval: "true"
+
+telegraf_flush_interval: 10s
+telegraf_flush_jitter: 0s
+telegraf_debug: "false"
+telegraf_hostname: 
+
+telegraf_influxdb_urls:
+  - http://localhost:8086
+telegraf_influxdb_database: telegraf
+telegraf_influxdb_precision: s
+
+telegraf_influxdb_timeout: 5s
+telegraf_influxdb_username: 
+telegraf_influxdb_password: 
+telegraf_influxdb_user_agent: 
+telegraf_influxdb_udp_payload: 512
+
+telegraf_plugins:
+  - cpu
+  - disk
+  - io
+  - mem
+  - swap
+  - system
+
+telegraf_plugin_settings:
+  cpu:
+    percpu: "true"
+    totalcpu: "true"
+    drop:
+      - cpu_time
+  disk:
+    mountpoints:
+      - "/"
+  io:
+    skip_serial_number: "true"
+  procstat:
+    specifications:
+      exe: influxd
+      prefix: influxdb
+
