@@ -2,10 +2,8 @@
 # Channel of Telegraf to install
 telegraf_install_version: stable
 
-
 # Configuration Variables
 telegraf_tags:
-  dc: us-east-1
 
 telegraf_agent_interval: 10s
 telegraf_round_interval: "true"
@@ -26,14 +24,15 @@ telegraf_influxdb_password:
 telegraf_influxdb_user_agent: 
 telegraf_influxdb_udp_payload: 512
 
-telegraf_plugins:
+# Plugins to enable at runtime
+telegraf_plugins_enabled:
   - cpu
   - disk
   - io
   - mem
   - swap
   - system
-
+  
 telegraf_plugin_settings:
   cpu:
     percpu: "true"

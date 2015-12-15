@@ -21,9 +21,11 @@
 
 # Tags can also be specified via a normal map, but only one form at a time:
 [tags]
-{% for key, value in telegraf_tags.iteritems() %}
+{% if telegraf_tags is defined and telegraf_tags != None %}
+{% for key, value in telegraf_tags.iteritems()%}
    {{ key }} = "{{ value }}"
 {% endfor %}
+{% endif %}
 
 # Configuration for telegraf agent
 [agent]
@@ -44,11 +46,11 @@
   # Run telegraf in debug mode
   debug = {{ telegraf_debug }}
   # Override default hostname, if empty use os.Hostname()
-  {% if telegraf_hostname is defined and telegraf_hostname != None %}
+{% if telegraf_hostname is defined and telegraf_hostname != None %}
   hostname = "{{ telegraf_hostname }}"
-  {% else %}
+{% else %}
   hostname = "{{ ansible_hostname }}"
-  {% endif %}
+{% endif %}
 
 ###############################################################################
 #                                  OUTPUTS                                    #
@@ -72,12 +74,12 @@
   # Connection timeout (for the connection with InfluxDB), formatted as a string.
   # If not provided, will default to 0 (no timeout)
   timeout = "{{ telegraf_influxdb_timeout }}"
-  {% if telegraf_influxdb_username is defined and telegraf_influxdb_username != None %}
+{% if telegraf_influxdb_username is defined and telegraf_influxdb_username != None %}
   username = "{{ telegraf_influxdb_username }}"
-  {% endif %}
-  {% if telegraf_influxdb_password is defined and telegraf_influxdb_password != None %}
+{% endif %}
+{% if telegraf_influxdb_password is defined and telegraf_influxdb_password != None %}
   password = "{{ telegraf_influxdb_password }}"
-  {% endif %}
+{% endif %}
   # Set the user agent for HTTP POSTs (can be useful for log differentiation)
   user_agent = "{{ telegraf_influxdb_user_agent }}"
   # Set UDP payload size, defaults to InfluxDB UDP Client default (512 bytes)
@@ -90,14 +92,18 @@
 
 [plugins]
 
-{% for plugin in telegraf_plugins %}
+{% for plugin in telegraf_plugins_enabled %}
 [[plugins.{{ plugin }}]]
 {% if telegraf_plugin_settings.get(plugin) != None %}
 {% for key, value in telegraf_plugin_settings.get(plugin).iteritems() %}
 {% if value is sequence and value is not string %}
    {{ key }} = [ "{{ value|join(',') }}" ]
 {% else %}
+{% if value == "true" or value == "false" or value is number %}
    {{ key }} = {{ value }}
+{% else %}
+   {{ key }} = "{{ value }}"
+{% endif %}
 {% endif %}
 {% endfor %}
 {% endif %}
