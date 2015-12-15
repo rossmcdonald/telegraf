@@ -62,7 +62,7 @@
   # Multiple urls can be specified but it is assumed that they are part of the same
   # cluster, this means that only ONE of the urls will be written to each interval.
   # urls = ["udp://localhost:8089"] # UDP endpoint example
-  urls = [ {{ telegraf_influxdb_urls|join(',') }} ] # required
+  urls = [ "{{ telegraf_influxdb_urls|join('","') }}" ] # required
   # The target database for metrics (telegraf will create it if not exists)
   database = "{{ telegraf_influxdb_database }}" # required
   # Precision of writes, valid values are n, u, ms, s, m, and h
@@ -95,7 +95,7 @@
 {% if telegraf_plugin_settings.get(plugin) != None %}
 {% for key, value in telegraf_plugin_settings.get(plugin).iteritems() %}
 {% if value is sequence and value is not string %}
-   {{ key }} = [ {{ value|join(',') }} ]
+   {{ key }} = [ "{{ value|join(',') }}" ]
 {% else %}
    {{ key }} = {{ value }}
 {% endif %}
