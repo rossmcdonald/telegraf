@@ -96,13 +96,32 @@
 [[plugins.{{ plugin }}]]
 {% if telegraf_plugin_settings.get(plugin) != None %}
 {% for key, value in telegraf_plugin_settings.get(plugin).iteritems() %}
+{% if value is mapping  %}
+  [[plugins.{{ plugin }}.{{ key }}]]
+{% for key, value in value.iteritems() %}
+{% if value is mapping  %}
+    [[plugins.{{ plugin }}.{{ key }}]]
+{% else %}
 {% if value is sequence and value is not string %}
-   {{ key }} = [ "{{ value|join(',') }}" ]
+      {{ key }} = [ "{{ value|join('", "') }}" ]
 {% else %}
 {% if value == "true" or value == "false" or value is number %}
-   {{ key }} = {{ value }}
+      {{ key }} = {{ value }}
 {% else %}
-   {{ key }} = "{{ value }}"
+      {{ key }} = "{{ value }}"
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% else %}
+{% if value is sequence and value is not string %}
+    {{ key }} = [ "{{ value|join('", "') }}" ]
+{% else %}
+{% if value == "true" or value == "false" or value is number %}
+    {{ key }} = {{ value }}
+{% else %}
+    {{ key }} = "{{ value }}"
+{% endif %}
 {% endif %}
 {% endif %}
 {% endfor %}
