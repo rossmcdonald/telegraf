@@ -9,6 +9,7 @@
     - python-httplib2
     - python-apt
     - curl
+    - apt-transport-https
 
 - name: Import InfluxData GPG signing key [Debian/Ubuntu]
   apt_key:
@@ -26,6 +27,8 @@
   apt: 
     name: telegraf
     state: latest
+    update_cache: yes 
+    cache_valid_time: 3600
   when: telegraf_install_url is not defined or telegraf_install_url == None
   
 - name: Download Telegraf package via URL [Debian/Ubuntu]

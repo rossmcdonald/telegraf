@@ -17,8 +17,8 @@ telegraf_start_service: yes
 telegraf_template_configuration: yes
 
 # Path for finding Telegraf data. Added for backwards-compatibility.
-telegraf_binary_path: /opt/telegraf
-telegraf_configuration_dir: /etc/opt/telegraf
+telegraf_binary_path: /usr/bin/telegraf
+telegraf_configuration_dir: /etc/telegraf
 
 # The user and group telegraf should run under (should be set to telegraf unless needed otherwise)
 telegraf_runas_user: telegraf

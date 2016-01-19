@@ -7,6 +7,7 @@ Vagrant.configure(2) do |config|
   # config.vm.box = "relativkreativ/centos-7-minimal"
   # config.vm.box = "box-cutter/fedora22"
   # config.vm.box = "puppetlabs/centos-6.6-64-nocm"
+  # config.vm.box = "debian/jessie64"
 
   BOX_COUNT = 1
   (1..BOX_COUNT).each do |machine_id|
