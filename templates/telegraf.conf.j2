@@ -90,10 +90,8 @@
 #                                  PLUGINS                                    #
 ###############################################################################
 
-[plugins]
-
 {% for plugin in telegraf_plugins_enabled %}
-[[plugins.{{ plugin }}]]
+[[inputs.{{ plugin }}]]
 {% if telegraf_plugin_settings.get(plugin) != None %}
 {% for key, value in telegraf_plugin_settings.get(plugin).iteritems() %}
 {% if value is sequence and value is not string %}
