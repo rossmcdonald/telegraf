@@ -28,7 +28,7 @@
 
 - name: Pause to ensure Telegraf service is up
   pause:
-    seconds: 3
+    seconds: 6 
   when: telegraf_started.changed and telegraf_start_service
   
 - name: Collect service status
