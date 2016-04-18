@@ -21,4 +21,4 @@ galaxy_info:
         - wheezy
   categories:
     - monitoring
-  dependencies: []
+dependencies: []
