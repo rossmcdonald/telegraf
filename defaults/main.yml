@@ -24,28 +24,33 @@ telegraf_influxdb_password:
 telegraf_influxdb_user_agent: 
 telegraf_influxdb_udp_payload: 512
 
-# Plugins to enable at runtime
-telegraf_plugins_enabled:
-  - cpu
-  - disk
-  - io
-  - mem
-  - swap
-  - system
-  
-telegraf_plugin_settings:
-  cpu:
-    percpu: "true"
-    totalcpu: "true"
-    drop:
-      - cpu_time
-  disk:
-    mountpoints:
-      - "/"
-  io:
-    skip_serial_number: "true"
-  procstat:
-    specifications:
-      exe: influxd
-      prefix: influxdb
+telegraf_plugins:
+  - name: mem
+  - name: system
+  - name: cpu
+    options:
+      percpu: "true"
+      totalcpu: "true"
+      drop:
+        - cpu_time
+  - name: disk
+    options: 
+      mountpoints:
+        - "/"
+  - name: io
+    options:
+      skip_serial_number: "true"
+  - name: procstat
+    options:
+      exe: "influxd"
+      prefix: "influxdb"
+  - name: procstat
+    options:
+      pid_file: "/var/lib/neo4j/data/neo4j-service.pid"
+      prefix: "neo4j_proc"
+
+  - name: net
+    options:
+      interfaces:
+        - "eth0"
 
