@@ -90,24 +90,20 @@
 #                                  PLUGINS                                    #
 ###############################################################################
 
-{% for plugin in telegraf_plugins_enabled %}
-[[inputs.{{ plugin }}]]
-{% if telegraf_plugin_settings.get(plugin) != None %}
-{% for key, value in telegraf_plugin_settings.get(plugin).iteritems() %}
+{% for plugin in telegraf_plugins %}
+[[inputs.{{ plugin.name }}]]
+{% if plugin.options is defined %}
+{% for key, value in plugin.options.iteritems() %}
 {% if value is mapping  %}
-  [[plugins.{{ plugin }}.{{ key }}]]
-{% for key, value in value.iteritems() %}
-{% if value is mapping  %}
-    [[plugins.{{ plugin }}.{{ key }}]]
+  [plugins.{{ plugin.name }}.{{ key }}]
+{% for lv2_key, lv2_value in value.iteritems() %}
+{% if lv2_value is sequence and lv2_value is not string %}
+      {{ lv2_key }} = [ "{{ lv2_value|join('", "') }}" ]
 {% else %}
-{% if value is sequence and value is not string %}
-      {{ key }} = [ "{{ value|join('", "') }}" ]
+{% if lv2_value == "true" or lv2_value == "false" or lv2_value is number %}
+      {{ lv2_key }} = {{ lv2_value }}
 {% else %}
-{% if value == "true" or value == "false" or value is number %}
-      {{ key }} = {{ value }}
-{% else %}
-      {{ key }} = "{{ value }}"
-{% endif %}
+      {{ lv2_key }} = "{{ lv2_value }}"
 {% endif %}
 {% endif %}
 {% endfor %}
