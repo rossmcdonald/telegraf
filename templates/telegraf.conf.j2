@@ -29,28 +29,48 @@
 
 # Configuration for telegraf agent
 [agent]
-  # Default data collection interval for all plugins
+  ## Default data collection interval for all inputs
   interval = "{{ telegraf_agent_interval }}"
-  # Rounds collection interval to 'interval'
-  # ie, if interval="10s" then always collect on :00, :10, :20, etc.
+  ## Rounds collection interval to 'interval'
+  ## ie, if interval="10s" then always collect on :00, :10, :20, etc.
   round_interval = {{ telegraf_round_interval }}
 
-  # Default data flushing interval for all outputs. You should not set this below
-  # interval. Maximum flush_interval will be flush_interval + flush_jitter
+  ## Telegraf will send metrics to outputs in batches of at
+  ## most metric_batch_size metrics.
+  metric_batch_size = {{ telegraf_metric_batch_size }}
+  ## For failed writes, telegraf will cache metric_buffer_limit metrics for each
+  ## output, and will flush this buffer on a successful write. Oldest metrics
+  ## are dropped first when this buffer fills.
+  metric_buffer_limit = {{ telegraf_metric_buffer_limit }}
+
+  ## Collection jitter is used to jitter the collection by a random amount.
+  ## Each plugin will sleep for a random time within jitter before collecting.
+  ## This can be used to avoid many plugins querying things like sysfs at the
+  ## same time, which can have a measurable effect on the system.
+  collection_jitter = "{{ telegraf_collection_jitter }}"
+
+  ## Default flushing interval for all outputs. You shouldn't set this below
+  ## interval. Maximum flush_interval will be flush_interval + flush_jitter
   flush_interval = "{{ telegraf_flush_interval }}"
-  # Jitter the flush interval by a random amount. This is primarily to avoid
-  # large write spikes for users running a large number of telegraf instances.
-  # ie, a jitter of 5s and interval 10s means flushes will happen every 10-15s
+  ## Jitter the flush interval by a random amount. This is primarily to avoid
+  ## large write spikes for users running a large number of telegraf instances.
+  ## ie, a jitter of 5s and interval 10s means flushes will happen every 10-15s
   flush_jitter = "{{ telegraf_flush_jitter }}"
 
-  # Run telegraf in debug mode
+  ## Run telegraf in debug mode
   debug = {{ telegraf_debug }}
+  ## Run telegraf in quiet mode
+  quiet = {{ telegraf_quiet }}
+
   # Override default hostname, if empty use os.Hostname()
 {% if telegraf_hostname is defined and telegraf_hostname != None %}
   hostname = "{{ telegraf_hostname }}"
 {% else %}
   hostname = "{{ ansible_hostname }}"
 {% endif %}
+
+  ## If set to true, do no set the "host" tag in the telegraf agent.
+  omit_hostname = {{ telegraf_omit_hostname }}
 
 ###############################################################################
 #                                  OUTPUTS                                    #
@@ -71,6 +91,11 @@
   # note: using second precision greatly helps InfluxDB compression
   precision = "{{ telegraf_influxdb_precision }}"
 
+  ## Retention policy to write to.
+  retention_policy = "{{ telegraf_influxdb_retention_policy }}"
+  ## Write consistency (clusters only), can be: "any", "one", "quorom", "all"
+  write_consistency = "{{ telegraf_influxdb_write_consistency }}"
+
   # Connection timeout (for the connection with InfluxDB), formatted as a string.
   # If not provided, will default to 0 (no timeout)
   timeout = "{{ telegraf_influxdb_timeout }}"
@@ -81,9 +106,30 @@
   password = "{{ telegraf_influxdb_password }}"
 {% endif %}
   # Set the user agent for HTTP POSTs (can be useful for log differentiation)
+{% if telegraf_influxdb_user_agent is defined and telegraf_influxdb_user_agent != None %}
   user_agent = "{{ telegraf_influxdb_user_agent }}"
+{% endif %}
   # Set UDP payload size, defaults to InfluxDB UDP Client default (512 bytes)
+{% if telegraf_influxdb_udp_payload is defined and telegraf_influxdb_udp_payload != None %}
   udp_payload = {{ telegraf_influxdb_udp_payload }}
+{% endif %}
+
+  ## Optional SSL Config
+{% if telegraf_influxdb_ssl_ca is defined and telegraf_influxdb_ssl_ca != None %}
+  # ssl_ca = "{{ telegraf_influxdb_ssl_ca }}"
+{% endif %}
+{% if telegraf_influxdb_ssl_cert is defined and telegraf_influxdb_ssl_cert != None %}
+  # ssl_cert = "{{ telegraf_influxdb_ssl_cert }}"
+{% endif %}
+{% if telegraf_influxdb_ssl_key is defined and telegraf_influxdb_ssl_key != None %}
+  # ssl_key = "{{ telegraf_influxdb_ssl_key }}"
+{% endif %}
+
+  ## Use SSL but skip chain & host verification
+{% if telegraf_influxdb_insecure_skip_verify is defined and telegraf_influxdb_insecure_skip_verify != None %}
+  # insecure_skip_verify = telegraf_influxdb_insecure_skip_verify
+{% endif %}
+
 
 
 ###############################################################################
