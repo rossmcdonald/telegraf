@@ -12,6 +12,7 @@ telegraf_flush_interval: 10s
 telegraf_flush_jitter: 0s
 telegraf_debug: "false"
 telegraf_hostname: 
+telegraf_install_url: 
 
 telegraf_influxdb_urls:
   - http://localhost:8086
@@ -32,7 +33,7 @@ telegraf_plugins_enabled:
   - mem
   - swap
   - system
-  
+
 telegraf_plugin_settings:
   cpu:
     percpu: "true"
