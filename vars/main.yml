@@ -4,12 +4,6 @@
 # This should only be set in the Vagrantfile and not modified elsewhere
 is_vagrant: no
 
-# By default, the InfluxData package repository will be used for installation. Alternatively,
-# if you have a specific package/version you want to install from, you can specify a package
-# URL here. Note that this does not modify any other logic, so installing older versions may
-# lead to unexpected results. Use at your own risk.
-telegraf_install_url:
-
 # If yes, service will be started. Will not be started if set to no.
 telegraf_start_service: yes
 

@@ -17,6 +17,7 @@ telegraf_debug: "false"
 telegraf_quiet: "false"
 telegraf_hostname:
 telegraf_omit_hostname: "false"
+telegraf_install_url:
 
 telegraf_influxdb_urls:
   - http://localhost:8086
