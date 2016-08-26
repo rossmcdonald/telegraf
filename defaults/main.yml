@@ -23,7 +23,7 @@ telegraf_influxdb_urls:
   - http://localhost:8086
 telegraf_influxdb_database: telegraf
 telegraf_influxdb_precision: s
-telegraf_influxdb_retention_policy: default
+telegraf_influxdb_retention_policy: autogen
 telegraf_influxdb_write_consistency: any
 telegraf_influxdb_ssl_ca:
 telegraf_influxdb_ssl_cert:
