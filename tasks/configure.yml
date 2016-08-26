@@ -1,7 +1,7 @@
 ---
 - name: Set templatized Telegraf configuration
-  template: 
-    src: telegraf.conf.j2 
+  template:
+    src: telegraf.conf.j2
     dest: "{{ telegraf_configuration_dir }}/telegraf.conf"
     force: yes
     backup: yes
@@ -10,14 +10,28 @@
     mode: 0744
   when: telegraf_template_configuration
 
-- name: Modify user Telegraf should run as
-  command: sed -i s/USER=.*/USER={{ telegraf_runas_user }}/ /etc/init.d/telegraf
-  when: telegraf_runas_user != "telegraf"
+- name: Test for sysvinit script
+  stat:
+    path: /etc/init.d/telegraf
+  register: telegraf_sysvinit_script
 
-- name: Modify user Telegraf should run as
+- name: Modify user Telegraf should run as [sysvinit]
+  command: sed -i s/USER=.*/USER={{ telegraf_runas_user }}/ /etc/init.d/telegraf
+  when: telegraf_runas_user != "telegraf" and telegraf_sysvinit_script.stat.exists
+
+- name: Modify group Telegraf should run as [sysvinit]
   command: sed -i s/GROUP=.*/GROUP={{ telegraf_runas_group }}/ /etc/init.d/telegraf
-  when: telegraf_runas_group != "telegraf"
-  
+  when: telegraf_runas_group != "telegraf" and telegraf_sysvinit_script.stat.exists
+
+- name: Modify user Telegraf should run as [systemd]
+  command: sed -i s/User=.*/User={{ telegraf_runas_user }}/ /usr/lib/systemd/system/telegraf.service
+  when: telegraf_runas_user != "telegraf" and not telegraf_sysvinit_script.stat.exists
+  register: telegraf_unit_file_updated
+
+- name: Reload systemd configuration [systemd]
+  command: systemctl daemon-reload
+  when: telegraf_unit_file_updated is defined and telegraf_unit_file_updated.changed
+
 - name: Start the Telegraf service
   service:
     name: telegraf
@@ -28,9 +42,9 @@
 
 - name: Pause to ensure Telegraf service is up
   pause:
-    seconds: 6 
+    seconds: 6
   when: telegraf_started.changed and telegraf_start_service
-  
+
 - name: Collect service status
   command: service telegraf status
   register: telegraf_service_status
