@@ -65,3 +65,5 @@ telegraf_plugins:
     options:
       interfaces:
         - "eth0"
+
+telegraf_influxdata_base_url: "https://repos.influxdata.com"
