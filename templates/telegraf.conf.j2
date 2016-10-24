@@ -130,8 +130,6 @@
   # insecure_skip_verify = telegraf_influxdb_insecure_skip_verify
 {% endif %}
 
-
-
 ###############################################################################
 #                                  PLUGINS                                    #
 ###############################################################################
@@ -142,7 +140,11 @@
 {% for key, value in plugin.options.iteritems() %}
 {% if value is not mapping %}
 {% if value is sequence and value is not string %}
+{% if value[0] is number %}
+    {{ key }} = [ {{ value|join(', ') }} ]
+{% else %}
     {{ key }} = [ "{{ value|join('", "') }}" ]
+{% endif %}
 {% else %}
 {% if value == "true" or value == "false" or value is number %}
     {{ key }} = {{ value }}
@@ -157,7 +159,11 @@
     [inputs.{{ plugin.name }}.{{ key }}]
 {% for lv2_key, lv2_value in value.iteritems() %}
 {% if lv2_value is sequence and lv2_value is not string %}
+{% if lv2_value[0] is number %}
+      {{ lv2_key }} = [ {{ lv2_value|join(', ') }} ]
+{% else %}
       {{ lv2_key }} = [ "{{ lv2_value|join('", "') }}" ]
+{% endif %}
 {% else %}
 {% if lv2_value == "true" or lv2_value == "false" or lv2_value is number %}
       {{ lv2_key }} = {{ lv2_value }}
