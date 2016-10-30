@@ -7,7 +7,7 @@
 
 - name: pause
   pause:
-    seconds: 3
+    seconds: "{{telegraf_start_delay}}"
 
 ## After version 2.2 of ansible 'listen' could be used to
 ## group 'check status' and 'assert running' into a single listener
