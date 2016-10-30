@@ -1,9 +1,21 @@
 ---
+# The order here matters
 - name: restart telegraf
-  service: 
+  service:
     name: telegraf
     state: restarted
 
 - name: pause
   pause:
     seconds: 3
+
+## After version 2.2 of ansible 'listen' could be used to
+## group 'check status' and 'assert running' into a single listener
+- name: check status
+  command: service telegraf status
+  ignore_errors: no
+  register: telegraf_service_status
+- name: assert running
+  assert:
+    that:
+      - "telegraf_service_status.rc == 0"

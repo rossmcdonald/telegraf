@@ -1,0 +1,11 @@
+
+- name: Start the Telegraf service
+  service:
+    name: telegraf
+    state: started
+    enabled: yes
+  # Only care to check the status if the state changed to 'started'
+  notify:
+    - "pause"
+    - "check status"
+    - "assert running"
