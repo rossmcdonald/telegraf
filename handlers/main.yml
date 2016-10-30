@@ -13,7 +13,7 @@
 ## group 'check status' and 'assert running' into a single listener
 - name: check status
   command: service telegraf status
-  ignore_errors: no
+  ignore_errors: yes
   register: telegraf_service_status
 - name: assert running
   assert:
