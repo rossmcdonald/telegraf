@@ -9,6 +9,12 @@
     group: telegraf
     mode: 0744
   when: telegraf_template_configuration
+  # If config changes, restart telegraf and confirm it remained running
+  notify:
+    - "restart telegraf"
+    - "pause"
+    - "check status"
+    - "assert running"
 
 - name: Test for sysvinit script
   stat:
@@ -31,28 +37,3 @@
 - name: Reload systemd configuration [systemd]
   command: systemctl daemon-reload
   when: telegraf_unit_file_updated is defined and telegraf_unit_file_updated.changed
-
-- name: Start the Telegraf service
-  service:
-    name: telegraf
-    state: restarted
-    enabled: yes
-  register: telegraf_started
-  when: telegraf_start_service
-
-- name: Pause to ensure Telegraf service is up
-  pause:
-    seconds: 6
-  when: telegraf_started.changed and telegraf_start_service
-
-- name: Collect service status
-  command: service telegraf status
-  register: telegraf_service_status
-  when: telegraf_start_service
-  ignore_errors: yes
-
-- name: Assert status of Telegraf service
-  assert:
-    that:
-      - "telegraf_service_status.rc == 0"
-  when: telegraf_start_service

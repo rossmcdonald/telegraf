@@ -4,3 +4,7 @@
 
 - include: configure.yml
   tags: [telegraf, configure]
+
+- include: start.yml
+  tags: [telegraf, start]
+  when: telegraf_start_service
