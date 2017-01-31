@@ -4,10 +4,12 @@
   service:
     name: telegraf
     state: restarted
+  when: telegraf_start_service
 
 - name: pause
   pause:
     seconds: "{{telegraf_start_delay}}"
+  when: telegraf_start_service
 
 ## After version 2.2 of ansible 'listen' could be used to
 ## group 'check status' and 'assert running' into a single listener
@@ -15,7 +17,10 @@
   command: service telegraf status
   ignore_errors: yes
   register: telegraf_service_status
+  when: telegraf_start_service
+
 - name: assert running
   assert:
     that:
       - "telegraf_service_status.rc == 0"
+  when: telegraf_start_service
