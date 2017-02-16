@@ -4,6 +4,8 @@ telegraf_install_version: stable
 
 # Configuration Variables
 telegraf_tags:
+telegraf_aws_tags: false
+telegraf_aws_tags_prefix:
 
 telegraf_agent_interval: 10s
 telegraf_round_interval: "true"

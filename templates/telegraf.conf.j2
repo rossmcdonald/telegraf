@@ -26,6 +26,11 @@
    {{ key }} = "{{ value }}"
 {% endfor %}
 {% endif %}
+{% if telegraf_aws_tags == true and ec2_tags is defined and ec2_tags != None %}
+{% for key, value in ec2_tags.tags.iteritems()%}
+   {{telegraf_aws_tags_prefix}}{{ key }} = "{{ value }}"
+{% endfor %}
+{% endif %}
 
 # Configuration for telegraf agent
 [agent]
