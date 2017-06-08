@@ -1,56 +1,45 @@
-Telegraf
-========
+# Ansible role for Telegraf
 
 An Ansible role to install, configure, and manage [Telegraf](https://github.com/influxdb/telegraf), the plugin-driven server agent for reporting metrics into InfluxDB.
 
-Requirements
-------------
+Note: this is a fork of https://github.com/rossmcdonald/telegraf
 
-Prior knowledge/experience with InfluxDB and Telegraf is highly recommended. Full documentation is available [here](https://docs.influxdata.com).
+## Requirements
 
-Installation
-------------
+Linux server (Debian/RedHat based), place to send the events too.
+Prior knowledge/experience with InfluxDB and Telegraf is highly recommended. See output plugins [here](https://github.com/influxdata/telegraf#output-plugins).
 
-Either clone this repository, or install through Ansible Galaxy directly using the command:
-
-```
-ansible-galaxy install rossmcdonald.telegraf
-```
-
-Role Variables
---------------
+## Role Variables
 
 The high-level variables are stored in the `defaults/main.yml` file. The most important ones being:
 
-```
-# Channel of Telegraf to install (currently only 'stable' is supported)
-telegraf_install_version: stable
-```
+- `telegraf_output_plugins` - A list of dictionaries to configure your ouput plugins, for instance to influxdb or other destinations.
+- `telegraf_input_plugins` - A list dictionaries to configure the metrics you want to collect. Either system metrics from the host the agent runs on or metrics of some services, DBs etc.
+
 
 More advanced configuration options are stored in the `vars/main.yml` file, which includes all of the necessary bells and whistles to tweak your configuration.
 
-Dependencies
-------------
+## Dependencies
 
 No other Ansible dependencies are required. This role was tested and developed with Ansible 1.9.4.
 
-Example Playbook
-----------------
+## Example Playbook
 
-An example playbook is included in the `test.yml` file. There is also a `Vagrantfile`, which can be used for quick local testing leveraging [Vagrant](https://www.vagrantup.com/).
+Example playbook using this role:
 
-Contributions and Feedback
---------------------------
+    - hosts: servers
+      vars:
+        telegraf_plugins:
+          - xxx
+      roles:
+         - mediapeers.telegraf
 
-Any contributions are welcome. For any bugs or feature requests, please open an issue through Github.
 
-License
--------
+## License
 
 MIT
 
-Author
-------
+## Author
 
 Created by [Ross McDonald](https://github.com/rossmcdonald).
 

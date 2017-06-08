@@ -1,7 +1,7 @@
 [influxdb]
 name = InfluxDB Repository - {{ ansible_distribution }} $releasever
-baseurl = {{ telegraf_influxdata_base_url }}/{{ ansible_distribution|lower }}/$releasever/$basearch/{{ telegraf_install_version }}
+baseurl = {{ telegraf_repo_base_url }}/{{ ansible_distribution|lower }}/$releasever/$basearch/{{ telegraf_install_version }}
 enabled = 1
 gpgcheck = 1
-gpgkey = {{ telegraf_influxdata_base_url }}/influxdb.key
+gpgkey = {{ telegraf_repo_base_url }}/influxdb.key
 sslverify = 1

@@ -1,69 +1,59 @@
 ---
-# Channel of Telegraf to install
-telegraf_install_version: stable
 
 # Configuration Variables
-telegraf_tags:
+telegraf_tags: []
 
 telegraf_agent_interval: 10s
 telegraf_round_interval: "true"
-telegraf_metric_batch_size: "1000"
-telegraf_metric_buffer_limit: "10000"
-
+telegraf_metric_batch_size: 1000
+telegraf_metric_buffer_limit: 10000
 telegraf_collection_jitter: 0s
 telegraf_flush_interval: 10s
 telegraf_flush_jitter: 0s
 telegraf_debug: "false"
 telegraf_quiet: "false"
-telegraf_hostname:
+telegraf_logfile: "" # emtpy means no log
+telegraf_hostname: "" # empty means fall back to os.Hostname()
 telegraf_omit_hostname: "false"
-telegraf_install_url:
 
-telegraf_influxdb_urls:
-  - http://localhost:8086
-telegraf_influxdb_database: telegraf
-telegraf_influxdb_precision: s
-telegraf_influxdb_retention_policy: autogen
-telegraf_influxdb_write_consistency: any
-telegraf_influxdb_ssl_ca:
-telegraf_influxdb_ssl_cert:
-telegraf_influxdb_ssl_key:
-telegraf_influxdb_insecure_skip_verify:
+# Replace with your own plugin configurations:
 
-telegraf_influxdb_timeout: 5s
-telegraf_influxdb_username:
-telegraf_influxdb_password:
-telegraf_influxdb_user_agent:
-telegraf_influxdb_udp_payload:
+telegraf_output_plugins:
+  - name: influxdb
+    options:
+      urls: ["http://localhost:8086"]
+      database: "telegraf"
+      write_consistency: "any"
+      timeout: "10s"
+  - name: instrumental
+    options:
+      api_key: "abc123"
+      prefix: ""
+      debug: false
 
-telegraf_plugins:
-  - name: mem
-  - name: system
+telegraf_input_plugins:
   - name: cpu
     options:
-      percpu: "true"
-      totalcpu: "true"
-      fielddrop:
-        - "time_*"
+      percpu: true
+      totalcpu: true
+      collect_cpu_time: false
   - name: disk
     options:
-      mountpoints:
-        - "/"
+      mount_points: ["/"]
+      ignore_fs: ["tmpfs", "devtmpfs", "devfs"]
+      name_override: "system"
+      tagexclude: ["fstype"]
+      fieldpass: ["free", "total", "used", "used_percent"]
+    tags:
+      system_measurement_tag: "disk"
   - name: diskio
     options:
-      skip_serial_number: "true"
-  - name: procstat
-    options:
-      exe: "influxd"
-      prefix: "influxdb"
-  - name: procstat
-    options:
-      pid_file: "/var/lib/neo4j/data/neo4j-service.pid"
-      prefix: "neo4j_proc"
-
+      skip_serial_number: true
+  - name: kernel
+  - name: mem
+  - name: processes
+  - name: swap
+  - name: system
   - name: net
     options:
-      interfaces:
-        - "eth0"
-
-telegraf_influxdata_base_url: "https://repos.influxdata.com"
+      interfaces: ["eth0"]
