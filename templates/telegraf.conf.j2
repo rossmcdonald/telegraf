@@ -1,4 +1,4 @@
-{{ ansible_managed }}
+# {{ ansible_managed }}
 
 # Telegraf Configuration
 #
@@ -90,12 +90,13 @@
 ###############################################################################
 
 {% for plugin in telegraf_output_plugins %}
-[[output.{{ plugin.name }}]]
-  {% if plugin.options is defined %}
-  {% for key, value in plugin.options.iteritems() %}
-  {{ key }} = {{ value }}
-  {% endfor %}
-  {% endif %}
+[[outputs.{{ plugin.name }}]]
+{% if plugin.options is defined %}
+{% for key, value in plugin.options.iteritems() %}
+  {{ key }} = {{ value|to_json }}
+{% endfor %}
+{% endif %}
+
 {% endfor %}
 
 
@@ -622,18 +623,19 @@
 ###############################################################################
 
 {% for plugin in telegraf_input_plugins %}
-[[input.{{ plugin.name }}]]
-  {% if plugin.options is defined %}
-  {% for key, value in plugin.options.iteritems() %}
-  {{ key }} = {{ value }}
-  {% endfor %}
-  {% endif %}
-  {% if plugin.tags is defined %}
+[[inputs.{{ plugin.name }}]]
+{% if plugin.options is defined %}
+{% for key, value in plugin.options.iteritems() %}
+  {{ key }} = {{ value|to_json }}
+{% endfor %}
+{% endif %}
+{% if plugin.tags is defined %}
   [inputs.{{ plugin.name }}.tags]
-  {% for key, value in plugin.tags.iteritems() %}
-  {{ key }} = {{ value }}
-  {% endfor %}
-  {% endif %}
+{% for key, value in plugin.tags.iteritems() %}
+  {{ key }} = {{ value|to_json }}
+{% endfor %}
+{% endif %}
+
 {% endfor %}
 
 

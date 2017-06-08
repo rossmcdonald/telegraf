@@ -17,7 +17,7 @@ telegraf_output_plugins:
       timeout: "10s"
   - name: instrumental
     options:
-      api_key: "abc123"
+      api_token: "abc123"
       prefix: ""
       debug: false
 

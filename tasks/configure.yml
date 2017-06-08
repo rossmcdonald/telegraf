@@ -6,6 +6,10 @@
   # If config changes, restart telegraf and confirm it remained running
   notify:
     - "restart telegraf"
-    - "pause"
+    - "wait for startup"
     - "check status"
-    - "assert running"
+
+- name: Register telegraf deamon to start on bootup
+  service:
+    name: telegraf
+    enabled: yes

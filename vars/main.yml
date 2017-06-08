@@ -12,14 +12,10 @@ telegraf_round_interval: "true"
 telegraf_metric_batch_size: 1000
 telegraf_metric_buffer_limit: 10000
 telegraf_collection_jitter: 0s
-telegraf_flush_interval: 10s
+telegraf_flush_interval: 30s
 telegraf_flush_jitter: 0s
 telegraf_debug: "false"
 telegraf_quiet: "false"
-
-# If yes, service will be started. Will not be started if set to no.
-telegraf_start_service: yes
-telegraf_start_delay: 6
 
 # Location of config files
 telegraf_configuration_dir: /etc/telegraf
