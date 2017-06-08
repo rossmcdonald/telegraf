@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  vars:
+    telegraf_output_plugins:
+      - name: influxdb
+        options:
+          urls: ["http://localhost:8086"]
+          database: "telegraf-test"
+          write_consistency: "any"
+          timeout: "5s"
+  roles:
+    - ansible-role-telegraf

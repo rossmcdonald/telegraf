@@ -1,0 +1,51 @@
+---
+sudo: required
+dist: trusty
+
+language: python
+python: "2.7"
+
+# Install ansible
+addons:
+  apt:
+    packages:
+    - python-pip
+
+before_install:
+  # Clean up all the weird rubies (none coming from apt packages) from system
+  - sudo rm /usr/bin/ruby /usr/bin/gem
+
+install:
+  # Install ansible
+  - pip install ansible
+
+  # Check ansible version
+  - ansible --version
+
+  # Create ansible.cfg with correct roles_path
+  - printf '[defaults]\nroles_path=../' > ansible.cfg
+
+  # Install ruby2.0 and serverspec gem as root
+  - sudo apt-get install -y ruby2.0
+  - sudo ln -s /usr/bin/ruby2.0 /usr/bin/ruby
+  - sudo ln -s /usr/bin/gem2.0 /usr/bin/gem
+  - sudo ln -s /usr/bin/rake2.0 /usr/bin/rake
+  - sudo ruby -v
+  - sudo gem install serverspec
+
+script:
+  # Basic role syntax check
+  - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+  # Real run:
+  - ansible-playbook tests/test.yml -i tests/inventory --connection=local
+  # Second run to check for indempotence:
+  - >
+    ansible-playbook tests/test.yml -i tests/inventory --connection=local
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
+  # Run serverspec
+  - sudo rake spec
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
