@@ -1,7 +1,7 @@
 ---
 
 # Configuration Variables
-telegraf_tags: []
+telegraf_tags: {}
 telegraf_logfile: "" # emtpy means no log
 telegraf_hostname: "" # empty means fall back to os.Hostname()
 telegraf_omit_hostname: "false"
