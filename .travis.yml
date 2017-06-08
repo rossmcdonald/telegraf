@@ -46,6 +46,8 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
   # Run serverspec
   - sudo rake spec
+  # Output result of config file (only non commented lines)
+  - sed '/ *#/d; /^ *$/d' /etc/telegraf/telegraf.conf
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

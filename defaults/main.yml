@@ -48,4 +48,8 @@ telegraf_input_plugins:
   - name: system
   - name: net
     options:
-      interfaces: ["eth0"]
+      name_override: "system"
+    tags:
+      system_measurement_tag: "network"
+    tagdrop:
+      interface: ["all"]

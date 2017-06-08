@@ -635,6 +635,18 @@
   {{ key }} = {{ value|to_json }}
 {% endfor %}
 {% endif %}
+{% if plugin.tagpass is defined %}
+  [inputs.{{ plugin.name }}.tagpass]
+{% for key, value in plugin.tagpass.iteritems() %}
+  {{ key }} = {{ value|to_json }}
+{% endfor %}
+{% endif %}
+{% if plugin.tagdrop is defined %}
+  [inputs.{{ plugin.name }}.tagdrop]
+{% for key, value in plugin.tagdrop.iteritems() %}
+  {{ key }} = {{ value|to_json }}
+{% endfor %}
+{% endif %}
 
 {% endfor %}
 
