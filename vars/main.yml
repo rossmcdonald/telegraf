@@ -6,12 +6,20 @@ telegraf_install_version: stable
 # Telegraf repo (by Influxdata)
 telegraf_repo_base_url: "https://repos.influxdata.com"
 
+# Sane defaults for global settings
+telegraf_agent_interval: 10s
+telegraf_round_interval: "true"
+telegraf_metric_batch_size: 1000
+telegraf_metric_buffer_limit: 10000
+telegraf_collection_jitter: 0s
+telegraf_flush_interval: 10s
+telegraf_flush_jitter: 0s
+telegraf_debug: "false"
+telegraf_quiet: "false"
+
 # If yes, service will be started. Will not be started if set to no.
 telegraf_start_service: yes
 telegraf_start_delay: 6
-
-# If yes, will overwrite the packaged configuration with an Asnible/jinja2 template
-telegraf_template_configuration: yes
 
 # Location of config files
 telegraf_configuration_dir: /etc/telegraf

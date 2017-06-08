@@ -1,14 +1,8 @@
 ---
-- name: Set templatized Telegraf configuration
+- name: Create Telegraf config file
   template:
     src: telegraf.conf.j2
     dest: "{{ telegraf_configuration_dir }}/telegraf.conf"
-    force: yes
-    backup: yes
-    owner: telegraf
-    group: telegraf
-    mode: 0744
-  when: telegraf_template_configuration
   # If config changes, restart telegraf and confirm it remained running
   notify:
     - "restart telegraf"

@@ -91,9 +91,11 @@
 
 {% for plugin in telegraf_output_plugins %}
 [[output.{{ plugin.name }}]]
+  {% if plugin.options is defined %}
   {% for key, value in plugin.options.iteritems() %}
   {{ key }} = {{ value }}
   {% endfor %}
+  {% endif %}
 {% endfor %}
 
 
@@ -621,10 +623,12 @@
 
 {% for plugin in telegraf_input_plugins %}
 [[input.{{ plugin.name }}]]
+  {% if plugin.options is defined %}
   {% for key, value in plugin.options.iteritems() %}
   {{ key }} = {{ value }}
   {% endfor %}
-  {% if plugin.options != None %}
+  {% endif %}
+  {% if plugin.tags is defined %}
   [inputs.{{ plugin.name }}.tags]
   {% for key, value in plugin.tags.iteritems() %}
   {{ key }} = {{ value }}
