@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mediapeers/ansible-role-telegraf.svg?branch=master)](https://travis-ci.org/mediapeers/ansible-role-telegraf)
+
 # Ansible role for Telegraf
 
 An Ansible role to install, configure, and manage [Telegraf](https://github.com/influxdb/telegraf), the plugin-driven server agent for reporting metrics into InfluxDB.
@@ -28,6 +30,7 @@ No other Ansible dependencies are required. This role was tested and developed w
 Example playbook using this role:
 
     - hosts: servers
+      become: true
       vars:
         telegraf_plugins:
           - xxx

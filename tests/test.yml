@@ -1,5 +1,6 @@
 ---
 - hosts: localhost
+  become: true
   vars:
     telegraf_output_plugins:
       - name: influxdb
