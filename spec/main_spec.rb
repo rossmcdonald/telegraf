@@ -14,7 +14,7 @@ describe "Telegraf setup" do
   describe file('/etc/telegraf/telegraf.conf') do
     it { should be_file }
     output_plugins.each do |plugin|
-      its(:content) { should include("[[output.#{plugin['name']}]]") }
+      its(:content) { should include("[[outputs.#{plugin['name']}]]") }
     end
   end
 end
