@@ -32,8 +32,24 @@ Example playbook using this role:
     - hosts: servers
       become: true
       vars:
-        telegraf_plugins:
-          - xxx
+        telegraf_output_plugins:
+          - name: instrumental
+            options:
+              api_token: "abc-1234"
+              prefix: ""
+              template: "measurement.host.system_measurement_tag.tags.field"
+              timeout: "2s"
+              debug: false
+        telegraf_input_plugins:
+          - name: cpu
+            options:
+              key: "value"
+            tags:
+              key: "value"
+            tagdrop:
+              key: "value"
+            tagpass:
+              key: "value"
       roles:
          - mediapeers.telegraf
 
