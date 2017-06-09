@@ -12,7 +12,7 @@ telegraf_round_interval: "true"
 telegraf_metric_batch_size: 1000
 telegraf_metric_buffer_limit: 10000
 telegraf_collection_jitter: 0s
-telegraf_flush_interval: 30s
+telegraf_flush_interval: 20s
 telegraf_flush_jitter: 0s
 telegraf_debug: "false"
 telegraf_quiet: "false"
