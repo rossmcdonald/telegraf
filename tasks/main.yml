@@ -1,6 +1,8 @@
 ---
 - include: install.yml
+  become: true
   tags: [telegraf, install]
 
 - include: configure.yml
+  become: true
   tags: [telegraf, configure]

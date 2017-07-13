@@ -29,8 +29,8 @@ No other Ansible dependencies are required. This role was tested and developed w
 
 Example playbook using this role:
 
-    - hosts: servers
-      become: true
+    - name: My Play with Telegraf
+      hosts: servers
       vars:
         telegraf_output_plugins:
           - name: instrumental
