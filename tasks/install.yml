@@ -4,3 +4,12 @@
 
 - include: install-debian.yml
   when: ansible_os_family == "Debian"
+
+- name: Overwrite telegraf binary with custom build one from URL
+  get_url:
+    url: '{{ telegraf_custom_bin_url }}'
+    dest: /usr/bin/telegraf
+    owner: root
+    group: root
+    mode: 0775
+  when: telegraf_custom_bin_url is defined
