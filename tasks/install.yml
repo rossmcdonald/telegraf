@@ -9,6 +9,7 @@
   get_url:
     url: '{{ telegraf_custom_bin_url }}'
     dest: /usr/bin/telegraf
+    force: yes
     owner: root
     group: root
     mode: 0775
