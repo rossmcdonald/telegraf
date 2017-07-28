@@ -5,6 +5,14 @@
 - include: install-debian.yml
   when: ansible_os_family == "Debian"
 
+# Allows overwriting telegraf bin with custom build one:
+
+- name: Stop telegraf before overwriting binary
+  service:
+    name: telegraf
+    state: stopped
+  when: telegraf_custom_bin_url is defined
+
 - name: Overwrite telegraf binary with custom build one from URL
   get_url:
     url: '{{ telegraf_custom_bin_url }}'
@@ -13,4 +21,10 @@
     owner: root
     group: root
     mode: 0775
+  when: telegraf_custom_bin_url is defined
+
+- name: Start telegraf after overwriting binary
+  service:
+    name: telegraf
+    state: started
   when: telegraf_custom_bin_url is defined
