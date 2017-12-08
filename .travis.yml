@@ -14,6 +14,7 @@ addons:
 before_install:
   # Clean up all the weird rubies (none coming from apt packages) from system
   - sudo rm /usr/bin/ruby /usr/bin/gem
+  - sudo pip install urllib3 pyOpenSSL ndg-httpsclient pyasn1
 
 install:
   # Install ansible
