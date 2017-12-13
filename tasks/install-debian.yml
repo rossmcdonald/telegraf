@@ -4,9 +4,21 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - python-httplib2
-    - python-apt
+    - python-pip
     - apt-transport-https
+
+- name: Install python packages needed for downloading from https urls (needed for next task)
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - urllib3
+    - ndg-httpsclient
+    - pyOpenSSL
+    - pyasn1
+  when:
+    (ansible_distribution == 'Ubuntu' and ansible_distribution_version < '15.04') or
+    (ansible_distribution == 'Debian' and ansible_distribution_version < '8')
 
 - name: Import InfluxData GPG signing key [Debian/Ubuntu]
   apt_key:

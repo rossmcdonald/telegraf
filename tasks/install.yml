@@ -1,9 +1,9 @@
 ---
 - include: install-redhat.yml
-  when: ansible_os_family == "RedHat" and telegraf_custom_bin_url is undefined
+  when: ansible_os_family == "RedHat"
 
 - include: install-debian.yml
-  when: ansible_os_family == "Debian" and telegraf_custom_bin_url is undefined
+  when: ansible_os_family == "Debian"
 
 # Allows overwriting telegraf bin with custom build one:
 
