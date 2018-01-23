@@ -23,7 +23,7 @@
   ## Environment variables can be used as tags, and throughout the config file
   # user = "$USER"
 {% if telegraf_tags is defined and telegraf_tags != None %}
-{% for key, value in telegraf_tags.iteritems() %}
+{% for key, value in telegraf_tags.items()|list %}
    {{ key }} = "{{ value }}"
 {% endfor %}
 {% endif %}
@@ -92,7 +92,7 @@
 {% for plugin in telegraf_output_plugins %}
 [[outputs.{{ plugin.name }}]]
 {% if plugin.options is defined %}
-{% for key, value in plugin.options.iteritems() %}
+{% for key, value in plugin.options.items()|list %}
   {{ key }} = {{ value|to_json }}
 {% endfor %}
 {% endif %}
@@ -625,25 +625,25 @@
 {% for plugin in telegraf_input_plugins %}
 [[inputs.{{ plugin.name }}]]
 {% if plugin.options is defined %}
-{% for key, value in plugin.options.iteritems() %}
+{% for key, value in plugin.options.items()|list %}
   {{ key }} = {{ value|to_json }}
 {% endfor %}
 {% endif %}
 {% if plugin.tags is defined %}
   [inputs.{{ plugin.name }}.tags]
-{% for key, value in plugin.tags.iteritems() %}
+{% for key, value in plugin.tags.items()|list %}
     {{ key }} = {{ value|to_json }}
 {% endfor %}
 {% endif %}
 {% if plugin.tagpass is defined %}
   [inputs.{{ plugin.name }}.tagpass]
-{% for key, value in plugin.tagpass.iteritems() %}
+{% for key, value in plugin.tagpass.items()|list %}
     {{ key }} = {{ value|to_json }}
 {% endfor %}
 {% endif %}
 {% if plugin.tagdrop is defined %}
   [inputs.{{ plugin.name }}.tagdrop]
-{% for key, value in plugin.tagdrop.iteritems() %}
+{% for key, value in plugin.tagdrop.items()|list %}
     {{ key }} = {{ value|to_json }}
 {% endfor %}
 {% endif %}
