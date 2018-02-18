@@ -13,7 +13,7 @@
 
 - name: Set templatized Telegraf configuration
   template:
-    src: telegraf.conf.j2
+    src: '{{ telegraf_configuration_template }}'
     dest: "{{ telegraf_configuration_dir }}/telegraf.conf"
     force: yes
     backup: yes
