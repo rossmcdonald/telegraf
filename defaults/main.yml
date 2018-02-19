@@ -6,6 +6,9 @@ telegraf_install_version: stable
 telegraf_runas_user: telegraf
 telegraf_runas_group: telegraf
 
+# Configuration Template
+telegraf_configuration_template: telegraf.conf.j2
+
 # Configuration Variables
 telegraf_tags:
 telegraf_aws_tags: false
