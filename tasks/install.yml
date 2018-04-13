@@ -1,8 +1,8 @@
 ---
-- include: install-redhat.yml
+- include_tasks: install-redhat.yml
   when: ansible_os_family == "RedHat"
 
-- include: install-debian.yml
+- include_tasks: install-debian.yml
   when: ansible_os_family == "Debian"
 
 # Allows overwriting telegraf bin with custom build one:
