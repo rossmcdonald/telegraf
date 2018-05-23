@@ -1,13 +1,6 @@
 ---
-- name: Add InfluxData repository file [RHEL/CentOS]
-  template:
-    src: etc/yum.repos.d/influxdata.repo.j2
-    dest: /etc/yum.repos.d/influxdata.repo
-    force: yes
-    backup: yes
 
 - name: Install Telegraf packages [RHEL/CentOS]
   yum:
-    name: telegraf
-    state: latest
-    update_cache: yes
+    name: 'https://dl.influxdata.com/telegraf/releases/telegraf-{{ telegraf_rpm_version }}.x86_64.rpm'
+    state: present

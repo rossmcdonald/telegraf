@@ -1,5 +1,8 @@
 ---
 
+# Version to install when using the RedHat play (yum/rpm package)
+telegraf_rpm_version: 1.6.3-1
+
 # Configuration Variables
 telegraf_tags: {}
 telegraf_logfile: "" # emtpy means no log
@@ -7,6 +10,7 @@ telegraf_hostname: "" # empty means fall back to os.Hostname()
 telegraf_omit_hostname: "false"
 # Define telegraf_custom_bin_url to overwrite telegraf bin with your own build
 # telegraf_custom_bin_url: 'https://download.com/location/telegraf'
+
 
 # Replace with your own plugin configurations:
 

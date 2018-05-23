@@ -18,6 +18,7 @@ The high-level variables are stored in the `defaults/main.yml` file. The most im
 - `telegraf_output_plugins` - A list of dictionaries to configure your ouput plugins, for instance to influxdb or other destinations.
 - `telegraf_input_plugins` - A list dictionaries to configure the metrics you want to collect. Either system metrics from the host the agent runs on or metrics of some services, DBs etc.
 
+For more params see `defaults/main.yml`.
 
 More advanced configuration options are stored in the `vars/main.yml` file, which includes all of the necessary bells and whistles to tweak your configuration.
 
