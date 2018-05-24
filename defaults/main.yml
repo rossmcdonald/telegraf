@@ -11,6 +11,9 @@ telegraf_omit_hostname: "false"
 # Define telegraf_custom_bin_url to overwrite telegraf bin with your own build
 # telegraf_custom_bin_url: 'https://download.com/location/telegraf'
 
+telegraf_flush_interval: 20s
+telegraf_flush_jitter: 5s
+
 
 # Replace with your own plugin configurations:
 
