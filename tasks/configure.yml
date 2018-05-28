@@ -49,7 +49,7 @@
 
 - name: Modify user Telegraf should run as [systemd]
   template:
-    src: etc/systemd/system/telegraf.service.d/override.conf
+    src: systemd/system/telegraf.service.d/override.conf
     dest: /etc/systemd/system/telegraf.service.d/override.conf
   when: telegraf_runas_user != "telegraf" and not telegraf_sysvinit_script.stat.exists
   register: telegraf_unit_file_updated
