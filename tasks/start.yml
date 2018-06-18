@@ -9,3 +9,4 @@
     - "pause"
     - "check status"
     - "assert running"
+  become: true
