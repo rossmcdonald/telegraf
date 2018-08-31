@@ -1,39 +1,28 @@
 ---
 sudo: required
-dist: trusty
+dist: xenial
 
 language: python
 python: "2.7"
 
-# Install ansible
+# Install pip package manager
 addons:
   apt:
     packages:
     - python-pip
 
-before_install:
-  # Clean up all the weird rubies (none coming from apt packages) from system
-  - sudo rm /usr/bin/ruby /usr/bin/gem
-  # Fix older Python versions to allow TLS connections with SNI, needed for fetching telegraf repo key over https
-  - sudo pip install urllib3 pyOpenSSL ndg-httpsclient pyasn1
-
 install:
+  # Install ruby and serverspec gem as root (used for test run later)
+  - sudo apt-get install -y ruby
+  - sudo ruby -v
+  - sudo gem install serverspec
+
   # Install ansible
   - pip install ansible
-
-  # Check ansible version
   - ansible --version
 
   # Create ansible.cfg with correct roles_path
   - printf '[defaults]\nroles_path=../' > ansible.cfg
-
-  # Install ruby2.0 and serverspec gem as root
-  - sudo apt-get install -y ruby2.0
-  - sudo ln -s /usr/bin/ruby2.0 /usr/bin/ruby
-  - sudo ln -s /usr/bin/gem2.0 /usr/bin/gem
-  - sudo ln -s /usr/bin/rake2.0 /usr/bin/rake
-  - sudo ruby -v
-  - sudo gem install serverspec
 
 script:
   # Basic role syntax check
