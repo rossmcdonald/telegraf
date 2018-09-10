@@ -30,11 +30,12 @@ script:
   # Real run:
   - ansible-playbook tests/test.yml -i tests/inventory --connection=local
   # Second run to check for indempotence:
+  # Allowing 1 'change' for status read.
   - >
     ansible-playbook tests/test.yml -i tests/inventory --connection=local
-#    | grep -q 'changed=0.*failed=0'
-#    && (echo 'Idempotence test: pass' && exit 0)
-#    || (echo 'Idempotence test: fail' && exit 1)
+    | grep -q 'changed=1.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
   # Run serverspec
   - sudo rake spec
   # Output result of config file (only non commented lines)
