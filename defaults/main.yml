@@ -14,6 +14,10 @@ telegraf_omit_hostname: "false"
 telegraf_flush_interval: 20s
 telegraf_flush_jitter: 5s
 
+# Define this variable if you want to provide your own config file,
+# without passing plugin configs through the telegraf_input_plugins variable.
+# Will be put into /etc/telegraf/telegraf.d/ config dir.
+# telegraf_custom_config_file: /path/to/template/file.conf.j2
 
 # Replace with your own plugin configurations:
 

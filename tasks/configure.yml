@@ -12,6 +12,7 @@
   template:
     src: "{{ telegraf_custom_config_file }}"
     dest: "{{ telegraf_configuration_dir }}/telegraf.d/{{ telegraf_custom_config_file.split('.')|first }}.conf"
+  when: telegraf_custom_config_file is defined
   notify:
     - 'restart telegraf'
 
