@@ -1,15 +1,24 @@
 ---
+# configure and (re)start telegraf and make sure it's enabled
+
 - name: Create Telegraf config file
   template:
     src: telegraf.conf.j2
     dest: "{{ telegraf_configuration_dir }}/telegraf.conf"
-  # If config changes, restart telegraf and confirm it remained running
   notify:
-    - "restart telegraf"
-    - "wait for startup"
-    - "check status"
+    - 'restart telegraf'
+
+- name: Create additional Telegraf config from given template/file
+  template:
+    src: "{{ telegraf_custom_config_file }}"
+    dest: "{{ telegraf_configuration_dir }}/telegraf.d/{{ telegraf_custom_config_file.split('.')|first }}.conf"
+  notify:
+    - 'restart telegraf'
 
 - name: Register telegraf deamon to start on bootup
   service:
     name: telegraf
     enabled: yes
+
+- name: Check status
+  command: service telegraf status

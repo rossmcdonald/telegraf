@@ -17,6 +17,7 @@ The high-level variables are stored in the `defaults/main.yml` file. The most im
 
 - `telegraf_output_plugins` - A list of dictionaries to configure your ouput plugins, for instance to influxdb or other destinations.
 - `telegraf_input_plugins` - A list dictionaries to configure the metrics you want to collect. Either system metrics from the host the agent runs on or metrics of some services, DBs etc.
+- `telegraf_custom_config_file` - A path to a file that contains (additional) telegraf config (can be a Jinja2 template too).
 
 For more params see `defaults/main.yml`.
 
@@ -61,5 +62,4 @@ MIT
 
 ## Author
 
-Created by [Ross McDonald](https://github.com/rossmcdonald).
-
+Created by [Ross McDonald](https://github.com/rossmcdonald). Extended by [Stefan Horning](https://github.com/stefanhorning).
