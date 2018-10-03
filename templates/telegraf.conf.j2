@@ -22,12 +22,12 @@
 # Tags can also be specified via a normal map, but only one form at a time:
 [global_tags]
 {% if telegraf_tags is defined and telegraf_tags != None %}
-{% for key, value in telegraf_tags.iteritems()%}
+{% for key, value in telegraf_tags.items()%}
    {{ key }} = "{{ value }}"
 {% endfor %}
 {% endif %}
 {% if telegraf_aws_tags == true and ec2_tags is defined and ec2_tags != None %}
-{% for key, value in ec2_tags.tags.iteritems()%}
+{% for key, value in ec2_tags.tags.items()%}
    {{telegraf_aws_tags_prefix}}{{ key }} = "{{ value }}"
 {% endfor %}
 {% endif %}
@@ -142,7 +142,7 @@
 {% for plugin in telegraf_plugins %}
 [[inputs.{{ plugin.name }}]]
 {% if plugin.options is defined %}
-{% for key, value in plugin.options.iteritems() %}
+{% for key, value in plugin.options.items() %}
 {% if value is not mapping %}
 {% if value is sequence and value is not string %}
 {% if value[0] is number %}
@@ -159,10 +159,10 @@
 {% endif %}
 {% endif %}
 {% endfor %}
-{% for key, value in plugin.options.iteritems() %}
+{% for key, value in plugin.options.items() %}
 {% if value is mapping %}
     [inputs.{{ plugin.name }}.{{ key }}]
-{% for lv2_key, lv2_value in value.iteritems() %}
+{% for lv2_key, lv2_value in value.items() %}
 {% if lv2_value is sequence and lv2_value is not string %}
 {% if lv2_value[0] is number %}
       {{ lv2_key }} = [ {{ lv2_value|join(', ') }} ]
