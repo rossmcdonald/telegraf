@@ -130,9 +130,9 @@
   # ssl_key = "{{ telegraf_influxdb_ssl_key }}"
 {% endif %}
 
-  ## Use SSL but skip chain & host verification
 {% if telegraf_influxdb_insecure_skip_verify is defined and telegraf_influxdb_insecure_skip_verify != None %}
-  # insecure_skip_verify = telegraf_influxdb_insecure_skip_verify
+  ## Use SSL but skip chain & host verification
+  insecure_skip_verify = {{ telegraf_influxdb_insecure_skip_verify }}
 {% endif %}
 
 ###############################################################################
