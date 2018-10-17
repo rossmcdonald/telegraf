@@ -11,17 +11,11 @@
     - curl
     - apt-transport-https
 
-- name: Import InfluxData GPG signing key [Debian/Ubuntu]
-  apt_key:
-    url: "{{ telegraf_influxdata_base_url }}/influxdb.key"
-    state: present
-  when: telegraf_install_url is not defined or telegraf_install_url == None
-
-- name: Add InfluxData repository [Debian/Ubuntu]
-  apt_repository:
-    repo: deb {{ telegraf_influxdata_base_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ telegraf_install_version }}
-    state: present
-  when: telegraf_install_url is not defined or telegraf_install_url == None
+- name: add influx repo
+  shell: |
+    curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+    source /etc/lsb-release
+    echo "deb https://repos.influxdata.com/ubuntu trusty stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 
 - name: Install Telegraf packages [Debian/Ubuntu]
   apt: 
