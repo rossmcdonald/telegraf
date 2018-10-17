@@ -11,7 +11,7 @@ telegraf_configuration_template: telegraf.conf.j2
 
 # Configuration Variables
 telegraf_tags:
-telegraf_aws_tags: false
+telegraf_aws_tags: true
 telegraf_aws_tags_prefix:
 
 telegraf_agent_interval: 10s
@@ -28,6 +28,11 @@ telegraf_hostname:
 telegraf_omit_hostname: "false"
 telegraf_install_url:
 
+telegraf_socket_writer_enabled: false
+telegraf_socket_writer_address: tcp://127.0.0.1:8094
+telegraf_socket_writer_data_format: influx
+
+telegraf_influxdb_enabled: false
 telegraf_influxdb_urls:
   - http://localhost:8086
 telegraf_influxdb_database: telegraf
@@ -61,6 +66,20 @@ telegraf_plugins_base:
   - name: diskio
     options:
       skip_serial_number: "true"
+  - name: net
+    options:
+      interfaces:
+        - "eth0"
+
+telegraf_plugins_extra:
+  - name: net
+    options:
+      interfaces:
+        - "eth1"
+  - name: socket_listener
+    options:
+      address: "tcp://:8094"
+      data_format: "influx"
   - name: procstat
     options:
       exe: "influxd"
@@ -69,11 +88,6 @@ telegraf_plugins_base:
     options:
       pid_file: "/var/lib/neo4j/data/neo4j-service.pid"
       prefix: "neo4j_proc"
-
-  - name: net
-    options:
-      interfaces:
-        - "eth0"
 
 telegraf_plugins: "{{ telegraf_plugins_base }} + {{ telegraf_plugins_extra | default([]) }}"
 
