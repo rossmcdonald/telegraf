@@ -12,7 +12,7 @@ telegraf_configuration_template: telegraf.conf.j2
 # Configuration Variables
 telegraf_tags:
 # VGS tags has non-suppoted format
-telegraf_aws_tags: false 
+telegraf_aws_tags: false
 telegraf_aws_tags_prefix:
 
 telegraf_agent_interval: 10s
@@ -30,8 +30,8 @@ telegraf_omit_hostname: "false"
 telegraf_install_url:
 
 telegraf_socket_writer_enabled: false
-telegraf_socket_writer_address: tcp://127.0.0.1:8094
-telegraf_socket_writer_data_format: influx
+telegraf_socket_writer_address: "tcp://127.0.0.1:8094"
+telegraf_socket_writer_data_format: "influx"
 
 telegraf_influxdb_enabled: false
 telegraf_influxdb_urls:

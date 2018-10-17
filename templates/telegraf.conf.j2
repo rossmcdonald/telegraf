@@ -141,7 +141,7 @@
 # Generic socket writer capable of handling multiple socket types.
 [[outputs.socket_writer]]
   ## URL to connect to
-  address = {{telegraf_socket_writer_address}}
+  address = "{{telegraf_socket_writer_address}}"
   # address = "tcp://example.com:http"
   # address = "tcp4://127.0.0.1:8094"
   # address = "tcp6://127.0.0.1:8094"
@@ -169,7 +169,7 @@
   ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
-  data_format = {{telegraf_socket_writer_data_format}}
+  data_format = "{{telegraf_socket_writer_data_format}}"
 {% endif %}
 
 ###############################################################################
