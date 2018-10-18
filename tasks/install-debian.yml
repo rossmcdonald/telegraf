@@ -1,9 +1,9 @@
 ---
 - name: Install any necessary dependencies [Debian/Ubuntu]
-  apt: 
-    name: "{{ item }}" 
-    state: present 
-    update_cache: yes 
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
     cache_valid_time: 3600
   with_items:
     - python-httplib2
@@ -16,15 +16,17 @@
     curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
     source /etc/lsb-release
     echo "deb https://repos.influxdata.com/ubuntu trusty stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+    apt-get update
 
+# by some reason update_cache flag doesn't work well
 - name: Install Telegraf packages [Debian/Ubuntu]
-  apt: 
-    name: telegraf
-    state: latest
-    update_cache: yes 
+  apt:
+    name: telegraf='{{telegraf_install_pkg_version}}'
+    state: present
+    update_cache: yes
     cache_valid_time: 3600
   when: telegraf_install_url is not defined or telegraf_install_url == None
-  
+
 - name: Download Telegraf package via URL [Debian/Ubuntu]
   command: curl -o /tmp/telegraf-ansible-download.deb {{ telegraf_install_url }}
   when: telegraf_install_url is defined and telegraf_install_url != None
