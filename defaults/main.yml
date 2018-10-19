@@ -80,7 +80,7 @@ telegraf_plugins_extra:
         - "eth1"
   - name: socket_listener
     options:
-      address: "tcp://:8094"
+      service_address: "tcp://:8094"
       data_format: "influx"
   - name: procstat
     options:
