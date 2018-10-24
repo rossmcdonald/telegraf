@@ -1,6 +1,10 @@
 [influxdb]
 name = InfluxDB Repository - {{ ansible_distribution }} $releasever
+{% if ansible_distribution|lower == "amazon" %}
+baseurl = "{{ telegraf_influxdata_base_url }}/centos/6/amd64/{{ telegraf_install_version }}"
+{% else %}
 baseurl = {{ telegraf_influxdata_base_url }}/{{ ansible_distribution|lower }}/$releasever/$basearch/{{ telegraf_install_version }}
+{% endif %}
 enabled = 1
 gpgcheck = 1
 gpgkey = {{ telegraf_influxdata_base_url }}/influxdb.key
