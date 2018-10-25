@@ -65,11 +65,6 @@ telegraf_plugins_base:
     options:
       exe: "influxd"
       prefix: "influxdb"
-  - name: procstat
-    options:
-      pid_file: "/var/lib/neo4j/data/neo4j-service.pid"
-      prefix: "neo4j_proc"
-
   - name: net
     options:
       interfaces:
