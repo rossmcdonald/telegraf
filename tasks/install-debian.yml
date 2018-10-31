@@ -21,7 +21,7 @@
 # by some reason update_cache flag doesn't work well
 - name: Install Telegraf packages [Debian/Ubuntu]
   apt:
-    name: telegraf='{{telegraf_install_pkg_version}}'
+    name: telegraf
     state: present
     update_cache: yes
     cache_valid_time: 3600
