@@ -15,5 +15,7 @@
   when: ansible_os_family == "Debian"
 
 - name: install rpm [RedHat/CentOS]
-  shell: rpm -i /tmp/telegraf.rpm
+  yum:
+    name: /tmp/telegraf.rpm
+    state: present
   when: ansible_os_family == "RedHat"
