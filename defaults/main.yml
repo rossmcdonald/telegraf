@@ -29,6 +29,7 @@ telegraf_quiet: "false"
 telegraf_hostname:
 telegraf_omit_hostname: "false"
 telegraf_install_url:
+telegraf_install_s3_path:
 
 telegraf_socket_writer_enabled: false
 telegraf_socket_writer_address: "tcp://127.0.0.1:8094"
