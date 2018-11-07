@@ -5,7 +5,7 @@
 is_vagrant: no
 
 # If yes, service will be started. Will not be started if set to no.
-telegraf_start_service: yes
+telegraf_start_service: no
 telegraf_start_delay: 6
 
 # If yes, will overwrite the packaged configuration with an Asnible/jinja2 template
