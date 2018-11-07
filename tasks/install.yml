@@ -1,9 +1,9 @@
 ---
 - include: install-redhat.yml
-  when: telegraf_install_s3_path is not defined and ansible_os_family == "RedHat"
+  when: telegraf_install_s3_path == "" and ansible_os_family == "RedHat"
 
 - include: install-debian.yml
-  when: telegraf_install_s3_path is not defined and ansible_os_family == "Debian"
+  when: telegraf_install_s3_path == "" and ansible_os_family == "Debian"
 
 - include: install-rpm.yml
-  when: telegraf_install_s3_path is defined
+  when: telegraf_install_s3_path != ""

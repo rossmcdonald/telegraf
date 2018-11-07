@@ -8,6 +8,7 @@
   when: ansible_os_family == "Debian"
 
 - name: get telegraf rpm
+  # binary should be in S3, i.e.: s3://{{cfn_bucket}}/bin/telegraf/
   shell: "aws s3 cp {{telegraf_install_s3_path}} /tmp/telegraf.rpm"
 
 - name: install rpm [Debian/Ubuntu]
