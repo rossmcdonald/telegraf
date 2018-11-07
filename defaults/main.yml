@@ -1,7 +1,6 @@
 ---
 # Channel of Telegraf to install
 telegraf_install_version: stable
-telegraf_install_pkg_version: 1.8.2-1
 
 # The user and group telegraf should run under (should be set to telegraf unless needed otherwise)
 telegraf_runas_user: telegraf

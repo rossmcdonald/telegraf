@@ -10,3 +10,4 @@
     - "check status"
     - "assert running"
   become: true
+  when: telegraf_start_service
