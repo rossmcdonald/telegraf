@@ -5,3 +5,4 @@ venv/
 *deb
 *rpm
 playbooks/
+.kitchen/logs/

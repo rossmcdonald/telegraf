@@ -1,0 +1,29 @@
+I, [2018-03-29T18:53:34.800466 #66009]  INFO -- Kitchen: -----> Starting Kitchen (v1.8.0)
+E, [2018-03-29T18:53:34.800807 #66009] ERROR -- Kitchen: ------Exception-------
+E, [2018-03-29T18:53:34.800842 #66009] ERROR -- Kitchen: Class: Kitchen::UserError
+E, [2018-03-29T18:53:34.800873 #66009] ERROR -- Kitchen: Message: Kitchen YAML file /Users/vader/vgg/verygood.ossec-server/tests/.kitchen.yml does not exist.
+E, [2018-03-29T18:53:34.800896 #66009] ERROR -- Kitchen: ------Backtrace-------
+E, [2018-03-29T18:53:34.800916 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/lib/kitchen/loader/yaml.rb:74:in `read'
+E, [2018-03-29T18:53:34.800937 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/lib/kitchen/config.rb:149:in `data'
+E, [2018-03-29T18:53:34.800957 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/lib/kitchen/config.rb:128:in `suites'
+E, [2018-03-29T18:53:34.800977 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/lib/kitchen/config.rb:179:in `filter_instances'
+E, [2018-03-29T18:53:34.800997 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/lib/kitchen/config.rb:138:in `build_instances'
+E, [2018-03-29T18:53:34.801017 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/lib/kitchen/config.rb:114:in `instances'
+E, [2018-03-29T18:53:34.801038 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/lib/kitchen/command.rb:115:in `filtered_instances'
+E, [2018-03-29T18:53:34.801058 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/lib/kitchen/command.rb:145:in `parse_subcommand'
+E, [2018-03-29T18:53:34.801078 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/lib/kitchen/command/action.rb:38:in `block in call'
+E, [2018-03-29T18:53:34.801103 #66009] ERROR -- Kitchen: /usr/local/Cellar/ruby/2.4.2_1/lib/ruby/2.4.0/benchmark.rb:293:in `measure'
+E, [2018-03-29T18:53:34.801123 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/lib/kitchen/command/action.rb:37:in `call'
+E, [2018-03-29T18:53:34.801143 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/lib/kitchen/cli.rb:56:in `perform'
+E, [2018-03-29T18:53:34.801163 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/lib/kitchen/cli.rb:180:in `block (2 levels) in <class:CLI>'
+E, [2018-03-29T18:53:34.801182 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/thor-0.20.0/lib/thor/command.rb:27:in `run'
+E, [2018-03-29T18:53:34.801202 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/thor-0.20.0/lib/thor/invocation.rb:126:in `invoke_command'
+E, [2018-03-29T18:53:34.801222 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/lib/kitchen/cli.rb:321:in `invoke_task'
+E, [2018-03-29T18:53:34.801241 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/thor-0.20.0/lib/thor.rb:387:in `dispatch'
+E, [2018-03-29T18:53:34.801267 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/thor-0.20.0/lib/thor/base.rb:466:in `start'
+E, [2018-03-29T18:53:34.801288 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/bin/kitchen:13:in `block in <top (required)>'
+E, [2018-03-29T18:53:34.801308 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/lib/kitchen/errors.rb:154:in `with_friendly_errors'
+E, [2018-03-29T18:53:34.801332 #66009] ERROR -- Kitchen: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.8.0/bin/kitchen:13:in `<top (required)>'
+E, [2018-03-29T18:53:34.801352 #66009] ERROR -- Kitchen: /usr/local/bin/kitchen:23:in `load'
+E, [2018-03-29T18:53:34.801371 #66009] ERROR -- Kitchen: /usr/local/bin/kitchen:23:in `<main>'
+E, [2018-03-29T18:53:34.801390 #66009] ERROR -- Kitchen: ----------------------

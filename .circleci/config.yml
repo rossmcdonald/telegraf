@@ -1,0 +1,18 @@
+# Python CircleCI 2.0 configuration file
+version: 2
+jobs:
+  build:
+    machine:
+      enabled: true
+    environment:
+      AWS_DEFAULT_REGION: us-west-2
+    steps:
+      - checkout
+      - run: 
+          name: Install Dependencies
+          command: |
+            bundle install
+      - run: 
+          name: Tests
+          command: |
+            kitchen test

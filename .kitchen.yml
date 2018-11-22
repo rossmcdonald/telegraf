@@ -1,0 +1,30 @@
+---
+driver:
+  name: docker
+  use_sudo: false
+
+provisioner:
+  name: ansible_playbook
+  playbook: tests/default.yml
+  hosts: all
+  ansible_verbose: true
+  #ansible_version: 2.2.0-1ppa~xenial
+  #idempotency_test true
+
+platforms:
+  - name: ubuntu
+    driver_config:
+      # provision_command:
+      #   - apt-get install -y python-netaddr
+      image: ubuntu:16.04
+      platform: ubuntu
+
+  # - name: amazon-linux
+  #   driver_config:
+  #     # provision_command:
+  #     #   - apt-get install -y python-netaddr
+  #     image: amazonlinux:2018.03
+  #     platform: amazonlinux
+
+suites:
+  - name: default

@@ -1,0 +1,745 @@
+I, [2018-11-23T00:08:31.309155 #8517]  INFO -- default-ubuntu: -----> Cleaning up any prior instances of <default-ubuntu>
+I, [2018-11-23T00:08:31.309315 #8517]  INFO -- default-ubuntu: -----> Destroying <default-ubuntu>...
+I, [2018-11-23T00:08:31.310194 #8517]  INFO -- default-ubuntu: Finished destroying <default-ubuntu> (0m0.00s).
+I, [2018-11-23T00:08:31.310553 #8517]  INFO -- default-ubuntu: -----> Testing <default-ubuntu>
+I, [2018-11-23T00:08:31.310652 #8517]  INFO -- default-ubuntu: -----> Creating <default-ubuntu>...
+I, [2018-11-23T00:08:32.011086 #8517]  INFO -- default-ubuntu: Sending build context to Docker daemon  347.6kB
+I, [2018-11-23T00:08:32.175335 #8517]  INFO -- default-ubuntu: Step 1/17 : FROM ubuntu:16.04
+I, [2018-11-23T00:08:32.175569 #8517]  INFO -- default-ubuntu:  ---> a51debf7e1eb
+I, [2018-11-23T00:08:32.175669 #8517]  INFO -- default-ubuntu: Step 2/17 : RUN dpkg-divert --local --rename --add /sbin/initctl
+I, [2018-11-23T00:08:32.176753 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.176862 #8517]  INFO -- default-ubuntu:  ---> ff901e154af0
+I, [2018-11-23T00:08:32.176961 #8517]  INFO -- default-ubuntu: Step 3/17 : RUN ln -sf /bin/true /sbin/initctl
+I, [2018-11-23T00:08:32.178169 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.178274 #8517]  INFO -- default-ubuntu:  ---> c12adc06e301
+I, [2018-11-23T00:08:32.178350 #8517]  INFO -- default-ubuntu: Step 4/17 : ENV DEBIAN_FRONTEND noninteractive
+I, [2018-11-23T00:08:32.179456 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.179564 #8517]  INFO -- default-ubuntu:  ---> a518bd705792
+I, [2018-11-23T00:08:32.179812 #8517]  INFO -- default-ubuntu: Step 5/17 : ENV container docker
+I, [2018-11-23T00:08:32.181355 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.181525 #8517]  INFO -- default-ubuntu:  ---> 312618d749c5
+I, [2018-11-23T00:08:32.181647 #8517]  INFO -- default-ubuntu: Step 6/17 : RUN apt-get update
+I, [2018-11-23T00:08:32.183834 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.184015 #8517]  INFO -- default-ubuntu:  ---> f3b299a0a5f5
+I, [2018-11-23T00:08:32.184114 #8517]  INFO -- default-ubuntu: Step 7/17 : RUN apt-get install -y sudo openssh-server curl lsb-release
+I, [2018-11-23T00:08:32.184221 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.184295 #8517]  INFO -- default-ubuntu:  ---> ae600107701c
+I, [2018-11-23T00:08:32.184378 #8517]  INFO -- default-ubuntu: Step 8/17 : RUN if ! getent passwd kitchen; then                 useradd -d /home/kitchen -m -s /bin/bash -p '*' kitchen;               fi
+I, [2018-11-23T00:08:32.184451 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.184517 #8517]  INFO -- default-ubuntu:  ---> b16be23fd5fd
+I, [2018-11-23T00:08:32.184580 #8517]  INFO -- default-ubuntu: Step 9/17 : RUN echo "kitchen ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+I, [2018-11-23T00:08:32.185127 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.185243 #8517]  INFO -- default-ubuntu:  ---> 7a21a7e0b1ae
+I, [2018-11-23T00:08:32.185325 #8517]  INFO -- default-ubuntu: Step 10/17 : RUN echo "Defaults !requiretty" >> /etc/sudoers
+I, [2018-11-23T00:08:32.185366 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.185402 #8517]  INFO -- default-ubuntu:  ---> 8b1dd87d3f3f
+I, [2018-11-23T00:08:32.185442 #8517]  INFO -- default-ubuntu: Step 11/17 : RUN mkdir -p /home/kitchen/.ssh
+I, [2018-11-23T00:08:32.186720 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.186829 #8517]  INFO -- default-ubuntu:  ---> 9376d2877ec5
+I, [2018-11-23T00:08:32.187222 #8517]  INFO -- default-ubuntu: Step 12/17 : RUN chown -R kitchen /home/kitchen/.ssh
+I, [2018-11-23T00:08:32.187294 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.187341 #8517]  INFO -- default-ubuntu:  ---> d1118568c216
+I, [2018-11-23T00:08:32.187397 #8517]  INFO -- default-ubuntu: Step 13/17 : RUN chmod 0700 /home/kitchen/.ssh
+I, [2018-11-23T00:08:32.189594 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.189710 #8517]  INFO -- default-ubuntu:  ---> 536062245f8f
+I, [2018-11-23T00:08:32.189756 #8517]  INFO -- default-ubuntu: Step 14/17 : RUN touch /home/kitchen/.ssh/authorized_keys
+I, [2018-11-23T00:08:32.191159 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.191339 #8517]  INFO -- default-ubuntu:  ---> a051ab67e5d7
+I, [2018-11-23T00:08:32.191733 #8517]  INFO -- default-ubuntu: Step 15/17 : RUN chown kitchen /home/kitchen/.ssh/authorized_keys
+I, [2018-11-23T00:08:32.194610 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.194751 #8517]  INFO -- default-ubuntu:  ---> 9a27e85b04f7
+I, [2018-11-23T00:08:32.194829 #8517]  INFO -- default-ubuntu: Step 16/17 : RUN chmod 0600 /home/kitchen/.ssh/authorized_keys
+I, [2018-11-23T00:08:32.194885 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.194944 #8517]  INFO -- default-ubuntu:  ---> d5b034e871b4
+I, [2018-11-23T00:08:32.195130 #8517]  INFO -- default-ubuntu: Step 17/17 : RUN echo ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQDCOTGZeNvc4/c/AcaE3X\+\+xuGy3wWPEhDkR\+nfPXC9ECxyOAVPTe3iqBC6sfzfhu\+Zd5i68753K4PVpiN\+x75t9YUf3N1U4XBs4n1bf72dxiQ3z3V9IHX3tAi6vYENF9BLp0zHMrFWpXGiDJD4\+0zhlceSyZg/SDYx61cwsZQWHq3xJPvE6mYu49dhzU3A/4IdaZ7nuwf9L\+F7gjrbIjsqwabOU6nbGlxzt4Bnxix7g/8bsPkCR\+6zIQA5JOW2ayt2dWWMMHArNMhLEpKnRdXUMW3jBG9xR0juMYIFvpbR61kkYc6UJLIyoHY7vhldcQScKlF4EjzxBmW/Ca\+mU8gt\ kitchen_docker_key >> /home/kitchen/.ssh/authorized_keys
+I, [2018-11-23T00:08:32.195955 #8517]  INFO -- default-ubuntu:  ---> Using cache
+I, [2018-11-23T00:08:32.196024 #8517]  INFO -- default-ubuntu:  ---> 561ec82ed3fc
+I, [2018-11-23T00:08:32.209971 #8517]  INFO -- default-ubuntu: Successfully built 561ec82ed3fc
+I, [2018-11-23T00:08:32.449169 #8517]  INFO -- default-ubuntu: f78ad127674fa43a14687011afcce51dd527d49eba87c2402c3440cc59519975
+I, [2018-11-23T00:08:33.158434 #8517]  INFO -- default-ubuntu: 0.0.0.0:32777
+I, [2018-11-23T00:08:33.277198 #8517]  INFO -- default-ubuntu: [SSH] Established
+I, [2018-11-23T00:08:33.278950 #8517]  INFO -- default-ubuntu: Finished creating <default-ubuntu> (0m1.97s).
+I, [2018-11-23T00:08:33.279135 #8517]  INFO -- default-ubuntu: -----> Converging <default-ubuntu>...
+I, [2018-11-23T00:08:33.280173 #8517]  INFO -- default-ubuntu: Preparing files for transfer
+I, [2018-11-23T00:08:33.280267 #8517]  INFO -- default-ubuntu: Preparing playbook
+I, [2018-11-23T00:08:33.280956 #8517]  INFO -- default-ubuntu: Preparing inventory
+I, [2018-11-23T00:08:33.281083 #8517]  INFO -- default-ubuntu: Preparing modules
+I, [2018-11-23T00:08:33.281541 #8517]  INFO -- default-ubuntu: nothing to do for modules
+I, [2018-11-23T00:08:33.281640 #8517]  INFO -- default-ubuntu: Preparing roles
+I, [2018-11-23T00:08:33.506477 #8517]  INFO -- default-ubuntu: Preparing ansible.cfg file
+I, [2018-11-23T00:08:33.506692 #8517]  INFO -- default-ubuntu: Empty ansible.cfg generated
+I, [2018-11-23T00:08:33.507087 #8517]  INFO -- default-ubuntu: Preparing group_vars
+I, [2018-11-23T00:08:33.507501 #8517]  INFO -- default-ubuntu: nothing to do for group_vars
+I, [2018-11-23T00:08:33.507578 #8517]  INFO -- default-ubuntu: Preparing additional_copy_path
+I, [2018-11-23T00:08:33.507849 #8517]  INFO -- default-ubuntu: Preparing host_vars
+I, [2018-11-23T00:08:33.508110 #8517]  INFO -- default-ubuntu: nothing to do for host_vars
+I, [2018-11-23T00:08:33.508173 #8517]  INFO -- default-ubuntu: Preparing hosts file
+I, [2018-11-23T00:08:33.508521 #8517]  INFO -- default-ubuntu: Preparing spec
+I, [2018-11-23T00:08:33.508708 #8517]  INFO -- default-ubuntu: nothing to do for spec
+I, [2018-11-23T00:08:33.508784 #8517]  INFO -- default-ubuntu: Preparing library plugins
+I, [2018-11-23T00:08:33.509134 #8517]  INFO -- default-ubuntu: nothing to do for library plugins
+I, [2018-11-23T00:08:33.509189 #8517]  INFO -- default-ubuntu: Preparing callback plugins
+I, [2018-11-23T00:08:33.509480 #8517]  INFO -- default-ubuntu: nothing to do for callback plugins
+I, [2018-11-23T00:08:33.509533 #8517]  INFO -- default-ubuntu: Preparing filter_plugins
+I, [2018-11-23T00:08:33.509867 #8517]  INFO -- default-ubuntu: nothing to do for filter_plugins
+I, [2018-11-23T00:08:33.509916 #8517]  INFO -- default-ubuntu: Preparing lookup_plugins
+I, [2018-11-23T00:08:33.510219 #8517]  INFO -- default-ubuntu: nothing to do for lookup_plugins
+I, [2018-11-23T00:08:33.510343 #8517]  INFO -- default-ubuntu: Preparing ansible vault password
+I, [2018-11-23T00:08:33.510686 #8517]  INFO -- default-ubuntu: Preparing additional_ssh_private_keys
+I, [2018-11-23T00:08:33.511093 #8517]  INFO -- default-ubuntu: nothing to do for additional_ssh_private_keys
+I, [2018-11-23T00:08:33.511159 #8517]  INFO -- default-ubuntu: Finished Preparing files for transfer
+I, [2018-11-23T00:08:33.511686 #8517]  INFO -- default-ubuntu: Installing ansible, will try to determine platform os
+I, [2018-11-23T00:08:33.818960 #8517]  INFO -- default-ubuntu: 0% [Working]            Get:1 http://security.ubuntu.com/ubuntu xenial-security InRelease [107 kB]
+I, [2018-11-23T00:08:33.832208 #8517]  INFO -- default-ubuntu: 0% [Waiting for headers] [1 InRelease 0 B/107 kB 0%]                                                    Hit:2 http://archive.ubuntu.com/ubuntu xenial InRelease
+I, [2018-11-23T00:08:33.892710 #8517]  INFO -- default-ubuntu:                                                     0% [1 InRelease 14.2 kB/107 kB 13%]0% [2 InRelease gpgv 247 kB] [Waiting for headers] [1 InRelease 14.2 kB/107 kB                                                                                Get:3 http://archive.ubuntu.com/ubuntu xenial-updates InRelease [109 kB]
+I, [2018-11-23T00:08:34.131781 #8517]  INFO -- default-ubuntu: 0% [2 InRelease gpgv 247 kB] [3 InRelease 0 B/109 kB 0%] [1 InRelease 38.8 kB/1                                                                               0% [2 InRelease gpgv 247 kB] [3 InRelease 37.4 kB/109 kB 34%]                                                             0% [3 InRelease 64.9 kB/109 kB 59%]0% [1 InRelease gpgv 107 kB] [3 InRelease 67.8 kB/109 kB 62%]                                                             0% [1 InRelease gpgv 107 kB]                            0% [Waiting for headers]0% [3 InRelease gpgv 109 kB] [Waiting for headers]                                                  Get:4 http://archive.ubuntu.com/ubuntu xenial-backports InRelease [107 kB]
+I, [2018-11-23T00:08:34.273629 #8517]  INFO -- default-ubuntu: 0% [3 InRelease gpgv 109 kB] [4 InRelease 4049 B/107 kB 4%]                                                           0% [3 InRelease gpgv 109 kB]                            0% [Working]0% [4 InRelease gpgv 107 kB]                            Get:5 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 Packages [909 kB]
+I, [2018-11-23T00:08:34.740821 #8517]  INFO -- default-ubuntu: 0% [4 InRelease gpgv 107 kB] [5 Packages 1239 B/909 kB 0%]                                                          50% [5 Packages 147 kB/909 kB 16%]                                  99% [Working]99% [5 Packages store 0 B]                          100% [Working]              Fetched 1232 kB in 1s (1161 kB/s)
+I, [2018-11-23T00:08:35.762995 #8517]  INFO -- default-ubuntu: Reading package lists... 0%Reading package lists... 0%Reading package lists... 1%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 72%Reading package lists... 72%Reading package lists... 72%Reading package lists... 73%Reading package lists... 73%Reading package lists... 82%Reading package lists... 82%Reading package lists... 82%Reading package lists... 82%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+I, [2018-11-23T00:08:36.741252 #8517]  INFO -- default-ubuntu: Reading package lists... 0%Reading package lists... 0%Reading package lists... 1%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 72%Reading package lists... 72%Reading package lists... 73%Reading package lists... 73%Reading package lists... 79%Reading package lists... 82%Reading package lists... 82%Reading package lists... 82%Reading package lists... 82%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+I, [2018-11-23T00:08:36.983192 #8517]  INFO -- default-ubuntu: Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+I, [2018-11-23T00:08:36.984158 #8517]  INFO -- default-ubuntu: Reading state information... 0%Reading state information... 1%Reading state information... Done
+I, [2018-11-23T00:08:37.197468 #8517]  INFO -- default-ubuntu: The following additional packages will be installed:
+I, [2018-11-23T00:08:37.198198 #8517]  INFO -- default-ubuntu:   git-man ifupdown iproute2 isc-dhcp-client isc-dhcp-common less
+I, [2018-11-23T00:08:37.198274 #8517]  INFO -- default-ubuntu:   libapt-inst2.0 libassuan0 libatm1 libdns-export162 liberror-perl libgdbm3
+I, [2018-11-23T00:08:37.199315 #8517]  INFO -- default-ubuntu:   libisc-export160 libksba8 libmnl0 libnpth0 libperl5.22 libpopt0 libxtables11
+I, [2018-11-23T00:08:37.199853 #8517]  INFO -- default-ubuntu:   netbase patch perl perl-modules-5.22 rename rsync
+I, [2018-11-23T00:08:37.202368 #8517]  INFO -- default-ubuntu: Suggested packages:
+I, [2018-11-23T00:08:37.202452 #8517]  INFO -- default-ubuntu:   gettext-base git-daemon-run | git-daemon-sysvinit git-doc git-el git-email
+I, [2018-11-23T00:08:37.202502 #8517]  INFO -- default-ubuntu:   git-gui gitk gitweb git-arch git-cvs git-mediawiki git-svn ppp rdnssd
+I, [2018-11-23T00:08:37.202543 #8517]  INFO -- default-ubuntu:   iproute2-doc resolvconf avahi-autoipd isc-dhcp-client-ddns apparmor ed
+I, [2018-11-23T00:08:37.202579 #8517]  INFO -- default-ubuntu:   diffutils-doc perl-doc libterm-readline-gnu-perl
+I, [2018-11-23T00:08:37.202609 #8517]  INFO -- default-ubuntu:   | libterm-readline-perl-perl make
+I, [2018-11-23T00:08:37.204873 #8517]  INFO -- default-ubuntu: The following NEW packages will be installed:
+I, [2018-11-23T00:08:37.205943 #8517]  INFO -- default-ubuntu:   apt-utils dirmngr git git-man ifupdown iproute2 isc-dhcp-client
+I, [2018-11-23T00:08:37.206036 #8517]  INFO -- default-ubuntu:   isc-dhcp-common less libapt-inst2.0 libassuan0 libatm1 libdns-export162
+I, [2018-11-23T00:08:37.206344 #8517]  INFO -- default-ubuntu:   liberror-perl libgdbm3 libisc-export160 libksba8 libmnl0 libnpth0
+I, [2018-11-23T00:08:37.207231 #8517]  INFO -- default-ubuntu:   libperl5.22 libpopt0 libxtables11 netbase patch perl perl-modules-5.22
+I, [2018-11-23T00:08:37.207566 #8517]  INFO -- default-ubuntu:   rename rsync
+I, [2018-11-23T00:08:37.217557 #8517]  INFO -- default-ubuntu: 0 upgraded, 28 newly installed, 0 to remove and 4 not upgraded.
+I, [2018-11-23T00:08:37.300754 #8517]  INFO -- default-ubuntu: Need to get 12.8 MB of archives.
+I, [2018-11-23T00:08:37.300829 #8517]  INFO -- default-ubuntu: After this operation, 73.9 MB of additional disk space will be used.
+I, [2018-11-23T00:08:37.405357 #8517]  INFO -- default-ubuntu: 0% [Working]            Get:1 http://archive.ubuntu.com/ubuntu xenial/main amd64 libatm1 amd64 1:2.5.1-1.5 [24.2 kB]
+I, [2018-11-23T00:08:37.515084 #8517]  INFO -- default-ubuntu: 0% [1 libatm1 1167 B/24.2 kB 5%]                                1% [Working]            Get:2 http://archive.ubuntu.com/ubuntu xenial/main amd64 libmnl0 amd64 1.0.3-5 [12.0 kB]
+I, [2018-11-23T00:08:37.526957 #8517]  INFO -- default-ubuntu: 1% [2 libmnl0 1167 B/12.0 kB 10%]                                 2% [Waiting for headers]                        Get:3 http://archive.ubuntu.com/ubuntu xenial/main amd64 libpopt0 amd64 1.16-10 [26.0 kB]
+I, [2018-11-23T00:08:37.561401 #8517]  INFO -- default-ubuntu: 2% [3 libpopt0 1948 B/26.0 kB 7%]                                 3% [Working]            Get:4 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgdbm3 amd64 1.8.3-13.1 [16.9 kB]
+I, [2018-11-23T00:08:37.576366 #8517]  INFO -- default-ubuntu: 3% [4 libgdbm3 261 B/16.9 kB 2%]                                3% [Waiting for headers]                        Get:5 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 perl-modules-5.22 all 5.22.1-9ubuntu0.5 [2645 kB]
+I, [2018-11-23T00:08:38.410425 #8517]  INFO -- default-ubuntu: 3% [5 perl-modules-5.22 3322 B/2645 kB 0%]13% [5 perl-modules-5.22 1587 kB/2645 kB 60%]                                             21% [Working]             Get:6 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libperl5.22 amd64 5.22.1-9ubuntu0.5 [3396 kB]
+I, [2018-11-23T00:08:39.258105 #8517]  INFO -- default-ubuntu: 21% [6 libperl5.22 32.6 kB/3396 kB 1%]34% [6 libperl5.22 2103 kB/3396 kB 62%]                                       43% [Waiting for headers]                         Get:7 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 perl amd64 5.22.1-9ubuntu0.5 [238 kB]
+I, [2018-11-23T00:08:39.341361 #8517]  INFO -- default-ubuntu: 43% [7 perl 21.2 kB/238 kB 9%]                              45% [Working]             Get:8 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libapt-inst2.0 amd64 1.2.29 [55.5 kB]
+I, [2018-11-23T00:08:39.363217 #8517]  INFO -- default-ubuntu: 45% [8 libapt-inst2.0 4877 B/55.5 kB 9%]                                        46% [Waiting for headers]                         Get:9 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 apt-utils amd64 1.2.29 [196 kB]
+I, [2018-11-23T00:08:39.418145 #8517]  INFO -- default-ubuntu: 46% [9 apt-utils 18.6 kB/196 kB 10%]                                    48% [Working]             Get:10 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 iproute2 amd64 4.3.0-1ubuntu3.16.04.4 [521 kB]
+I, [2018-11-23T00:08:39.558688 #8517]  INFO -- default-ubuntu: 48% [10 iproute2 0 B/521 kB 0%]                               52% [Waiting for headers]                         Get:11 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 ifupdown amd64 0.8.10ubuntu1.4 [54.9 kB]
+I, [2018-11-23T00:08:39.570411 #8517]  INFO -- default-ubuntu: 52% [11 ifupdown 5824 B/54.9 kB 11%]                                    Get:12 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libisc-export160 amd64 1:9.10.3.dfsg.P4-8ubuntu1.11 [153 kB]
+I, [2018-11-23T00:08:39.615520 #8517]  INFO -- default-ubuntu: 53% [12 libisc-export160 2817 B/153 kB 2%]                                          55% [Working]             Get:13 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libdns-export162 amd64 1:9.10.3.dfsg.P4-8ubuntu1.11 [667 kB]
+I, [2018-11-23T00:08:39.787888 #8517]  INFO -- default-ubuntu: 55% [13 libdns-export162 0 B/667 kB 0%]                                       60% [Working]             Get:14 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 isc-dhcp-client amd64 4.3.3-5ubuntu12.10 [224 kB]
+I, [2018-11-23T00:08:39.843735 #8517]  INFO -- default-ubuntu: 60% [14 isc-dhcp-client 0 B/224 kB 0%]                                      62% [Waiting for headers]                         Get:15 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 isc-dhcp-common amd64 4.3.3-5ubuntu12.10 [105 kB]
+I, [2018-11-23T00:08:39.886155 #8517]  INFO -- default-ubuntu: 62% [15 isc-dhcp-common 11.9 kB/105 kB 11%]                                           63% [Waiting for headers]                         Get:16 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 less amd64 481-2.1ubuntu0.2 [110 kB]
+I, [2018-11-23T00:08:39.936402 #8517]  INFO -- default-ubuntu: 63% [16 less 11.1 kB/110 kB 10%]                                64% [Working]             Get:17 http://archive.ubuntu.com/ubuntu xenial/main amd64 libxtables11 amd64 1.6.0-2ubuntu3 [27.2 kB]
+I, [2018-11-23T00:08:39.939940 #8517]  INFO -- default-ubuntu: 64% [17 libxtables11 0 B/27.2 kB 0%]                                    65% [Waiting for headers]                         Get:18 http://archive.ubuntu.com/ubuntu xenial/main amd64 netbase all 5.3 [12.9 kB]
+I, [2018-11-23T00:08:39.943074 #8517]  INFO -- default-ubuntu: 65% [18 netbase 5381 B/12.9 kB 42%]                                   66% [Working]             Get:19 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 rsync amd64 3.1.1-3ubuntu1.2 [329 kB]
+I, [2018-11-23T00:08:40.026486 #8517]  INFO -- default-ubuntu: 66% [19 rsync 880 B/329 kB 0%]                              69% [Working]             Get:20 http://archive.ubuntu.com/ubuntu xenial/main amd64 libassuan0 amd64 2.4.2-2 [34.6 kB]
+I, [2018-11-23T00:08:40.035917 #8517]  INFO -- default-ubuntu: 69% [20 libassuan0 10.8 kB/34.6 kB 31%]                                       70% [Waiting for headers]                         Get:21 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libksba8 amd64 1.3.3-1ubuntu0.16.04.1 [90.2 kB]
+I, [2018-11-23T00:08:40.080838 #8517]  INFO -- default-ubuntu: 70% [21 libksba8 7773 B/90.2 kB 9%]                                   71% [Working]             Get:22 http://archive.ubuntu.com/ubuntu xenial/main amd64 libnpth0 amd64 1.2-3 [7998 B]
+I, [2018-11-23T00:08:40.081483 #8517]  INFO -- default-ubuntu: 71% [22 libnpth0 2723 B/7998 B 34%]                                   72% [Working]             Get:23 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 dirmngr amd64 2.1.11-6ubuntu2.1 [235 kB]
+I, [2018-11-23T00:08:40.134211 #8517]  INFO -- default-ubuntu: 72% [23 dirmngr 0 B/235 kB 0%]                              74% [Working]             Get:24 http://archive.ubuntu.com/ubuntu xenial/main amd64 liberror-perl all 0.17-1.2 [19.6 kB]
+I, [2018-11-23T00:08:40.155548 #8517]  INFO -- default-ubuntu: 74% [24 liberror-perl 0 B/19.6 kB 0%]                                     75% [Waiting for headers]                         Get:25 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 git-man all 1:2.7.4-0ubuntu1.5 [736 kB]
+I, [2018-11-23T00:08:40.282015 #8517]  INFO -- default-ubuntu: 75% [25 git-man 41.3 kB/736 kB 6%]                                  80% [Waiting for headers]                         Get:26 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 git amd64 1:2.7.4-0ubuntu1.5 [2714 kB]
+I, [2018-11-23T00:08:41.254104 #8517]  INFO -- default-ubuntu: 80% [26 git 10.7 kB/2714 kB 0%]90% [26 git 1486 kB/2714 kB 55%]                                98% [Working]             Get:27 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 patch amd64 2.7.5-1ubuntu0.16.04.1 [90.5 kB]
+I, [2018-11-23T00:08:41.320072 #8517]  INFO -- default-ubuntu: 98% [27 patch 0 B/90.5 kB 0%]                             Get:28 http://archive.ubuntu.com/ubuntu xenial/main amd64 rename all 0.20-4 [12.0 kB]
+I, [2018-11-23T00:08:41.328739 #8517]  INFO -- default-ubuntu: 99% [28 rename 4051 B/12.0 kB 34%]                                  100% [Working]              Fetched 12.8 MB in 4s (3171 kB/s)
+I, [2018-11-23T00:08:41.384512 #8517]  INFO -- default-ubuntu: perl: warning: Setting locale failed.
+I, [2018-11-23T00:08:41.385058 #8517]  INFO -- default-ubuntu: perl: warning: Please check that your locale settings:
+I, [2018-11-23T00:08:41.385129 #8517]  INFO -- default-ubuntu: 	LANGUAGE = (unset),
+I, [2018-11-23T00:08:41.385169 #8517]  INFO -- default-ubuntu: 	LC_ALL = (unset),
+I, [2018-11-23T00:08:41.385276 #8517]  INFO -- default-ubuntu: 	LC_CTYPE = "ru_RU.UTF-8",
+I, [2018-11-23T00:08:41.385310 #8517]  INFO -- default-ubuntu: 	LANG = "ru_RU.UTF-8"
+I, [2018-11-23T00:08:41.385341 #8517]  INFO -- default-ubuntu:     are supported and installed on your system.
+I, [2018-11-23T00:08:41.385371 #8517]  INFO -- default-ubuntu: perl: warning: Falling back to the standard locale ("C").
+I, [2018-11-23T00:08:41.685172 #8517]  INFO -- default-ubuntu: debconf: delaying package configuration, since apt-utils is not installed
+I, [2018-11-23T00:08:41.938294 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libatm1:amd64.
+I, [2018-11-23T00:08:41.957006 #8517]  INFO -- default-ubuntu: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 9646 files and directories currently installed.)
+I, [2018-11-23T00:08:41.957178 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libatm1_1%3a2.5.1-1.5_amd64.deb ...
+I, [2018-11-23T00:08:41.969552 #8517]  INFO -- default-ubuntu: Unpacking libatm1:amd64 (1:2.5.1-1.5) ...
+I, [2018-11-23T00:08:42.033634 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libmnl0:amd64.
+I, [2018-11-23T00:08:42.039323 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libmnl0_1.0.3-5_amd64.deb ...
+I, [2018-11-23T00:08:42.061100 #8517]  INFO -- default-ubuntu: Unpacking libmnl0:amd64 (1.0.3-5) ...
+I, [2018-11-23T00:08:42.156940 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libpopt0:amd64.
+I, [2018-11-23T00:08:42.159483 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libpopt0_1.16-10_amd64.deb ...
+I, [2018-11-23T00:08:42.172610 #8517]  INFO -- default-ubuntu: Unpacking libpopt0:amd64 (1.16-10) ...
+I, [2018-11-23T00:08:42.266909 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libgdbm3:amd64.
+I, [2018-11-23T00:08:42.275954 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libgdbm3_1.8.3-13.1_amd64.deb ...
+I, [2018-11-23T00:08:42.312101 #8517]  INFO -- default-ubuntu: Unpacking libgdbm3:amd64 (1.8.3-13.1) ...
+I, [2018-11-23T00:08:42.408900 #8517]  INFO -- default-ubuntu: Selecting previously unselected package perl-modules-5.22.
+I, [2018-11-23T00:08:42.408977 #8517]  INFO -- default-ubuntu: Preparing to unpack .../perl-modules-5.22_5.22.1-9ubuntu0.5_all.deb ...
+I, [2018-11-23T00:08:42.413719 #8517]  INFO -- default-ubuntu: Unpacking perl-modules-5.22 (5.22.1-9ubuntu0.5) ...
+I, [2018-11-23T00:08:43.516322 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libperl5.22:amd64.
+I, [2018-11-23T00:08:43.524950 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libperl5.22_5.22.1-9ubuntu0.5_amd64.deb ...
+I, [2018-11-23T00:08:43.576330 #8517]  INFO -- default-ubuntu: Unpacking libperl5.22:amd64 (5.22.1-9ubuntu0.5) ...
+I, [2018-11-23T00:08:44.340355 #8517]  INFO -- default-ubuntu: Selecting previously unselected package perl.
+I, [2018-11-23T00:08:44.347162 #8517]  INFO -- default-ubuntu: Preparing to unpack .../perl_5.22.1-9ubuntu0.5_amd64.deb ...
+I, [2018-11-23T00:08:44.360235 #8517]  INFO -- default-ubuntu: Unpacking perl (5.22.1-9ubuntu0.5) ...
+I, [2018-11-23T00:08:44.466350 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libapt-inst2.0:amd64.
+I, [2018-11-23T00:08:44.470187 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libapt-inst2.0_1.2.29_amd64.deb ...
+I, [2018-11-23T00:08:44.481317 #8517]  INFO -- default-ubuntu: Unpacking libapt-inst2.0:amd64 (1.2.29) ...
+I, [2018-11-23T00:08:44.658078 #8517]  INFO -- default-ubuntu: Selecting previously unselected package apt-utils.
+I, [2018-11-23T00:08:44.659886 #8517]  INFO -- default-ubuntu: Preparing to unpack .../apt-utils_1.2.29_amd64.deb ...
+I, [2018-11-23T00:08:44.675248 #8517]  INFO -- default-ubuntu: Unpacking apt-utils (1.2.29) ...
+I, [2018-11-23T00:08:44.798817 #8517]  INFO -- default-ubuntu: Selecting previously unselected package iproute2.
+I, [2018-11-23T00:08:44.798904 #8517]  INFO -- default-ubuntu: Preparing to unpack .../iproute2_4.3.0-1ubuntu3.16.04.4_amd64.deb ...
+I, [2018-11-23T00:08:44.809029 #8517]  INFO -- default-ubuntu: Unpacking iproute2 (4.3.0-1ubuntu3.16.04.4) ...
+I, [2018-11-23T00:08:44.967247 #8517]  INFO -- default-ubuntu: Selecting previously unselected package ifupdown.
+I, [2018-11-23T00:08:44.967337 #8517]  INFO -- default-ubuntu: Preparing to unpack .../ifupdown_0.8.10ubuntu1.4_amd64.deb ...
+I, [2018-11-23T00:08:44.989405 #8517]  INFO -- default-ubuntu: Unpacking ifupdown (0.8.10ubuntu1.4) ...
+I, [2018-11-23T00:08:45.060319 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libisc-export160.
+I, [2018-11-23T00:08:45.060408 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libisc-export160_1%3a9.10.3.dfsg.P4-8ubuntu1.11_amd64.deb ...
+I, [2018-11-23T00:08:45.065974 #8517]  INFO -- default-ubuntu: Unpacking libisc-export160 (1:9.10.3.dfsg.P4-8ubuntu1.11) ...
+I, [2018-11-23T00:08:45.133263 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libdns-export162.
+I, [2018-11-23T00:08:45.133325 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libdns-export162_1%3a9.10.3.dfsg.P4-8ubuntu1.11_amd64.deb ...
+I, [2018-11-23T00:08:45.137349 #8517]  INFO -- default-ubuntu: Unpacking libdns-export162 (1:9.10.3.dfsg.P4-8ubuntu1.11) ...
+I, [2018-11-23T00:08:45.283374 #8517]  INFO -- default-ubuntu: Selecting previously unselected package isc-dhcp-client.
+I, [2018-11-23T00:08:45.288633 #8517]  INFO -- default-ubuntu: Preparing to unpack .../isc-dhcp-client_4.3.3-5ubuntu12.10_amd64.deb ...
+I, [2018-11-23T00:08:45.294086 #8517]  INFO -- default-ubuntu: Unpacking isc-dhcp-client (4.3.3-5ubuntu12.10) ...
+I, [2018-11-23T00:08:45.396530 #8517]  INFO -- default-ubuntu: Selecting previously unselected package isc-dhcp-common.
+I, [2018-11-23T00:08:45.396607 #8517]  INFO -- default-ubuntu: Preparing to unpack .../isc-dhcp-common_4.3.3-5ubuntu12.10_amd64.deb ...
+I, [2018-11-23T00:08:45.406868 #8517]  INFO -- default-ubuntu: Unpacking isc-dhcp-common (4.3.3-5ubuntu12.10) ...
+I, [2018-11-23T00:08:45.469624 #8517]  INFO -- default-ubuntu: Selecting previously unselected package less.
+I, [2018-11-23T00:08:45.472667 #8517]  INFO -- default-ubuntu: Preparing to unpack .../less_481-2.1ubuntu0.2_amd64.deb ...
+I, [2018-11-23T00:08:45.477434 #8517]  INFO -- default-ubuntu: Unpacking less (481-2.1ubuntu0.2) ...
+I, [2018-11-23T00:08:45.550121 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libxtables11:amd64.
+I, [2018-11-23T00:08:45.550403 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libxtables11_1.6.0-2ubuntu3_amd64.deb ...
+I, [2018-11-23T00:08:45.556663 #8517]  INFO -- default-ubuntu: Unpacking libxtables11:amd64 (1.6.0-2ubuntu3) ...
+I, [2018-11-23T00:08:45.611298 #8517]  INFO -- default-ubuntu: Selecting previously unselected package netbase.
+I, [2018-11-23T00:08:45.611375 #8517]  INFO -- default-ubuntu: Preparing to unpack .../archives/netbase_5.3_all.deb ...
+I, [2018-11-23T00:08:45.617552 #8517]  INFO -- default-ubuntu: Unpacking netbase (5.3) ...
+I, [2018-11-23T00:08:45.677605 #8517]  INFO -- default-ubuntu: Selecting previously unselected package rsync.
+I, [2018-11-23T00:08:45.680066 #8517]  INFO -- default-ubuntu: Preparing to unpack .../rsync_3.1.1-3ubuntu1.2_amd64.deb ...
+I, [2018-11-23T00:08:45.692920 #8517]  INFO -- default-ubuntu: Unpacking rsync (3.1.1-3ubuntu1.2) ...
+I, [2018-11-23T00:08:45.801108 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libassuan0:amd64.
+I, [2018-11-23T00:08:45.807567 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libassuan0_2.4.2-2_amd64.deb ...
+I, [2018-11-23T00:08:45.812505 #8517]  INFO -- default-ubuntu: Unpacking libassuan0:amd64 (2.4.2-2) ...
+I, [2018-11-23T00:08:45.886010 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libksba8:amd64.
+I, [2018-11-23T00:08:45.886105 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libksba8_1.3.3-1ubuntu0.16.04.1_amd64.deb ...
+I, [2018-11-23T00:08:45.890242 #8517]  INFO -- default-ubuntu: Unpacking libksba8:amd64 (1.3.3-1ubuntu0.16.04.1) ...
+I, [2018-11-23T00:08:45.947124 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libnpth0:amd64.
+I, [2018-11-23T00:08:45.949361 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libnpth0_1.2-3_amd64.deb ...
+I, [2018-11-23T00:08:45.954079 #8517]  INFO -- default-ubuntu: Unpacking libnpth0:amd64 (1.2-3) ...
+I, [2018-11-23T00:08:45.999639 #8517]  INFO -- default-ubuntu: Selecting previously unselected package dirmngr.
+I, [2018-11-23T00:08:46.002076 #8517]  INFO -- default-ubuntu: Preparing to unpack .../dirmngr_2.1.11-6ubuntu2.1_amd64.deb ...
+I, [2018-11-23T00:08:46.028494 #8517]  INFO -- default-ubuntu: Unpacking dirmngr (2.1.11-6ubuntu2.1) ...
+I, [2018-11-23T00:08:46.095897 #8517]  INFO -- default-ubuntu: Selecting previously unselected package liberror-perl.
+I, [2018-11-23T00:08:46.096015 #8517]  INFO -- default-ubuntu: Preparing to unpack .../liberror-perl_0.17-1.2_all.deb ...
+I, [2018-11-23T00:08:46.099866 #8517]  INFO -- default-ubuntu: Unpacking liberror-perl (0.17-1.2) ...
+I, [2018-11-23T00:08:46.143397 #8517]  INFO -- default-ubuntu: Selecting previously unselected package git-man.
+I, [2018-11-23T00:08:46.143496 #8517]  INFO -- default-ubuntu: Preparing to unpack .../git-man_1%3a2.7.4-0ubuntu1.5_all.deb ...
+I, [2018-11-23T00:08:46.152095 #8517]  INFO -- default-ubuntu: Unpacking git-man (1:2.7.4-0ubuntu1.5) ...
+I, [2018-11-23T00:08:46.314444 #8517]  INFO -- default-ubuntu: Selecting previously unselected package git.
+I, [2018-11-23T00:08:46.314560 #8517]  INFO -- default-ubuntu: Preparing to unpack .../git_1%3a2.7.4-0ubuntu1.5_amd64.deb ...
+I, [2018-11-23T00:08:46.328132 #8517]  INFO -- default-ubuntu: Unpacking git (1:2.7.4-0ubuntu1.5) ...
+I, [2018-11-23T00:08:47.059658 #8517]  INFO -- default-ubuntu: Selecting previously unselected package patch.
+I, [2018-11-23T00:08:47.059760 #8517]  INFO -- default-ubuntu: Preparing to unpack .../patch_2.7.5-1ubuntu0.16.04.1_amd64.deb ...
+I, [2018-11-23T00:08:47.065227 #8517]  INFO -- default-ubuntu: Unpacking patch (2.7.5-1ubuntu0.16.04.1) ...
+I, [2018-11-23T00:08:47.130444 #8517]  INFO -- default-ubuntu: Selecting previously unselected package rename.
+I, [2018-11-23T00:08:47.131435 #8517]  INFO -- default-ubuntu: Preparing to unpack .../archives/rename_0.20-4_all.deb ...
+I, [2018-11-23T00:08:47.136625 #8517]  INFO -- default-ubuntu: Unpacking rename (0.20-4) ...
+I, [2018-11-23T00:08:47.166516 #8517]  INFO -- default-ubuntu: Processing triggers for libc-bin (2.23-0ubuntu10) ...
+I, [2018-11-23T00:08:47.188544 #8517]  INFO -- default-ubuntu: Processing triggers for systemd (229-4ubuntu21.8) ...
+I, [2018-11-23T00:08:47.204247 #8517]  INFO -- default-ubuntu: Processing triggers for mime-support (3.59ubuntu1) ...
+I, [2018-11-23T00:08:47.285361 #8517]  INFO -- default-ubuntu: Setting up libatm1:amd64 (1:2.5.1-1.5) ...
+I, [2018-11-23T00:08:47.332752 #8517]  INFO -- default-ubuntu: Setting up libmnl0:amd64 (1.0.3-5) ...
+I, [2018-11-23T00:08:47.367648 #8517]  INFO -- default-ubuntu: Setting up libpopt0:amd64 (1.16-10) ...
+I, [2018-11-23T00:08:47.418954 #8517]  INFO -- default-ubuntu: Setting up libgdbm3:amd64 (1.8.3-13.1) ...
+I, [2018-11-23T00:08:47.454156 #8517]  INFO -- default-ubuntu: Setting up perl-modules-5.22 (5.22.1-9ubuntu0.5) ...
+I, [2018-11-23T00:08:47.467601 #8517]  INFO -- default-ubuntu: Setting up libperl5.22:amd64 (5.22.1-9ubuntu0.5) ...
+I, [2018-11-23T00:08:47.498925 #8517]  INFO -- default-ubuntu: Setting up perl (5.22.1-9ubuntu0.5) ...
+I, [2018-11-23T00:08:47.531645 #8517]  INFO -- default-ubuntu: update-alternatives: using /usr/bin/prename to provide /usr/bin/rename (rename) in auto mode
+I, [2018-11-23T00:08:47.559268 #8517]  INFO -- default-ubuntu: Setting up libapt-inst2.0:amd64 (1.2.29) ...
+I, [2018-11-23T00:08:47.585589 #8517]  INFO -- default-ubuntu: Setting up apt-utils (1.2.29) ...
+I, [2018-11-23T00:08:47.791191 #8517]  INFO -- default-ubuntu: Setting up iproute2 (4.3.0-1ubuntu3.16.04.4) ...
+I, [2018-11-23T00:08:47.886786 #8517]  INFO -- default-ubuntu: Setting up ifupdown (0.8.10ubuntu1.4) ...
+I, [2018-11-23T00:08:48.028944 #8517]  INFO -- default-ubuntu: Creating /etc/network/interfaces.
+I, [2018-11-23T00:08:48.226493 #8517]  INFO -- default-ubuntu: Setting up libisc-export160 (1:9.10.3.dfsg.P4-8ubuntu1.11) ...
+I, [2018-11-23T00:08:48.250845 #8517]  INFO -- default-ubuntu: Setting up libdns-export162 (1:9.10.3.dfsg.P4-8ubuntu1.11) ...
+I, [2018-11-23T00:08:48.273739 #8517]  INFO -- default-ubuntu: Setting up isc-dhcp-client (4.3.3-5ubuntu12.10) ...
+I, [2018-11-23T00:08:48.349306 #8517]  INFO -- default-ubuntu: Setting up isc-dhcp-common (4.3.3-5ubuntu12.10) ...
+I, [2018-11-23T00:08:48.371214 #8517]  INFO -- default-ubuntu: Setting up less (481-2.1ubuntu0.2) ...
+I, [2018-11-23T00:08:48.497837 #8517]  INFO -- default-ubuntu: debconf: unable to initialize frontend: Dialog
+I, [2018-11-23T00:08:48.497946 #8517]  INFO -- default-ubuntu: debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 76.)
+I, [2018-11-23T00:08:48.498010 #8517]  INFO -- default-ubuntu: debconf: falling back to frontend: Readline
+I, [2018-11-23T00:08:48.541090 #8517]  INFO -- default-ubuntu: Setting up libxtables11:amd64 (1.6.0-2ubuntu3) ...
+I, [2018-11-23T00:08:48.567431 #8517]  INFO -- default-ubuntu: Setting up netbase (5.3) ...
+I, [2018-11-23T00:08:48.606451 #8517]  INFO -- default-ubuntu: Setting up rsync (3.1.1-3ubuntu1.2) ...
+I, [2018-11-23T00:08:48.684893 #8517]  INFO -- default-ubuntu: invoke-rc.d: could not determine current runlevel
+I, [2018-11-23T00:08:48.690252 #8517]  INFO -- default-ubuntu: invoke-rc.d: policy-rc.d denied execution of restart.
+I, [2018-11-23T00:08:48.701932 #8517]  INFO -- default-ubuntu: Setting up libassuan0:amd64 (2.4.2-2) ...
+I, [2018-11-23T00:08:48.723076 #8517]  INFO -- default-ubuntu: Setting up libksba8:amd64 (1.3.3-1ubuntu0.16.04.1) ...
+I, [2018-11-23T00:08:48.752491 #8517]  INFO -- default-ubuntu: Setting up libnpth0:amd64 (1.2-3) ...
+I, [2018-11-23T00:08:48.779940 #8517]  INFO -- default-ubuntu: Setting up dirmngr (2.1.11-6ubuntu2.1) ...
+I, [2018-11-23T00:08:48.834182 #8517]  INFO -- default-ubuntu: Setting up liberror-perl (0.17-1.2) ...
+I, [2018-11-23T00:08:48.854748 #8517]  INFO -- default-ubuntu: Setting up git-man (1:2.7.4-0ubuntu1.5) ...
+I, [2018-11-23T00:08:48.883443 #8517]  INFO -- default-ubuntu: Setting up git (1:2.7.4-0ubuntu1.5) ...
+I, [2018-11-23T00:08:48.912206 #8517]  INFO -- default-ubuntu: Setting up patch (2.7.5-1ubuntu0.16.04.1) ...
+I, [2018-11-23T00:08:48.928906 #8517]  INFO -- default-ubuntu: Setting up rename (0.20-4) ...
+I, [2018-11-23T00:08:48.943224 #8517]  INFO -- default-ubuntu: update-alternatives: using /usr/bin/file-rename to provide /usr/bin/rename (rename) in auto mode
+I, [2018-11-23T00:08:48.953784 #8517]  INFO -- default-ubuntu: Processing triggers for libc-bin (2.23-0ubuntu10) ...
+I, [2018-11-23T00:08:48.986725 #8517]  INFO -- default-ubuntu: Processing triggers for systemd (229-4ubuntu21.8) ...
+I, [2018-11-23T00:08:50.286120 #8517]  INFO -- default-ubuntu: Reading package lists... 0%Reading package lists... 0%Reading package lists... 1%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 67%Reading package lists... 72%Reading package lists... 72%Reading package lists... 73%Reading package lists... 73%Reading package lists... 82%Reading package lists... 82%Reading package lists... 82%Reading package lists... 82%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+I, [2018-11-23T00:08:50.624248 #8517]  INFO -- default-ubuntu: Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+I, [2018-11-23T00:08:50.627409 #8517]  INFO -- default-ubuntu: Reading state information... 0%Reading state information... 1%Reading state information... Done
+I, [2018-11-23T00:08:50.960810 #8517]  INFO -- default-ubuntu: The following additional packages will be installed:
+I, [2018-11-23T00:08:50.963143 #8517]  INFO -- default-ubuntu:   cron dbus gir1.2-glib-2.0 iso-codes libcap-ng0 libdbus-1-3 libdbus-glib-1-2
+I, [2018-11-23T00:08:50.966718 #8517]  INFO -- default-ubuntu:   libgirepository-1.0-1 libglib2.0-0 libglib2.0-data libicu55 libxml2
+I, [2018-11-23T00:08:50.969585 #8517]  INFO -- default-ubuntu:   python-apt-common python3-apt python3-dbus python3-gi python3-pycurl
+I, [2018-11-23T00:08:50.974049 #8517]  INFO -- default-ubuntu:   python3-software-properties sgml-base shared-mime-info ucf
+I, [2018-11-23T00:08:50.975556 #8517]  INFO -- default-ubuntu:   unattended-upgrades xdg-user-dirs xml-core xz-utils
+I, [2018-11-23T00:08:50.979976 #8517]  INFO -- default-ubuntu: Suggested packages:
+I, [2018-11-23T00:08:50.981072 #8517]  INFO -- default-ubuntu:   anacron logrotate checksecurity exim4 | postfix | mail-transport-agent
+I, [2018-11-23T00:08:50.982980 #8517]  INFO -- default-ubuntu:   dbus-user-session | dbus-x11 isoquery python3-apt-dbg python-apt-doc
+I, [2018-11-23T00:08:50.983097 #8517]  INFO -- default-ubuntu:   python-dbus-doc python3-dbus-dbg libcurl4-gnutls-dev python-pycurl-doc
+I, [2018-11-23T00:08:50.983166 #8517]  INFO -- default-ubuntu:   python3-pycurl-dbg sgml-base-doc bsd-mailx mail-transport-agent debhelper
+I, [2018-11-23T00:08:50.986551 #8517]  INFO -- default-ubuntu: The following NEW packages will be installed:
+I, [2018-11-23T00:08:50.988942 #8517]  INFO -- default-ubuntu:   cron dbus gir1.2-glib-2.0 iso-codes libcap-ng0 libdbus-1-3 libdbus-glib-1-2
+I, [2018-11-23T00:08:50.989080 #8517]  INFO -- default-ubuntu:   libgirepository-1.0-1 libglib2.0-0 libglib2.0-data libicu55 libxml2
+I, [2018-11-23T00:08:50.989122 #8517]  INFO -- default-ubuntu:   python-apt-common python3-apt python3-dbus python3-gi python3-pycurl
+I, [2018-11-23T00:08:50.989260 #8517]  INFO -- default-ubuntu:   python3-software-properties sgml-base shared-mime-info
+I, [2018-11-23T00:08:50.989299 #8517]  INFO -- default-ubuntu:   software-properties-common ucf unattended-upgrades xdg-user-dirs xml-core
+I, [2018-11-23T00:08:50.989336 #8517]  INFO -- default-ubuntu:   xz-utils
+I, [2018-11-23T00:08:51.005072 #8517]  INFO -- default-ubuntu: 0 upgraded, 26 newly installed, 0 to remove and 4 not upgraded.
+I, [2018-11-23T00:08:51.101106 #8517]  INFO -- default-ubuntu: Need to get 13.7 MB of archives.
+I, [2018-11-23T00:08:51.101231 #8517]  INFO -- default-ubuntu: After this operation, 62.3 MB of additional disk space will be used.
+I, [2018-11-23T00:08:51.240283 #8517]  INFO -- default-ubuntu: 0% [Working]            Get:1 http://archive.ubuntu.com/ubuntu xenial/main amd64 cron amd64 3.0pl1-128ubuntu2 [68.4 kB]
+I, [2018-11-23T00:08:51.403936 #8517]  INFO -- default-ubuntu: 0% [1 cron 2614 B/68.4 kB 4%]                             1% [Working]            Get:2 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libglib2.0-0 amd64 2.48.2-0ubuntu4.1 [1120 kB]
+I, [2018-11-23T00:08:51.751442 #8517]  INFO -- default-ubuntu: 1% [2 libglib2.0-0 11.3 kB/1120 kB 1%]                                      8% [Waiting for headers]                        Get:3 http://archive.ubuntu.com/ubuntu xenial/main amd64 sgml-base all 1.26+nmu4ubuntu1 [12.5 kB]
+I, [2018-11-23T00:08:51.754273 #8517]  INFO -- default-ubuntu: 9% [3 sgml-base 12.1 kB/12.5 kB 97%]                                    Get:4 http://archive.ubuntu.com/ubuntu xenial/main amd64 ucf all 3.0036 [52.9 kB]
+I, [2018-11-23T00:08:51.762251 #8517]  INFO -- default-ubuntu:                                     9% [4 ucf 6583 B/52.9 kB 12%]                             10% [Working]             Get:5 http://archive.ubuntu.com/ubuntu xenial/main amd64 libcap-ng0 amd64 0.7.7-1 [10.9 kB]
+I, [2018-11-23T00:08:51.768469 #8517]  INFO -- default-ubuntu: 10% [5 libcap-ng0 4036 B/10.9 kB 37%]                                     11% [Working]             Get:6 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libdbus-1-3 amd64 1.10.6-1ubuntu3.3 [161 kB]
+I, [2018-11-23T00:08:51.805316 #8517]  INFO -- default-ubuntu: 11% [6 libdbus-1-3 0 B/161 kB 0%]                                 13% [Working]             Get:7 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 dbus amd64 1.10.6-1ubuntu3.3 [142 kB]
+I, [2018-11-23T00:08:51.836720 #8517]  INFO -- default-ubuntu: 13% [7 dbus 0 B/142 kB 0%]                          15% [Working]             Get:8 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgirepository-1.0-1 amd64 1.46.0-3ubuntu1 [88.3 kB]
+I, [2018-11-23T00:08:51.858877 #8517]  INFO -- default-ubuntu: 15% [8 libgirepository-1.0-1 0 B/88.3 kB 0%]                                            16% [Working]             Get:9 http://archive.ubuntu.com/ubuntu xenial/main amd64 gir1.2-glib-2.0 amd64 1.46.0-3ubuntu1 [127 kB]
+I, [2018-11-23T00:08:51.884668 #8517]  INFO -- default-ubuntu: 16% [9 gir1.2-glib-2.0 0 B/127 kB 0%]                                     17% [Working]             Get:10 http://archive.ubuntu.com/ubuntu xenial/main amd64 iso-codes all 3.65-1 [2268 kB]
+I, [2018-11-23T00:08:52.421695 #8517]  INFO -- default-ubuntu: 17% [10 iso-codes 0 B/2268 kB 0%]30% [10 iso-codes 2213 kB/2268 kB 98%]                                      31% [Working]             Get:11 http://archive.ubuntu.com/ubuntu xenial/main amd64 libdbus-glib-1-2 amd64 0.106-1 [67.1 kB]
+I, [2018-11-23T00:08:52.427206 #8517]  INFO -- default-ubuntu: 32% [11 libdbus-glib-1-2 57.5 kB/67.1 kB 86%]                                             33% [Waiting for headers]                         Get:12 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libglib2.0-data all 2.48.2-0ubuntu4.1 [132 kB]
+I, [2018-11-23T00:08:52.480326 #8517]  INFO -- default-ubuntu: 33% [12 libglib2.0-data 7447 B/132 kB 6%]                                         34% [Waiting for headers]                         Get:13 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libicu55 amd64 55.1-7ubuntu0.4 [7646 kB]
+I, [2018-11-23T00:08:54.291642 #8517]  INFO -- default-ubuntu: 34% [13 libicu55 22.9 kB/7646 kB 0%]45% [13 libicu55 1860 kB/7646 kB 24%]58% [13 libicu55 4092 kB/7646 kB 54%]71% [13 libicu55 6361 kB/7646 kB 83%]                                     80% [Waiting for headers]                         Get:14 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libxml2 amd64 2.9.3+dfsg1-1ubuntu0.6 [697 kB]
+I, [2018-11-23T00:08:54.419028 #8517]  INFO -- default-ubuntu: 80% [14 libxml2 29.4 kB/697 kB 4%]                                  85% [Waiting for headers]                         Get:15 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python-apt-common all 1.1.0~beta1ubuntu0.16.04.2 [16.0 kB]
+I, [2018-11-23T00:08:54.422397 #8517]  INFO -- default-ubuntu: 85% [15 python-apt-common 16.0 kB/16.0 kB 100%]                                               85% [Waiting for headers]                         Get:16 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python3-apt amd64 1.1.0~beta1ubuntu0.16.04.2 [137 kB]
+I, [2018-11-23T00:08:54.458422 #8517]  INFO -- default-ubuntu: 85% [16 python3-apt 0 B/137 kB 0%]                                  87% [Waiting for headers]                         Get:17 http://archive.ubuntu.com/ubuntu xenial/main amd64 python3-dbus amd64 1.2.0-3 [83.1 kB]
+I, [2018-11-23T00:08:54.480519 #8517]  INFO -- default-ubuntu: 87% [17 python3-dbus 13.7 kB/83.1 kB 16%]                                         88% [Working]             Get:18 http://archive.ubuntu.com/ubuntu xenial/main amd64 python3-gi amd64 3.20.0-0ubuntu1 [153 kB]
+I, [2018-11-23T00:08:54.583011 #8517]  INFO -- default-ubuntu: 88% [18 python3-gi 5644 B/153 kB 4%]                                    90% [Working]             Get:19 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 shared-mime-info amd64 1.5-2ubuntu0.2 [405 kB]
+I, [2018-11-23T00:08:54.680088 #8517]  INFO -- default-ubuntu: 90% [19 shared-mime-info 22.2 kB/405 kB 5%]                                           93% [Waiting for headers]                         Get:20 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 xdg-user-dirs amd64 0.15-2ubuntu6.16.04.1 [61.8 kB]
+I, [2018-11-23T00:08:54.691360 #8517]  INFO -- default-ubuntu: 93% [20 xdg-user-dirs 27.9 kB/61.8 kB 45%]                                          94% [Waiting for headers]                         Get:21 http://archive.ubuntu.com/ubuntu xenial/main amd64 xml-core all 0.13+nmu2 [23.3 kB]
+I, [2018-11-23T00:08:54.699718 #8517]  INFO -- default-ubuntu: 94% [21 xml-core 22.3 kB/23.3 kB 96%]                                     95% [Working]             Get:22 http://archive.ubuntu.com/ubuntu xenial/main amd64 python3-pycurl amd64 7.43.0-1ubuntu1 [42.3 kB]
+I, [2018-11-23T00:08:54.710093 #8517]  INFO -- default-ubuntu: 95% [22 python3-pycurl 10.3 kB/42.3 kB 24%]                                           Get:23 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python3-software-properties all 0.96.20.7 [20.3 kB]
+I, [2018-11-23T00:08:54.714748 #8517]  INFO -- default-ubuntu: 96% [23 python3-software-properties 11.1 kB/20.3 kB 55%]                                                        Get:24 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 software-properties-common all 0.96.20.7 [9452 B]
+I, [2018-11-23T00:08:54.717418 #8517]  INFO -- default-ubuntu:                                                         97% [24 software-properties-common 9452 B/9452 B 100%]                                                      Get:25 http://archive.ubuntu.com/ubuntu xenial/main amd64 xz-utils amd64 5.1.1alpha+20120614-2ubuntu2 [78.8 kB]
+I, [2018-11-23T00:08:54.731722 #8517]  INFO -- default-ubuntu:                                                       98% [25 xz-utils 12.6 kB/78.8 kB 16%]                                     99% [Waiting for headers]                         Get:26 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 unattended-upgrades all 0.90ubuntu0.9 [32.3 kB]
+I, [2018-11-23T00:08:54.739636 #8517]  INFO -- default-ubuntu: 99% [26 unattended-upgrades 5968 B/32.3 kB 18%]                                               100% [Working]              Fetched 13.7 MB in 3s (3794 kB/s)
+I, [2018-11-23T00:08:54.752485 #8517]  INFO -- default-ubuntu: perl: warning: Setting locale failed.
+I, [2018-11-23T00:08:54.754567 #8517]  INFO -- default-ubuntu: perl: warning: Please check that your locale settings:
+I, [2018-11-23T00:08:54.754961 #8517]  INFO -- default-ubuntu: 	LANGUAGE = (unset),
+I, [2018-11-23T00:08:54.755294 #8517]  INFO -- default-ubuntu: 	LC_ALL = (unset),
+I, [2018-11-23T00:08:54.755630 #8517]  INFO -- default-ubuntu: 	LC_CTYPE = "ru_RU.UTF-8",
+I, [2018-11-23T00:08:54.755964 #8517]  INFO -- default-ubuntu: 	LANG = "ru_RU.UTF-8"
+I, [2018-11-23T00:08:54.756364 #8517]  INFO -- default-ubuntu:     are supported and installed on your system.
+I, [2018-11-23T00:08:54.756719 #8517]  INFO -- default-ubuntu: perl: warning: Falling back to the standard locale ("C").
+I, [2018-11-23T00:08:56.010617 #8517]  INFO -- default-ubuntu: Preconfiguring packages ...
+I, [2018-11-23T00:08:56.119068 #8517]  INFO -- default-ubuntu: Selecting previously unselected package cron.
+I, [2018-11-23T00:08:56.142558 #8517]  INFO -- default-ubuntu: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 12655 files and directories currently installed.)
+I, [2018-11-23T00:08:56.144968 #8517]  INFO -- default-ubuntu: Preparing to unpack .../cron_3.0pl1-128ubuntu2_amd64.deb ...
+I, [2018-11-23T00:08:56.152269 #8517]  INFO -- default-ubuntu: Unpacking cron (3.0pl1-128ubuntu2) ...
+I, [2018-11-23T00:08:56.216950 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libglib2.0-0:amd64.
+I, [2018-11-23T00:08:56.220068 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libglib2.0-0_2.48.2-0ubuntu4.1_amd64.deb ...
+I, [2018-11-23T00:08:56.229527 #8517]  INFO -- default-ubuntu: Unpacking libglib2.0-0:amd64 (2.48.2-0ubuntu4.1) ...
+I, [2018-11-23T00:08:56.494488 #8517]  INFO -- default-ubuntu: Selecting previously unselected package sgml-base.
+I, [2018-11-23T00:08:56.499992 #8517]  INFO -- default-ubuntu: Preparing to unpack .../sgml-base_1.26+nmu4ubuntu1_all.deb ...
+I, [2018-11-23T00:08:56.525335 #8517]  INFO -- default-ubuntu: Unpacking sgml-base (1.26+nmu4ubuntu1) ...
+I, [2018-11-23T00:08:56.625245 #8517]  INFO -- default-ubuntu: Selecting previously unselected package ucf.
+I, [2018-11-23T00:08:56.629119 #8517]  INFO -- default-ubuntu: Preparing to unpack .../archives/ucf_3.0036_all.deb ...
+I, [2018-11-23T00:08:56.663967 #8517]  INFO -- default-ubuntu: Moving old data out of the way
+I, [2018-11-23T00:08:56.667174 #8517]  INFO -- default-ubuntu: Unpacking ucf (3.0036) ...
+I, [2018-11-23T00:08:56.833266 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libcap-ng0:amd64.
+I, [2018-11-23T00:08:56.836918 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libcap-ng0_0.7.7-1_amd64.deb ...
+I, [2018-11-23T00:08:56.850066 #8517]  INFO -- default-ubuntu: Unpacking libcap-ng0:amd64 (0.7.7-1) ...
+I, [2018-11-23T00:08:56.955258 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libdbus-1-3:amd64.
+I, [2018-11-23T00:08:56.960701 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libdbus-1-3_1.10.6-1ubuntu3.3_amd64.deb ...
+I, [2018-11-23T00:08:56.994434 #8517]  INFO -- default-ubuntu: Unpacking libdbus-1-3:amd64 (1.10.6-1ubuntu3.3) ...
+I, [2018-11-23T00:08:57.079935 #8517]  INFO -- default-ubuntu: Selecting previously unselected package dbus.
+I, [2018-11-23T00:08:57.083796 #8517]  INFO -- default-ubuntu: Preparing to unpack .../dbus_1.10.6-1ubuntu3.3_amd64.deb ...
+I, [2018-11-23T00:08:57.122445 #8517]  INFO -- default-ubuntu: Unpacking dbus (1.10.6-1ubuntu3.3) ...
+I, [2018-11-23T00:08:57.294845 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libgirepository-1.0-1:amd64.
+I, [2018-11-23T00:08:57.303031 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libgirepository-1.0-1_1.46.0-3ubuntu1_amd64.deb ...
+I, [2018-11-23T00:08:57.319885 #8517]  INFO -- default-ubuntu: Unpacking libgirepository-1.0-1:amd64 (1.46.0-3ubuntu1) ...
+I, [2018-11-23T00:08:57.433014 #8517]  INFO -- default-ubuntu: Selecting previously unselected package gir1.2-glib-2.0:amd64.
+I, [2018-11-23T00:08:57.436531 #8517]  INFO -- default-ubuntu: Preparing to unpack .../gir1.2-glib-2.0_1.46.0-3ubuntu1_amd64.deb ...
+I, [2018-11-23T00:08:57.448799 #8517]  INFO -- default-ubuntu: Unpacking gir1.2-glib-2.0:amd64 (1.46.0-3ubuntu1) ...
+I, [2018-11-23T00:08:57.541099 #8517]  INFO -- default-ubuntu: Selecting previously unselected package iso-codes.
+I, [2018-11-23T00:08:57.545302 #8517]  INFO -- default-ubuntu: Preparing to unpack .../iso-codes_3.65-1_all.deb ...
+I, [2018-11-23T00:08:57.552112 #8517]  INFO -- default-ubuntu: Unpacking iso-codes (3.65-1) ...
+I, [2018-11-23T00:08:58.279057 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libdbus-glib-1-2:amd64.
+I, [2018-11-23T00:08:58.282355 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libdbus-glib-1-2_0.106-1_amd64.deb ...
+I, [2018-11-23T00:08:58.293095 #8517]  INFO -- default-ubuntu: Unpacking libdbus-glib-1-2:amd64 (0.106-1) ...
+I, [2018-11-23T00:08:58.343866 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libglib2.0-data.
+I, [2018-11-23T00:08:58.348433 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libglib2.0-data_2.48.2-0ubuntu4.1_all.deb ...
+I, [2018-11-23T00:08:58.354236 #8517]  INFO -- default-ubuntu: Unpacking libglib2.0-data (2.48.2-0ubuntu4.1) ...
+I, [2018-11-23T00:08:58.414281 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libicu55:amd64.
+I, [2018-11-23T00:08:58.417053 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libicu55_55.1-7ubuntu0.4_amd64.deb ...
+I, [2018-11-23T00:08:58.423160 #8517]  INFO -- default-ubuntu: Unpacking libicu55:amd64 (55.1-7ubuntu0.4) ...
+I, [2018-11-23T00:08:59.596483 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libxml2:amd64.
+I, [2018-11-23T00:08:59.599669 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libxml2_2.9.3+dfsg1-1ubuntu0.6_amd64.deb ...
+I, [2018-11-23T00:08:59.605742 #8517]  INFO -- default-ubuntu: Unpacking libxml2:amd64 (2.9.3+dfsg1-1ubuntu0.6) ...
+I, [2018-11-23T00:08:59.738956 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-apt-common.
+I, [2018-11-23T00:08:59.741774 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-apt-common_1.1.0~beta1ubuntu0.16.04.2_all.deb ...
+I, [2018-11-23T00:08:59.748789 #8517]  INFO -- default-ubuntu: Unpacking python-apt-common (1.1.0~beta1ubuntu0.16.04.2) ...
+I, [2018-11-23T00:08:59.805375 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python3-apt.
+I, [2018-11-23T00:08:59.808453 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python3-apt_1.1.0~beta1ubuntu0.16.04.2_amd64.deb ...
+I, [2018-11-23T00:08:59.814597 #8517]  INFO -- default-ubuntu: Unpacking python3-apt (1.1.0~beta1ubuntu0.16.04.2) ...
+I, [2018-11-23T00:08:59.939020 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python3-dbus.
+I, [2018-11-23T00:08:59.942727 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python3-dbus_1.2.0-3_amd64.deb ...
+I, [2018-11-23T00:08:59.955885 #8517]  INFO -- default-ubuntu: Unpacking python3-dbus (1.2.0-3) ...
+I, [2018-11-23T00:09:00.056516 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python3-gi.
+I, [2018-11-23T00:09:00.059453 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python3-gi_3.20.0-0ubuntu1_amd64.deb ...
+I, [2018-11-23T00:09:00.067323 #8517]  INFO -- default-ubuntu: Unpacking python3-gi (3.20.0-0ubuntu1) ...
+I, [2018-11-23T00:09:00.151759 #8517]  INFO -- default-ubuntu: Selecting previously unselected package shared-mime-info.
+I, [2018-11-23T00:09:00.155637 #8517]  INFO -- default-ubuntu: Preparing to unpack .../shared-mime-info_1.5-2ubuntu0.2_amd64.deb ...
+I, [2018-11-23T00:09:00.161054 #8517]  INFO -- default-ubuntu: Unpacking shared-mime-info (1.5-2ubuntu0.2) ...
+I, [2018-11-23T00:09:00.255670 #8517]  INFO -- default-ubuntu: Selecting previously unselected package xdg-user-dirs.
+I, [2018-11-23T00:09:00.258566 #8517]  INFO -- default-ubuntu: Preparing to unpack .../xdg-user-dirs_0.15-2ubuntu6.16.04.1_amd64.deb ...
+I, [2018-11-23T00:09:00.264601 #8517]  INFO -- default-ubuntu: Unpacking xdg-user-dirs (0.15-2ubuntu6.16.04.1) ...
+I, [2018-11-23T00:09:00.385479 #8517]  INFO -- default-ubuntu: Selecting previously unselected package xml-core.
+I, [2018-11-23T00:09:00.388519 #8517]  INFO -- default-ubuntu: Preparing to unpack .../xml-core_0.13+nmu2_all.deb ...
+I, [2018-11-23T00:09:00.400002 #8517]  INFO -- default-ubuntu: Unpacking xml-core (0.13+nmu2) ...
+I, [2018-11-23T00:09:00.486598 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python3-pycurl.
+I, [2018-11-23T00:09:00.489848 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python3-pycurl_7.43.0-1ubuntu1_amd64.deb ...
+I, [2018-11-23T00:09:00.500957 #8517]  INFO -- default-ubuntu: Unpacking python3-pycurl (7.43.0-1ubuntu1) ...
+I, [2018-11-23T00:09:00.581005 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python3-software-properties.
+I, [2018-11-23T00:09:00.585433 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python3-software-properties_0.96.20.7_all.deb ...
+I, [2018-11-23T00:09:00.591813 #8517]  INFO -- default-ubuntu: Unpacking python3-software-properties (0.96.20.7) ...
+I, [2018-11-23T00:09:00.655245 #8517]  INFO -- default-ubuntu: Selecting previously unselected package software-properties-common.
+I, [2018-11-23T00:09:00.658822 #8517]  INFO -- default-ubuntu: Preparing to unpack .../software-properties-common_0.96.20.7_all.deb ...
+I, [2018-11-23T00:09:00.671162 #8517]  INFO -- default-ubuntu: Unpacking software-properties-common (0.96.20.7) ...
+I, [2018-11-23T00:09:00.753497 #8517]  INFO -- default-ubuntu: Selecting previously unselected package xz-utils.
+I, [2018-11-23T00:09:00.757442 #8517]  INFO -- default-ubuntu: Preparing to unpack .../xz-utils_5.1.1alpha+20120614-2ubuntu2_amd64.deb ...
+I, [2018-11-23T00:09:00.766859 #8517]  INFO -- default-ubuntu: Unpacking xz-utils (5.1.1alpha+20120614-2ubuntu2) ...
+I, [2018-11-23T00:09:00.851338 #8517]  INFO -- default-ubuntu: Selecting previously unselected package unattended-upgrades.
+I, [2018-11-23T00:09:00.853917 #8517]  INFO -- default-ubuntu: Preparing to unpack .../unattended-upgrades_0.90ubuntu0.9_all.deb ...
+I, [2018-11-23T00:09:00.863353 #8517]  INFO -- default-ubuntu: Unpacking unattended-upgrades (0.90ubuntu0.9) ...
+I, [2018-11-23T00:09:00.923114 #8517]  INFO -- default-ubuntu: Processing triggers for systemd (229-4ubuntu21.8) ...
+I, [2018-11-23T00:09:00.939306 #8517]  INFO -- default-ubuntu: Processing triggers for libc-bin (2.23-0ubuntu10) ...
+I, [2018-11-23T00:09:01.012800 #8517]  INFO -- default-ubuntu: Setting up cron (3.0pl1-128ubuntu2) ...
+I, [2018-11-23T00:09:01.127034 #8517]  INFO -- default-ubuntu: Adding group `crontab' (GID 108) ...
+I, [2018-11-23T00:09:01.150029 #8517]  INFO -- default-ubuntu: Done.
+I, [2018-11-23T00:09:01.366474 #8517]  INFO -- default-ubuntu: update-rc.d: warning: start and stop actions are no longer supported; falling back to defaults
+I, [2018-11-23T00:09:01.366564 #8517]  INFO -- default-ubuntu: update-rc.d: warning: stop runlevel arguments (1) do not match cron Default-Stop values (none)
+I, [2018-11-23T00:09:01.387740 #8517]  INFO -- default-ubuntu: invoke-rc.d: could not determine current runlevel
+I, [2018-11-23T00:09:01.394020 #8517]  INFO -- default-ubuntu: invoke-rc.d: policy-rc.d denied execution of start.
+I, [2018-11-23T00:09:01.401623 #8517]  INFO -- default-ubuntu: Setting up libglib2.0-0:amd64 (2.48.2-0ubuntu4.1) ...
+I, [2018-11-23T00:09:01.428919 #8517]  INFO -- default-ubuntu: No schema files found: doing nothing.
+I, [2018-11-23T00:09:01.440167 #8517]  INFO -- default-ubuntu: Setting up sgml-base (1.26+nmu4ubuntu1) ...
+I, [2018-11-23T00:09:01.535084 #8517]  INFO -- default-ubuntu: Setting up ucf (3.0036) ...
+I, [2018-11-23T00:09:01.667051 #8517]  INFO -- default-ubuntu: Setting up libcap-ng0:amd64 (0.7.7-1) ...
+I, [2018-11-23T00:09:01.679674 #8517]  INFO -- default-ubuntu: Setting up libdbus-1-3:amd64 (1.10.6-1ubuntu3.3) ...
+I, [2018-11-23T00:09:01.718237 #8517]  INFO -- default-ubuntu: Setting up dbus (1.10.6-1ubuntu3.3) ...
+I, [2018-11-23T00:09:01.971475 #8517]  INFO -- default-ubuntu: Setting up libgirepository-1.0-1:amd64 (1.46.0-3ubuntu1) ...
+I, [2018-11-23T00:09:01.989823 #8517]  INFO -- default-ubuntu: Setting up gir1.2-glib-2.0:amd64 (1.46.0-3ubuntu1) ...
+I, [2018-11-23T00:09:02.004646 #8517]  INFO -- default-ubuntu: Setting up iso-codes (3.65-1) ...
+I, [2018-11-23T00:09:02.024694 #8517]  INFO -- default-ubuntu: Setting up libdbus-glib-1-2:amd64 (0.106-1) ...
+I, [2018-11-23T00:09:02.047810 #8517]  INFO -- default-ubuntu: Setting up libglib2.0-data (2.48.2-0ubuntu4.1) ...
+I, [2018-11-23T00:09:02.063835 #8517]  INFO -- default-ubuntu: Setting up libicu55:amd64 (55.1-7ubuntu0.4) ...
+I, [2018-11-23T00:09:02.079538 #8517]  INFO -- default-ubuntu: Setting up libxml2:amd64 (2.9.3+dfsg1-1ubuntu0.6) ...
+I, [2018-11-23T00:09:02.095988 #8517]  INFO -- default-ubuntu: Setting up python-apt-common (1.1.0~beta1ubuntu0.16.04.2) ...
+I, [2018-11-23T00:09:02.114670 #8517]  INFO -- default-ubuntu: Setting up python3-apt (1.1.0~beta1ubuntu0.16.04.2) ...
+I, [2018-11-23T00:09:02.450020 #8517]  INFO -- default-ubuntu: Setting up python3-dbus (1.2.0-3) ...
+I, [2018-11-23T00:09:02.778782 #8517]  INFO -- default-ubuntu: Setting up python3-gi (3.20.0-0ubuntu1) ...
+I, [2018-11-23T00:09:03.188341 #8517]  INFO -- default-ubuntu: Setting up shared-mime-info (1.5-2ubuntu0.2) ...
+I, [2018-11-23T00:09:05.677750 #8517]  INFO -- default-ubuntu: Setting up xdg-user-dirs (0.15-2ubuntu6.16.04.1) ...
+I, [2018-11-23T00:09:05.710523 #8517]  INFO -- default-ubuntu: Setting up xml-core (0.13+nmu2) ...
+I, [2018-11-23T00:09:06.045063 #8517]  INFO -- default-ubuntu: Setting up python3-pycurl (7.43.0-1ubuntu1) ...
+I, [2018-11-23T00:09:06.370491 #8517]  INFO -- default-ubuntu: Setting up python3-software-properties (0.96.20.7) ...
+I, [2018-11-23T00:09:06.719229 #8517]  INFO -- default-ubuntu: Setting up software-properties-common (0.96.20.7) ...
+I, [2018-11-23T00:09:07.027562 #8517]  INFO -- default-ubuntu: Setting up xz-utils (5.1.1alpha+20120614-2ubuntu2) ...
+I, [2018-11-23T00:09:07.046197 #8517]  INFO -- default-ubuntu: update-alternatives: using /usr/bin/xz to provide /usr/bin/lzma (lzma) in auto mode
+I, [2018-11-23T00:09:07.057399 #8517]  INFO -- default-ubuntu: Setting up unattended-upgrades (0.90ubuntu0.9) ...
+I, [2018-11-23T00:09:07.233090 #8517]  INFO -- default-ubuntu: 
+I, [2018-11-23T00:09:07.234352 #8517]  INFO -- default-ubuntu: Creating config file /etc/apt/apt.conf.d/20auto-upgrades with new version
+I, [2018-11-23T00:09:07.340309 #8517]  INFO -- default-ubuntu: 
+I, [2018-11-23T00:09:07.342252 #8517]  INFO -- default-ubuntu: Creating config file /etc/apt/apt.conf.d/50unattended-upgrades with new version
+I, [2018-11-23T00:09:07.725747 #8517]  INFO -- default-ubuntu: invoke-rc.d: could not determine current runlevel
+I, [2018-11-23T00:09:07.731170 #8517]  INFO -- default-ubuntu: invoke-rc.d: policy-rc.d denied execution of start.
+I, [2018-11-23T00:09:07.770395 #8517]  INFO -- default-ubuntu: Processing triggers for systemd (229-4ubuntu21.8) ...
+I, [2018-11-23T00:09:07.782430 #8517]  INFO -- default-ubuntu: Processing triggers for libc-bin (2.23-0ubuntu10) ...
+I, [2018-11-23T00:09:07.801070 #8517]  INFO -- default-ubuntu: Processing triggers for sgml-base (1.26+nmu4ubuntu1) ...
+I, [2018-11-23T00:09:07.826936 #8517]  INFO -- default-ubuntu: Processing triggers for dbus (1.10.6-1ubuntu3.3) ...
+I, [2018-11-23T00:09:08.978994 #8517]  INFO -- default-ubuntu: Reading package lists... 0%Reading package lists... 0%Reading package lists... 1%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 68%Reading package lists... 72%Reading package lists... 72%Reading package lists... 73%Reading package lists... 73%Reading package lists... 82%Reading package lists... 82%Reading package lists... 82%Reading package lists... 82%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+I, [2018-11-23T00:09:09.210910 #8517]  INFO -- default-ubuntu: Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+I, [2018-11-23T00:09:09.212673 #8517]  INFO -- default-ubuntu: Reading state information... 0%Reading state information... 0%Reading state information... Done
+I, [2018-11-23T00:09:09.456802 #8517]  INFO -- default-ubuntu: The following additional packages will be installed:
+I, [2018-11-23T00:09:09.457375 #8517]  INFO -- default-ubuntu:   libpython-stdlib libpython2.7-minimal libpython2.7-stdlib python python-apt
+I, [2018-11-23T00:09:09.457871 #8517]  INFO -- default-ubuntu:   python-minimal python-pycurl python2.7 python2.7-minimal
+I, [2018-11-23T00:09:09.460188 #8517]  INFO -- default-ubuntu: Suggested packages:
+I, [2018-11-23T00:09:09.460280 #8517]  INFO -- default-ubuntu:   python-doc python-tk python-apt-dbg python-apt-doc libcurl4-gnutls-dev
+I, [2018-11-23T00:09:09.460334 #8517]  INFO -- default-ubuntu:   python-pycurl-dbg python-pycurl-doc python2.7-doc binutils binfmt-support
+I, [2018-11-23T00:09:09.469315 #8517]  INFO -- default-ubuntu: The following NEW packages will be installed:
+I, [2018-11-23T00:09:09.471513 #8517]  INFO -- default-ubuntu:   libpython-stdlib libpython2.7-minimal libpython2.7-stdlib python python-apt
+I, [2018-11-23T00:09:09.471664 #8517]  INFO -- default-ubuntu:   python-minimal python-pycurl python-software-properties python2.7
+I, [2018-11-23T00:09:09.472119 #8517]  INFO -- default-ubuntu:   python2.7-minimal
+I, [2018-11-23T00:09:09.497841 #8517]  INFO -- default-ubuntu: 0 upgraded, 10 newly installed, 0 to remove and 4 not upgraded.
+I, [2018-11-23T00:09:09.547113 #8517]  INFO -- default-ubuntu: Need to get 4081 kB of archives.
+I, [2018-11-23T00:09:09.547229 #8517]  INFO -- default-ubuntu: After this operation, 17.5 MB of additional disk space will be used.
+I, [2018-11-23T00:09:09.644073 #8517]  INFO -- default-ubuntu: 0% [Working]            Get:1 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython2.7-minimal amd64 2.7.12-1ubuntu0~16.04.4 [339 kB]
+I, [2018-11-23T00:09:09.976661 #8517]  INFO -- default-ubuntu: 0% [1 libpython2.7-minimal 1165 B/339 kB 0%]                                            9% [Working]            Get:2 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python2.7-minimal amd64 2.7.12-1ubuntu0~16.04.4 [1261 kB]
+I, [2018-11-23T00:09:10.313930 #8517]  INFO -- default-ubuntu: 9% [2 python2.7-minimal 0 B/1261 kB 0%]                                       35% [Working]             Get:3 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python-minimal amd64 2.7.12-1~16.04 [28.1 kB]
+I, [2018-11-23T00:09:10.318128 #8517]  INFO -- default-ubuntu: 35% [3 python-minimal 0 B/28.1 kB 0%]                                     38% [Working]             Get:4 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython2.7-stdlib amd64 2.7.12-1ubuntu0~16.04.4 [1880 kB]
+I, [2018-11-23T00:09:10.800894 #8517]  INFO -- default-ubuntu: 38% [4 libpython2.7-stdlib 0 B/1880 kB 0%]                                          77% [Working]             Get:5 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python2.7 amd64 2.7.12-1ubuntu0~16.04.4 [224 kB]
+I, [2018-11-23T00:09:10.844702 #8517]  INFO -- default-ubuntu: 77% [5 python2.7 0 B/224 kB 0%]                               Get:6 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython-stdlib amd64 2.7.12-1~16.04 [7768 B]
+I, [2018-11-23T00:09:10.847454 #8517]  INFO -- default-ubuntu: 83% [6 libpython-stdlib 7768 B/7768 B 100%]                                           Get:7 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python amd64 2.7.12-1~16.04 [137 kB]
+I, [2018-11-23T00:09:10.877591 #8517]  INFO -- default-ubuntu:                                            86% [7 python 18.9 kB/137 kB 14%]                                 90% [Waiting for headers]                         Get:8 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python-apt amd64 1.1.0~beta1ubuntu0.16.04.2 [139 kB]
+I, [2018-11-23T00:09:10.904845 #8517]  INFO -- default-ubuntu: 90% [8 python-apt 4850 B/139 kB 3%]                                   95% [Waiting for headers]                         Get:9 http://archive.ubuntu.com/ubuntu xenial/main amd64 python-pycurl amd64 7.43.0-1ubuntu1 [43.3 kB]
+I, [2018-11-23T00:09:10.911788 #8517]  INFO -- default-ubuntu: 95% [9 python-pycurl 5657 B/43.3 kB 13%]                                        Get:10 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 python-software-properties all 0.96.20.7 [20.7 kB]
+I, [2018-11-23T00:09:10.915111 #8517]  INFO -- default-ubuntu: 98% [10 python-software-properties 8418 B/20.7 kB 41%]                                                      100% [Working]              Fetched 4081 kB in 1s (2996 kB/s)
+I, [2018-11-23T00:09:10.928782 #8517]  INFO -- default-ubuntu: perl: warning: Setting locale failed.
+I, [2018-11-23T00:09:10.928879 #8517]  INFO -- default-ubuntu: perl: warning: Please check that your locale settings:
+I, [2018-11-23T00:09:10.928942 #8517]  INFO -- default-ubuntu: 	LANGUAGE = (unset),
+I, [2018-11-23T00:09:10.928997 #8517]  INFO -- default-ubuntu: 	LC_ALL = (unset),
+I, [2018-11-23T00:09:10.929046 #8517]  INFO -- default-ubuntu: 	LC_CTYPE = "ru_RU.UTF-8",
+I, [2018-11-23T00:09:10.929092 #8517]  INFO -- default-ubuntu: 	LANG = "ru_RU.UTF-8"
+I, [2018-11-23T00:09:10.929630 #8517]  INFO -- default-ubuntu:     are supported and installed on your system.
+I, [2018-11-23T00:09:10.929683 #8517]  INFO -- default-ubuntu: perl: warning: Falling back to the standard locale ("C").
+I, [2018-11-23T00:09:12.111098 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libpython2.7-minimal:amd64.
+I, [2018-11-23T00:09:12.130935 #8517]  INFO -- default-ubuntu: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 13891 files and directories currently installed.)
+I, [2018-11-23T00:09:12.132467 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libpython2.7-minimal_2.7.12-1ubuntu0~16.04.4_amd64.deb ...
+I, [2018-11-23T00:09:12.139414 #8517]  INFO -- default-ubuntu: Unpacking libpython2.7-minimal:amd64 (2.7.12-1ubuntu0~16.04.4) ...
+I, [2018-11-23T00:09:12.351313 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python2.7-minimal.
+I, [2018-11-23T00:09:12.351403 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python2.7-minimal_2.7.12-1ubuntu0~16.04.4_amd64.deb ...
+I, [2018-11-23T00:09:12.362838 #8517]  INFO -- default-ubuntu: Unpacking python2.7-minimal (2.7.12-1ubuntu0~16.04.4) ...
+I, [2018-11-23T00:09:12.593086 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-minimal.
+I, [2018-11-23T00:09:12.595755 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-minimal_2.7.12-1~16.04_amd64.deb ...
+I, [2018-11-23T00:09:12.605139 #8517]  INFO -- default-ubuntu: Unpacking python-minimal (2.7.12-1~16.04) ...
+I, [2018-11-23T00:09:12.680362 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libpython2.7-stdlib:amd64.
+I, [2018-11-23T00:09:12.680449 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libpython2.7-stdlib_2.7.12-1ubuntu0~16.04.4_amd64.deb ...
+I, [2018-11-23T00:09:12.684805 #8517]  INFO -- default-ubuntu: Unpacking libpython2.7-stdlib:amd64 (2.7.12-1ubuntu0~16.04.4) ...
+I, [2018-11-23T00:09:13.048977 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python2.7.
+I, [2018-11-23T00:09:13.049059 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python2.7_2.7.12-1ubuntu0~16.04.4_amd64.deb ...
+I, [2018-11-23T00:09:13.053440 #8517]  INFO -- default-ubuntu: Unpacking python2.7 (2.7.12-1ubuntu0~16.04.4) ...
+I, [2018-11-23T00:09:13.123406 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libpython-stdlib:amd64.
+I, [2018-11-23T00:09:13.123471 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libpython-stdlib_2.7.12-1~16.04_amd64.deb ...
+I, [2018-11-23T00:09:13.132795 #8517]  INFO -- default-ubuntu: Unpacking libpython-stdlib:amd64 (2.7.12-1~16.04) ...
+I, [2018-11-23T00:09:13.179611 #8517]  INFO -- default-ubuntu: Processing triggers for mime-support (3.59ubuntu1) ...
+I, [2018-11-23T00:09:13.270192 #8517]  INFO -- default-ubuntu: Setting up libpython2.7-minimal:amd64 (2.7.12-1ubuntu0~16.04.4) ...
+I, [2018-11-23T00:09:13.296997 #8517]  INFO -- default-ubuntu: Setting up python2.7-minimal (2.7.12-1ubuntu0~16.04.4) ...
+I, [2018-11-23T00:09:13.685041 #8517]  INFO -- default-ubuntu: Setting up python-minimal (2.7.12-1~16.04) ...
+I, [2018-11-23T00:09:13.776808 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python.
+I, [2018-11-23T00:09:13.803988 #8517]  INFO -- default-ubuntu: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14638 files and directories currently installed.)
+I, [2018-11-23T00:09:13.804068 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python_2.7.12-1~16.04_amd64.deb ...
+I, [2018-11-23T00:09:13.819339 #8517]  INFO -- default-ubuntu: Unpacking python (2.7.12-1~16.04) ...
+I, [2018-11-23T00:09:13.906014 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-apt.
+I, [2018-11-23T00:09:13.906100 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-apt_1.1.0~beta1ubuntu0.16.04.2_amd64.deb ...
+I, [2018-11-23T00:09:13.912186 #8517]  INFO -- default-ubuntu: Unpacking python-apt (1.1.0~beta1ubuntu0.16.04.2) ...
+I, [2018-11-23T00:09:14.016499 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-pycurl.
+I, [2018-11-23T00:09:14.019668 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-pycurl_7.43.0-1ubuntu1_amd64.deb ...
+I, [2018-11-23T00:09:14.028358 #8517]  INFO -- default-ubuntu: Unpacking python-pycurl (7.43.0-1ubuntu1) ...
+I, [2018-11-23T00:09:14.078238 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-software-properties.
+I, [2018-11-23T00:09:14.078327 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-software-properties_0.96.20.7_all.deb ...
+I, [2018-11-23T00:09:14.084199 #8517]  INFO -- default-ubuntu: Unpacking python-software-properties (0.96.20.7) ...
+I, [2018-11-23T00:09:14.153200 #8517]  INFO -- default-ubuntu: Setting up libpython2.7-stdlib:amd64 (2.7.12-1ubuntu0~16.04.4) ...
+I, [2018-11-23T00:09:14.168657 #8517]  INFO -- default-ubuntu: Setting up python2.7 (2.7.12-1ubuntu0~16.04.4) ...
+I, [2018-11-23T00:09:15.382505 #8517]  INFO -- default-ubuntu: Setting up libpython-stdlib:amd64 (2.7.12-1~16.04) ...
+I, [2018-11-23T00:09:15.397367 #8517]  INFO -- default-ubuntu: Setting up python (2.7.12-1~16.04) ...
+I, [2018-11-23T00:09:15.436877 #8517]  INFO -- default-ubuntu: Setting up python-apt (1.1.0~beta1ubuntu0.16.04.2) ...
+I, [2018-11-23T00:09:15.837766 #8517]  INFO -- default-ubuntu: Setting up python-pycurl (7.43.0-1ubuntu1) ...
+I, [2018-11-23T00:09:16.209057 #8517]  INFO -- default-ubuntu: Setting up python-software-properties (0.96.20.7) ...
+I, [2018-11-23T00:09:18.189661 #8517]  INFO -- default-ubuntu: gpg: keyring `/tmp/tmpq08984db/secring.gpg' created
+I, [2018-11-23T00:09:18.192094 #8517]  INFO -- default-ubuntu: gpg: keyring `/tmp/tmpq08984db/pubring.gpg' created
+I, [2018-11-23T00:09:18.192531 #8517]  INFO -- default-ubuntu: gpg: requesting key 7BB9C367 from hkp server keyserver.ubuntu.com
+I, [2018-11-23T00:09:18.286896 #8517]  INFO -- default-ubuntu: gpg: /tmp/tmpq08984db/trustdb.gpg: trustdb created
+I, [2018-11-23T00:09:18.288801 #8517]  INFO -- default-ubuntu: gpg: key 7BB9C367: public key "Launchpad PPA for Ansible, Inc." imported
+I, [2018-11-23T00:09:18.289923 #8517]  INFO -- default-ubuntu: gpg: Total number processed: 1
+I, [2018-11-23T00:09:18.290028 #8517]  INFO -- default-ubuntu: gpg:               imported: 1  (RSA: 1)
+I, [2018-11-23T00:09:18.554175 #8517]  INFO -- default-ubuntu: OK
+I, [2018-11-23T00:09:18.785936 #8517]  INFO -- default-ubuntu: 0% [Working]            Get:1 http://security.ubuntu.com/ubuntu xenial-security InRelease [107 kB]
+I, [2018-11-23T00:09:18.786053 #8517]  INFO -- default-ubuntu: 0% [Waiting for headers] [1 InRelease 0 B/107 kB 0%] [Waiting for headers]                                                                          Get:2 http://ppa.launchpad.net/ansible/ansible/ubuntu xenial InRelease [18.0 kB]
+I, [2018-11-23T00:09:18.799694 #8517]  INFO -- default-ubuntu: 0% [Waiting for headers] [1 InRelease 2585 B/107 kB 2%] [2 InRelease 14.2 kB/18                                                                               Hit:3 http://archive.ubuntu.com/ubuntu xenial InRelease
+I, [2018-11-23T00:09:18.830734 #8517]  INFO -- default-ubuntu:                                                                                0% [1 InRelease 11.3 kB/107 kB 11%] [2 InRelease 14.2 kB/18.0 kB 79%]0% [3 InRelease gpgv 247 kB] [Waiting for headers] [1 InRelease 12.7 kB/107 kB 0% [3 InRelease gpgv 247 kB] [Waiting for headers] [1 InRelease 17.1 kB/107 kB                                                                                Hit:4 http://archive.ubuntu.com/ubuntu xenial-updates InRelease
+I, [2018-11-23T00:09:18.914746 #8517]  INFO -- default-ubuntu: 0% [3 InRelease gpgv 247 kB] [Waiting for headers] [1 InRelease 20.0 kB/107 kB                                                                                Get:5 http://archive.ubuntu.com/ubuntu xenial-backports InRelease [107 kB]
+I, [2018-11-23T00:09:19.543184 #8517]  INFO -- default-ubuntu: 0% [3 InRelease gpgv 247 kB] [5 InRelease 17.1 kB/107 kB 16%] [1 InRelease 75.0                                                                               0% [3 InRelease gpgv 247 kB] [5 InRelease 76.4 kB/107 kB 72%]                                                             0% [3 InRelease gpgv 247 kB]                            0% [Working]0% [2 InRelease gpgv 18.0 kB]                             0% [Working]0% [4 InRelease gpgv 109 kB] [Connecting to ppa.launchpad.net (91.189.95.83)]                                                                             Get:6 http://ppa.launchpad.net/ansible/ansible/ubuntu xenial/main amd64 Packages [467 B]
+I, [2018-11-23T00:09:20.087125 #8517]  INFO -- default-ubuntu:                                                                              0% [4 InRelease gpgv 109 kB]0% [6 Packages store 0 B] [4 InRelease gpgv 109 kB]                                                   0% [4 InRelease gpgv 109 kB]                            0% [Working]0% [1 InRelease gpgv 107 kB]                            0% [Working]0% [5 InRelease gpgv 107 kB]                            100% [Working]              Fetched 232 kB in 1s (164 kB/s)
+I, [2018-11-23T00:09:21.603265 #8517]  INFO -- default-ubuntu: Reading package lists... 0%Reading package lists... 0%Reading package lists... 1%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 53%Reading package lists... 72%Reading package lists... 72%Reading package lists... 73%Reading package lists... 73%Reading package lists... 82%Reading package lists... 82%Reading package lists... 82%Reading package lists... 82%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+I, [2018-11-23T00:09:23.000235 #8517]  INFO -- default-ubuntu: Reading package lists... 0%Reading package lists... 0%Reading package lists... 1%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 56%Reading package lists... 72%Reading package lists... 72%Reading package lists... 73%Reading package lists... 73%Reading package lists... 82%Reading package lists... 82%Reading package lists... 82%Reading package lists... 82%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 89%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+I, [2018-11-23T00:09:23.307317 #8517]  INFO -- default-ubuntu: Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree... 72%Building dependency tree       
+I, [2018-11-23T00:09:23.309589 #8517]  INFO -- default-ubuntu: Reading state information... 0%Reading state information... 0%Reading state information... Done
+I, [2018-11-23T00:09:23.612733 #8517]  INFO -- default-ubuntu: The following additional packages will be installed:
+I, [2018-11-23T00:09:23.613858 #8517]  INFO -- default-ubuntu:   libyaml-0-2 python-cffi-backend python-crypto python-cryptography
+I, [2018-11-23T00:09:23.614338 #8517]  INFO -- default-ubuntu:   python-ecdsa python-enum34 python-httplib2 python-idna python-ipaddress
+I, [2018-11-23T00:09:23.614600 #8517]  INFO -- default-ubuntu:   python-jinja2 python-markupsafe python-paramiko python-pkg-resources
+I, [2018-11-23T00:09:23.617141 #8517]  INFO -- default-ubuntu:   python-pyasn1 python-setuptools python-six python-yaml sshpass
+I, [2018-11-23T00:09:23.621713 #8517]  INFO -- default-ubuntu: Suggested packages:
+I, [2018-11-23T00:09:23.621876 #8517]  INFO -- default-ubuntu:   python-crypto-dbg python-crypto-doc python-cryptography-doc
+I, [2018-11-23T00:09:23.621949 #8517]  INFO -- default-ubuntu:   python-cryptography-vectors python-enum34-doc python-jinja2-doc doc-base
+I, [2018-11-23T00:09:23.622017 #8517]  INFO -- default-ubuntu:   python-setuptools-doc
+I, [2018-11-23T00:09:23.626184 #8517]  INFO -- default-ubuntu: The following NEW packages will be installed:
+I, [2018-11-23T00:09:23.628614 #8517]  INFO -- default-ubuntu:   ansible libyaml-0-2 python-cffi-backend python-crypto python-cryptography
+I, [2018-11-23T00:09:23.628706 #8517]  INFO -- default-ubuntu:   python-ecdsa python-enum34 python-httplib2 python-idna python-ipaddress
+I, [2018-11-23T00:09:23.628751 #8517]  INFO -- default-ubuntu:   python-jinja2 python-markupsafe python-paramiko python-pkg-resources
+I, [2018-11-23T00:09:23.629696 #8517]  INFO -- default-ubuntu:   python-pyasn1 python-setuptools python-six python-yaml sshpass
+I, [2018-11-23T00:09:23.649380 #8517]  INFO -- default-ubuntu: 0 upgraded, 19 newly installed, 0 to remove and 4 not upgraded.
+I, [2018-11-23T00:09:23.754003 #8517]  INFO -- default-ubuntu: Need to get 5300 kB of archives.
+I, [2018-11-23T00:09:23.754100 #8517]  INFO -- default-ubuntu: After this operation, 42.0 MB of additional disk space will be used.
+I, [2018-11-23T00:09:23.889981 #8517]  INFO -- default-ubuntu: 0% [Working]            Get:1 http://archive.ubuntu.com/ubuntu xenial/main amd64 libyaml-0-2 amd64 0.1.6-3 [47.6 kB]
+I, [2018-11-23T00:09:23.892165 #8517]  INFO -- default-ubuntu: 0% [1 libyaml-0-2 0 B/47.6 kB 0%] [Waiting for headers]                                                       Get:2 http://ppa.launchpad.net/ansible/ansible/ubuntu xenial/main amd64 ansible all 2.7.2-1ppa~xenial [3910 kB]
+I, [2018-11-23T00:09:24.024496 #8517]  INFO -- default-ubuntu: 0% [1 libyaml-0-2 2615 B/47.6 kB 5%] [2 ansible 2638 B/3910 kB 0%]                                                                  2% [2 ansible 37.4 kB/3910 kB 1%]                                 Get:3 http://archive.ubuntu.com/ubuntu xenial/main amd64 python-markupsafe amd64 0.23-2build2 [15.5 kB]
+I, [2018-11-23T00:09:24.039756 #8517]  INFO -- default-ubuntu: 3% [3 python-markupsafe 0 B/15.5 kB 0%] [2 ansible 62.0 kB/3910 kB 2%]                                                                      4% [2 ansible 72.1 kB/3910 kB 2%]                                 Get:4 http://archive.ubuntu.com/ubuntu xenial/main amd64 python-jinja2 all 2.8-1 [109 kB]
+I, [2018-11-23T00:09:24.107922 #8517]  INFO -- default-ubuntu: 4% [4 python-jinja2 0 B/109 kB 0%] [2 ansible 72.1 kB/3910 kB 2%]                                                                 7% [2 ansible 111 kB/3910 kB 3%]                                Get:5 http://archive.ubuntu.com/ubuntu xenial/main amd64 python-yaml amd64 3.11-3build1 [105 kB]
+I, [2018-11-23T00:09:24.181797 #8517]  INFO -- default-ubuntu: 7% [5 python-yaml 0 B/105 kB 0%] [2 ansible 111 kB/3910 kB 3%]                                                              10% [2 ansible 137 kB/3910 kB 4%]                                 Get:6 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python-crypto amd64 2.6.1-6ubuntu0.16.04.3 [246 kB]
+I, [2018-11-23T00:09:24.256620 #8517]  INFO -- default-ubuntu: 10% [6 python-crypto 0 B/246 kB 0%] [2 ansible 137 kB/3910 kB 4%]                                                                 16% [2 ansible 166 kB/3910 kB 4%]                                 Get:7 http://archive.ubuntu.com/ubuntu xenial/main amd64 python-six all 1.10.0-3 [10.9 kB]
+I, [2018-11-23T00:09:24.264071 #8517]  INFO -- default-ubuntu: 16% [7 python-six 0 B/10.9 kB 0%] [2 ansible 166 kB/3910 kB 4%]                                                               17% [2 ansible 166 kB/3910 kB 4%]                                 Get:8 http://archive.ubuntu.com/ubuntu xenial/main amd64 python-ecdsa all 0.13-2 [34.0 kB]
+I, [2018-11-23T00:09:24.286517 #8517]  INFO -- default-ubuntu: 17% [8 python-ecdsa 0 B/34.0 kB 0%] [2 ansible 166 kB/3910 kB 4%]                                                                 18% [2 ansible 166 kB/3910 kB 4%]                                 Get:9 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python-paramiko all 1.16.0-1ubuntu0.2 [110 kB]
+I, [2018-11-23T00:09:24.303705 #8517]  INFO -- default-ubuntu: 19% [9 python-paramiko 0 B/110 kB 0%] [2 ansible 172 kB/3910 kB 4%]                                                                   21% [2 ansible 178 kB/3910 kB 5%]                                 Get:10 http://archive.ubuntu.com/ubuntu xenial/main amd64 python-httplib2 all 0.9.1+dfsg-1 [34.2 kB]
+I, [2018-11-23T00:09:24.315159 #8517]  INFO -- default-ubuntu: 21% [10 python-httplib2 0 B/34.2 kB 0%] [2 ansible 178 kB/3910 kB 5%]                                                                     23% [2 ansible 178 kB/3910 kB 5%]                                 Get:11 http://archive.ubuntu.com/ubuntu xenial/main amd64 python-pkg-resources all 20.7.0-1 [108 kB]
+I, [2018-11-23T00:09:24.346140 #8517]  INFO -- default-ubuntu: 23% [11 python-pkg-resources 0 B/108 kB 0%] [2 ansible 178 kB/3910 kB 5%]                                                                         26% [2 ansible 195 kB/3910 kB 5%]                                 Get:12 http://archive.ubuntu.com/ubuntu xenial/main amd64 python-setuptools all 20.7.0-1 [169 kB]
+I, [2018-11-23T00:09:24.375989 #8517]  INFO -- default-ubuntu: 27% [12 python-setuptools 63.5 kB/169 kB 38%] [2 ansible 195 kB/3910 kB 5%]                                                                           30% [2 ansible 207 kB/3910 kB 5%]                                 Get:13 http://archive.ubuntu.com/ubuntu xenial/universe amd64 sshpass amd64 1.05-1 [10.5 kB]
+I, [2018-11-23T00:09:24.379201 #8517]  INFO -- default-ubuntu: 30% [13 sshpass 0 B/10.5 kB 0%] [2 ansible 207 kB/3910 kB 5%]                                                             31% [2 ansible 207 kB/3910 kB 5%]                                 Get:14 http://archive.ubuntu.com/ubuntu xenial/main amd64 python-cffi-backend amd64 1.5.2-1ubuntu1 [58.1 kB]
+I, [2018-11-23T00:09:24.393343 #8517]  INFO -- default-ubuntu: 31% [14 python-cffi-backend 0 B/58.1 kB 0%] [2 ansible 207 kB/3910 kB 5%]                                                                         33% [2 ansible 207 kB/3910 kB 5%]                                 Get:15 http://archive.ubuntu.com/ubuntu xenial/main amd64 python-enum34 all 1.1.2-1 [35.8 kB]
+I, [2018-11-23T00:09:24.403347 #8517]  INFO -- default-ubuntu: 33% [15 python-enum34 0 B/35.8 kB 0%] [2 ansible 207 kB/3910 kB 5%]                                                                   34% [2 ansible 210 kB/3910 kB 5%]                                 Get:16 http://archive.ubuntu.com/ubuntu xenial/main amd64 python-idna all 2.0-3 [35.1 kB]
+I, [2018-11-23T00:09:24.420874 #8517]  INFO -- default-ubuntu: 34% [16 python-idna 0 B/35.1 kB 0%] [2 ansible 210 kB/3910 kB 5%]                                                                 36% [2 ansible 210 kB/3910 kB 5%]                                 Get:17 http://archive.ubuntu.com/ubuntu xenial/main amd64 python-ipaddress all 1.0.16-1 [18.0 kB]
+I, [2018-11-23T00:09:24.440847 #8517]  INFO -- default-ubuntu: 36% [17 python-ipaddress 0 B/18.0 kB 0%] [2 ansible 210 kB/3910 kB 5%]                                                                      38% [2 ansible 227 kB/3910 kB 6%]                                 Get:18 http://archive.ubuntu.com/ubuntu xenial/main amd64 python-pyasn1 all 0.1.9-1 [45.1 kB]
+I, [2018-11-23T00:09:24.445666 #8517]  INFO -- default-ubuntu: 38% [18 python-pyasn1 0 B/45.1 kB 0%] [2 ansible 227 kB/3910 kB 6%]                                                                   39% [2 ansible 230 kB/3910 kB 6%]                                 Get:19 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python-cryptography amd64 1.2.3-1ubuntu0.2 [199 kB]
+I, [2018-11-23T00:09:26.884223 #8517]  INFO -- default-ubuntu: 39% [19 python-cryptography 0 B/199 kB 0%] [2 ansible 230 kB/3910 kB 6%]                                                                        44% [2 ansible 242 kB/3910 kB 6%]50% [2 ansible 667 kB/3910 kB 17%]59% [2 ansible 1291 kB/3910 kB 33%]73% [2 ansible 2192 kB/3910 kB 56%]87% [2 ansible 3109 kB/3910 kB 79%]                                   100% [Working]              Fetched 5300 kB in 3s (1704 kB/s)
+I, [2018-11-23T00:09:26.901647 #8517]  INFO -- default-ubuntu: perl: warning: Setting locale failed.
+I, [2018-11-23T00:09:26.901823 #8517]  INFO -- default-ubuntu: perl: warning: Please check that your locale settings:
+I, [2018-11-23T00:09:26.901912 #8517]  INFO -- default-ubuntu: 	LANGUAGE = (unset),
+I, [2018-11-23T00:09:26.902280 #8517]  INFO -- default-ubuntu: 	LC_ALL = (unset),
+I, [2018-11-23T00:09:26.902549 #8517]  INFO -- default-ubuntu: 	LC_CTYPE = "ru_RU.UTF-8",
+I, [2018-11-23T00:09:26.902779 #8517]  INFO -- default-ubuntu: 	LANG = "ru_RU.UTF-8"
+I, [2018-11-23T00:09:26.902995 #8517]  INFO -- default-ubuntu:     are supported and installed on your system.
+I, [2018-11-23T00:09:26.907313 #8517]  INFO -- default-ubuntu: perl: warning: Falling back to the standard locale ("C").
+I, [2018-11-23T00:09:29.201009 #8517]  INFO -- default-ubuntu: Selecting previously unselected package libyaml-0-2:amd64.
+I, [2018-11-23T00:09:29.215505 #8517]  INFO -- default-ubuntu: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14746 files and directories currently installed.)
+I, [2018-11-23T00:09:29.219511 #8517]  INFO -- default-ubuntu: Preparing to unpack .../libyaml-0-2_0.1.6-3_amd64.deb ...
+I, [2018-11-23T00:09:29.228657 #8517]  INFO -- default-ubuntu: Unpacking libyaml-0-2:amd64 (0.1.6-3) ...
+I, [2018-11-23T00:09:29.319278 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-markupsafe.
+I, [2018-11-23T00:09:29.322264 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-markupsafe_0.23-2build2_amd64.deb ...
+I, [2018-11-23T00:09:29.327991 #8517]  INFO -- default-ubuntu: Unpacking python-markupsafe (0.23-2build2) ...
+I, [2018-11-23T00:09:29.392769 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-jinja2.
+I, [2018-11-23T00:09:29.395290 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-jinja2_2.8-1_all.deb ...
+I, [2018-11-23T00:09:29.401133 #8517]  INFO -- default-ubuntu: Unpacking python-jinja2 (2.8-1) ...
+I, [2018-11-23T00:09:29.506868 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-yaml.
+I, [2018-11-23T00:09:29.509421 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-yaml_3.11-3build1_amd64.deb ...
+I, [2018-11-23T00:09:29.514678 #8517]  INFO -- default-ubuntu: Unpacking python-yaml (3.11-3build1) ...
+I, [2018-11-23T00:09:29.621717 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-crypto.
+I, [2018-11-23T00:09:29.624368 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-crypto_2.6.1-6ubuntu0.16.04.3_amd64.deb ...
+I, [2018-11-23T00:09:29.629913 #8517]  INFO -- default-ubuntu: Unpacking python-crypto (2.6.1-6ubuntu0.16.04.3) ...
+I, [2018-11-23T00:09:29.786721 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-six.
+I, [2018-11-23T00:09:29.790041 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-six_1.10.0-3_all.deb ...
+I, [2018-11-23T00:09:29.796532 #8517]  INFO -- default-ubuntu: Unpacking python-six (1.10.0-3) ...
+I, [2018-11-23T00:09:29.894930 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-ecdsa.
+I, [2018-11-23T00:09:29.897295 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-ecdsa_0.13-2_all.deb ...
+I, [2018-11-23T00:09:29.904465 #8517]  INFO -- default-ubuntu: Unpacking python-ecdsa (0.13-2) ...
+I, [2018-11-23T00:09:29.994949 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-paramiko.
+I, [2018-11-23T00:09:29.998496 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-paramiko_1.16.0-1ubuntu0.2_all.deb ...
+I, [2018-11-23T00:09:30.013405 #8517]  INFO -- default-ubuntu: Unpacking python-paramiko (1.16.0-1ubuntu0.2) ...
+I, [2018-11-23T00:09:30.139708 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-httplib2.
+I, [2018-11-23T00:09:30.142327 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-httplib2_0.9.1+dfsg-1_all.deb ...
+I, [2018-11-23T00:09:30.148474 #8517]  INFO -- default-ubuntu: Unpacking python-httplib2 (0.9.1+dfsg-1) ...
+I, [2018-11-23T00:09:30.237523 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-pkg-resources.
+I, [2018-11-23T00:09:30.242070 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-pkg-resources_20.7.0-1_all.deb ...
+I, [2018-11-23T00:09:30.252655 #8517]  INFO -- default-ubuntu: Unpacking python-pkg-resources (20.7.0-1) ...
+I, [2018-11-23T00:09:30.354556 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-setuptools.
+I, [2018-11-23T00:09:30.355179 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-setuptools_20.7.0-1_all.deb ...
+I, [2018-11-23T00:09:30.360502 #8517]  INFO -- default-ubuntu: Unpacking python-setuptools (20.7.0-1) ...
+I, [2018-11-23T00:09:30.456388 #8517]  INFO -- default-ubuntu: Selecting previously unselected package sshpass.
+I, [2018-11-23T00:09:30.459392 #8517]  INFO -- default-ubuntu: Preparing to unpack .../sshpass_1.05-1_amd64.deb ...
+I, [2018-11-23T00:09:30.465038 #8517]  INFO -- default-ubuntu: Unpacking sshpass (1.05-1) ...
+I, [2018-11-23T00:09:30.544868 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-cffi-backend.
+I, [2018-11-23T00:09:30.549607 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-cffi-backend_1.5.2-1ubuntu1_amd64.deb ...
+I, [2018-11-23T00:09:30.556929 #8517]  INFO -- default-ubuntu: Unpacking python-cffi-backend (1.5.2-1ubuntu1) ...
+I, [2018-11-23T00:09:30.642297 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-enum34.
+I, [2018-11-23T00:09:30.645255 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-enum34_1.1.2-1_all.deb ...
+I, [2018-11-23T00:09:30.653041 #8517]  INFO -- default-ubuntu: Unpacking python-enum34 (1.1.2-1) ...
+I, [2018-11-23T00:09:30.759247 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-idna.
+I, [2018-11-23T00:09:30.762013 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-idna_2.0-3_all.deb ...
+I, [2018-11-23T00:09:30.778030 #8517]  INFO -- default-ubuntu: Unpacking python-idna (2.0-3) ...
+I, [2018-11-23T00:09:30.873947 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-ipaddress.
+I, [2018-11-23T00:09:30.877036 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-ipaddress_1.0.16-1_all.deb ...
+I, [2018-11-23T00:09:30.882606 #8517]  INFO -- default-ubuntu: Unpacking python-ipaddress (1.0.16-1) ...
+I, [2018-11-23T00:09:30.966872 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-pyasn1.
+I, [2018-11-23T00:09:30.968117 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-pyasn1_0.1.9-1_all.deb ...
+I, [2018-11-23T00:09:30.973595 #8517]  INFO -- default-ubuntu: Unpacking python-pyasn1 (0.1.9-1) ...
+I, [2018-11-23T00:09:31.052401 #8517]  INFO -- default-ubuntu: Selecting previously unselected package python-cryptography.
+I, [2018-11-23T00:09:31.054939 #8517]  INFO -- default-ubuntu: Preparing to unpack .../python-cryptography_1.2.3-1ubuntu0.2_amd64.deb ...
+I, [2018-11-23T00:09:31.060368 #8517]  INFO -- default-ubuntu: Unpacking python-cryptography (1.2.3-1ubuntu0.2) ...
+I, [2018-11-23T00:09:31.183906 #8517]  INFO -- default-ubuntu: Selecting previously unselected package ansible.
+I, [2018-11-23T00:09:31.186347 #8517]  INFO -- default-ubuntu: Preparing to unpack .../ansible_2.7.2-1ppa~xenial_all.deb ...
+I, [2018-11-23T00:09:31.191267 #8517]  INFO -- default-ubuntu: Unpacking ansible (2.7.2-1ppa~xenial) ...
+I, [2018-11-23T00:09:33.801484 #8517]  INFO -- default-ubuntu: Setting up libyaml-0-2:amd64 (0.1.6-3) ...
+I, [2018-11-23T00:09:33.839837 #8517]  INFO -- default-ubuntu: Setting up python-markupsafe (0.23-2build2) ...
+I, [2018-11-23T00:09:34.230656 #8517]  INFO -- default-ubuntu: Setting up python-jinja2 (2.8-1) ...
+I, [2018-11-23T00:09:34.675370 #8517]  INFO -- default-ubuntu: Setting up python-yaml (3.11-3build1) ...
+I, [2018-11-23T00:09:35.067359 #8517]  INFO -- default-ubuntu: Setting up python-crypto (2.6.1-6ubuntu0.16.04.3) ...
+I, [2018-11-23T00:09:35.576740 #8517]  INFO -- default-ubuntu: Setting up python-six (1.10.0-3) ...
+I, [2018-11-23T00:09:35.959628 #8517]  INFO -- default-ubuntu: Setting up python-ecdsa (0.13-2) ...
+I, [2018-11-23T00:09:36.339607 #8517]  INFO -- default-ubuntu: Setting up python-paramiko (1.16.0-1ubuntu0.2) ...
+I, [2018-11-23T00:09:36.796442 #8517]  INFO -- default-ubuntu: Setting up python-httplib2 (0.9.1+dfsg-1) ...
+I, [2018-11-23T00:09:37.234645 #8517]  INFO -- default-ubuntu: Setting up python-pkg-resources (20.7.0-1) ...
+I, [2018-11-23T00:09:37.687627 #8517]  INFO -- default-ubuntu: Setting up python-setuptools (20.7.0-1) ...
+I, [2018-11-23T00:09:38.103400 #8517]  INFO -- default-ubuntu: Setting up sshpass (1.05-1) ...
+I, [2018-11-23T00:09:38.128680 #8517]  INFO -- default-ubuntu: Setting up python-cffi-backend (1.5.2-1ubuntu1) ...
+I, [2018-11-23T00:09:38.143077 #8517]  INFO -- default-ubuntu: Setting up python-enum34 (1.1.2-1) ...
+I, [2018-11-23T00:09:38.569095 #8517]  INFO -- default-ubuntu: Setting up python-idna (2.0-3) ...
+I, [2018-11-23T00:09:39.017094 #8517]  INFO -- default-ubuntu: Setting up python-ipaddress (1.0.16-1) ...
+I, [2018-11-23T00:09:39.402240 #8517]  INFO -- default-ubuntu: Setting up python-pyasn1 (0.1.9-1) ...
+I, [2018-11-23T00:09:39.839668 #8517]  INFO -- default-ubuntu: Setting up python-cryptography (1.2.3-1ubuntu0.2) ...
+I, [2018-11-23T00:09:40.377270 #8517]  INFO -- default-ubuntu: Setting up ansible (2.7.2-1ppa~xenial) ...
+I, [2018-11-23T00:09:45.094269 #8517]  INFO -- default-ubuntu: Processing triggers for libc-bin (2.23-0ubuntu10) ...
+I, [2018-11-23T00:09:45.187215 #8517]  INFO -- default-ubuntu: -----> Installing Chef Omnibus to install busser to run tests
+I, [2018-11-23T00:09:45.187321 #8517]  INFO -- default-ubuntu: downloading https://www.getchef.com/chef/install.sh
+I, [2018-11-23T00:09:45.187416 #8517]  INFO -- default-ubuntu:   to file /tmp/install.sh
+I, [2018-11-23T00:09:45.187970 #8517]  INFO -- default-ubuntu: trying wget...
+I, [2018-11-23T00:10:12.227627 #8517]  INFO -- default-ubuntu: Transferring files to <default-ubuntu>
+E, [2018-11-23T00:10:12.448190 #8517] ERROR -- default-ubuntu: Converge failed on instance <default-ubuntu>.
+E, [2018-11-23T00:10:12.448608 #8517] ERROR -- default-ubuntu: ------Exception-------
+E, [2018-11-23T00:10:12.448668 #8517] ERROR -- default-ubuntu: Class: Kitchen::ActionFailed
+E, [2018-11-23T00:10:12.448707 #8517] ERROR -- default-ubuntu: Message: SCP upload failed (open failed (1))
+E, [2018-11-23T00:10:12.448743 #8517] ERROR -- default-ubuntu: ----------------------
+E, [2018-11-23T00:10:12.448779 #8517] ERROR -- default-ubuntu: ------Backtrace-------
+E, [2018-11-23T00:10:12.448819 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/provisioner/base.rb:91:in `rescue in call'
+E, [2018-11-23T00:10:12.448861 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/provisioner/base.rb:94:in `call'
+E, [2018-11-23T00:10:12.448904 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:393:in `block in converge_action'
+E, [2018-11-23T00:10:12.448941 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:536:in `synchronize_or_call'
+E, [2018-11-23T00:10:12.448974 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:498:in `block in action'
+E, [2018-11-23T00:10:12.449006 #8517] ERROR -- default-ubuntu: /usr/local/Cellar/ruby/2.4.2_1/lib/ruby/2.4.0/benchmark.rb:293:in `measure'
+E, [2018-11-23T00:10:12.449037 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:497:in `action'
+E, [2018-11-23T00:10:12.449068 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:389:in `converge_action'
+E, [2018-11-23T00:10:12.449099 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:368:in `block in transition_to'
+E, [2018-11-23T00:10:12.449129 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:367:in `each'
+E, [2018-11-23T00:10:12.449160 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:367:in `transition_to'
+E, [2018-11-23T00:10:12.449190 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:157:in `verify'
+E, [2018-11-23T00:10:12.449269 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:186:in `block in test'
+E, [2018-11-23T00:10:12.449305 #8517] ERROR -- default-ubuntu: /usr/local/Cellar/ruby/2.4.2_1/lib/ruby/2.4.0/benchmark.rb:293:in `measure'
+E, [2018-11-23T00:10:12.449336 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:182:in `test'
+E, [2018-11-23T00:10:12.449366 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/command.rb:197:in `public_send'
+E, [2018-11-23T00:10:12.449395 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/command.rb:197:in `run_action_in_thread'
+E, [2018-11-23T00:10:12.449425 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/command.rb:169:in `block (2 levels) in run_action'
+E, [2018-11-23T00:10:12.449455 #8517] ERROR -- default-ubuntu: ----End Backtrace-----
+E, [2018-11-23T00:10:12.449484 #8517] ERROR -- default-ubuntu: ---Nested Exception---
+E, [2018-11-23T00:10:12.449513 #8517] ERROR -- default-ubuntu: Class: Kitchen::Transport::SshFailed
+E, [2018-11-23T00:10:12.449541 #8517] ERROR -- default-ubuntu: Message: SCP upload failed (open failed (1))
+E, [2018-11-23T00:10:12.449570 #8517] ERROR -- default-ubuntu: ----------------------
+E, [2018-11-23T00:10:12.449599 #8517] ERROR -- default-ubuntu: ------Backtrace-------
+E, [2018-11-23T00:10:12.449627 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/provisioner/base.rb:91:in `rescue in call'
+E, [2018-11-23T00:10:12.449656 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/provisioner/base.rb:94:in `call'
+E, [2018-11-23T00:10:12.449686 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:393:in `block in converge_action'
+E, [2018-11-23T00:10:12.449715 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:536:in `synchronize_or_call'
+E, [2018-11-23T00:10:12.449744 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:498:in `block in action'
+E, [2018-11-23T00:10:12.449773 #8517] ERROR -- default-ubuntu: /usr/local/Cellar/ruby/2.4.2_1/lib/ruby/2.4.0/benchmark.rb:293:in `measure'
+E, [2018-11-23T00:10:12.449802 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:497:in `action'
+E, [2018-11-23T00:10:12.449831 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:389:in `converge_action'
+E, [2018-11-23T00:10:12.449860 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:368:in `block in transition_to'
+E, [2018-11-23T00:10:12.449889 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:367:in `each'
+E, [2018-11-23T00:10:12.449918 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:367:in `transition_to'
+E, [2018-11-23T00:10:12.449947 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:157:in `verify'
+E, [2018-11-23T00:10:12.449976 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:186:in `block in test'
+E, [2018-11-23T00:10:12.450005 #8517] ERROR -- default-ubuntu: /usr/local/Cellar/ruby/2.4.2_1/lib/ruby/2.4.0/benchmark.rb:293:in `measure'
+E, [2018-11-23T00:10:12.450034 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/instance.rb:182:in `test'
+E, [2018-11-23T00:10:12.450063 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/command.rb:197:in `public_send'
+E, [2018-11-23T00:10:12.450092 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/command.rb:197:in `run_action_in_thread'
+E, [2018-11-23T00:10:12.450124 #8517] ERROR -- default-ubuntu: /usr/local/lib/ruby/gems/2.4.0/gems/test-kitchen-1.20.0/lib/kitchen/command.rb:169:in `block (2 levels) in run_action'
+E, [2018-11-23T00:10:12.450153 #8517] ERROR -- default-ubuntu: ----End Backtrace-----

@@ -1,0 +1,9 @@
+---
+username: kitchen
+ssh_key: "/Users/vader/vgg/telegraf/.kitchen/docker_id_rsa"
+image_id: 561ec82ed3fc
+container_id: f78ad127674fa43a14687011afcce51dd527d49eba87c2402c3440cc59519975
+hostname: localhost
+port: 32777
+last_action: create
+last_error: Kitchen::ActionFailed
