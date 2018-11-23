@@ -48,6 +48,9 @@ jobs:
           command: |
             bundle install
       - run:
+          command: |
+            curl -sL https://bootstrap.pypa.io/get-pip.py | python -
+      - run:
           name: Tests Ubuntu RPM
           command: |
             kitchen test rpm-install-ubuntu
@@ -64,6 +67,9 @@ jobs:
           name: Install Dependencies
           command: |
             bundle install
+      - run:
+          command: |
+            curl -sL https://bootstrap.pypa.io/get-pip.py | python -
       - run:
           name: Tests Centos RPM
           command: |
