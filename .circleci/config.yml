@@ -1,4 +1,12 @@
 # Python CircleCI 2.0 configuration file
+bundle-install: &bundle-install
+  run:
+    command: bundle install
+
+pip-install: &pip-install
+  run:
+    command: curl -sL https://bootstrap.pypa.io/get-pip.py | python -
+
 version: 2
 jobs:
   ubuntu-default-tests:
@@ -9,10 +17,7 @@ jobs:
       AWS_DEFAULT_REGION: us-west-2
     steps:
       - checkout
-      - run:
-          name: Install Dependencies
-          command: |
-            bundle install
+      - *bundle-install
       - run:
           name: Tests Ubuntu Defaults
           command: |
@@ -26,10 +31,7 @@ jobs:
       AWS_DEFAULT_REGION: us-west-2
     steps:
       - checkout
-      - run:
-          name: Install Dependencies
-          command: |
-            bundle install
+      - *bundle-install
       - run:
           name: Tests Centos Defaults
           command: |
@@ -43,13 +45,8 @@ jobs:
       AWS_DEFAULT_REGION: us-west-2
     steps:
       - checkout
-      - run:
-          name: Install Dependencies
-          command: |
-            bundle install
-      - run:
-          command: |
-            curl -sL https://bootstrap.pypa.io/get-pip.py | python -
+      - *bundle-install
+      - *pip-install
       - run:
           name: Tests Ubuntu RPM
           command: |
@@ -63,13 +60,8 @@ jobs:
       AWS_DEFAULT_REGION: us-west-2
     steps:
       - checkout
-      - run:
-          name: Install Dependencies
-          command: |
-            bundle install
-      - run:
-          command: |
-            curl -sL https://bootstrap.pypa.io/get-pip.py | python -
+      - *bundle-install
+      - *pip-install
       - run:
           name: Tests Centos RPM
           command: |
