@@ -1,5 +1,4 @@
-venv/
-.vagrant/
 .kitchen/
+tests/.kitchen/
 .kitchen.local.yml
 Gemfile.lock

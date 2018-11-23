@@ -4,7 +4,7 @@ driver:
 
 provisioner:
   name: ansible_playbook
-  playbook: tests/default.yml
+  #playbook: tests/default.yml
   hosts: all
   require_ansible_repo: true
   ansible_verbose: true
@@ -12,6 +12,7 @@ provisioner:
   # this version doesn't have ansible-playbook binary by some reason
   #ansible_version: 2.2.0
   idempotency_test: true
+  require_chef_for_busser: false
 
 platforms:
   - name: ubuntu
