@@ -7,6 +7,7 @@ provisioner:
   playbook: tests/default.yml
   hosts: all
   require_ansible_repo: true
+  ansible_verbose: true
   #require_ansible_omnibus: true
   # this version doesn't have ansible-playbook binary by some reason
   #ansible_version: 2.2.0
