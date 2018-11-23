@@ -8,8 +8,10 @@ provisioner:
   playbook: tests/default.yml
   hosts: all
   ansible_verbose: true
-  #ansible_version: 2.2.0-1ppa~xenial
-  #idempotency_test true
+  require_ansible_repo: false
+  require_ansible_omnibus: true
+  ansible_version: 2.2.0
+  idempotency_test: true
 
 platforms:
   - name: ubuntu

@@ -5,4 +5,6 @@ venv/
 *deb
 *rpm
 playbooks/
-.kitchen/logs/
+.kitchen/*
+.kitchen.local.yml
+Gemfile.lock
