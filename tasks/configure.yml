@@ -27,6 +27,7 @@
     - "pause"
     - "check status"
     - "assert running"
+  changed_when: false
 
 - name: Test for sysvinit script
   stat:
