@@ -6,13 +6,14 @@ jobs:
       enabled: true
     environment:
       AWS_DEFAULT_REGION: us-west-2
+    working_directory: ~/project
     steps:
       - checkout
-      - run: 
+      - run:
           name: Install Dependencies
           command: |
             bundle install
-      - run: 
+      - run:
           name: Tests
           command: |
             kitchen test
