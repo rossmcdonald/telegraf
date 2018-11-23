@@ -4,7 +4,7 @@ driver:
 
 provisioner:
   name: ansible_playbook
-  #playbook: tests/default.yml
+  #playbook: using default kitchen playbook to test this role
   hosts: all
   require_ansible_repo: true
   ansible_verbose: true
