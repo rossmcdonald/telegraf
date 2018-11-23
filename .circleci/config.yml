@@ -14,6 +14,21 @@ jobs:
           command: |
             bundle install
       - run:
-          name: Tests
+          name: Tests Ubuntu Defaults
           command: |
-            kitchen test
+            kitchen test default-ubuntu
+
+      - run:
+          name: Tests Centos Defaults
+          command: |
+            kitchen test default-centos-72
+
+      - run:
+          name: Tests Ubuntu RPM
+          command: |
+            kitchen test rpm-install-ubuntu
+
+      - run:
+          name: Tests Centos RPM
+          command: |
+            kitchen test rpm-install-centos-72

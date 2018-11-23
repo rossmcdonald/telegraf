@@ -29,3 +29,4 @@ suites:
   - name: default
   - name: rpm-install
     playbook: rpm-install.yml
+  # add test for `telegraf_install_url var`
