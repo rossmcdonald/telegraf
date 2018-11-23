@@ -6,7 +6,6 @@ jobs:
       enabled: true
     environment:
       AWS_DEFAULT_REGION: us-west-2
-    working_directory: ~/project
     steps:
       - checkout
       - run:
