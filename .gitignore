@@ -1,10 +1,5 @@
-*#
-*~
 venv/
 .vagrant/
-*deb
-*rpm
-playbooks/
-.kitchen/*
+.kitchen/
 .kitchen.local.yml
 Gemfile.lock
