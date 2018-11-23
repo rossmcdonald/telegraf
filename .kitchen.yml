@@ -4,8 +4,6 @@ driver:
 
 provisioner:
   name: ansible_playbook
-  # TODO: make circle ci working with default.yml playbook
-  #playbook: tests/default.yml
   hosts: all
   require_ansible_repo: true
   ansible_verbose: true
