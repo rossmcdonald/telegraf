@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  become: yes
+  vars:
+    #telegraf_install_url
+    telegraf_install_s3_path: 's3://aaa/bbb/ccc.rpm'
+  roles:
+    - telegraf

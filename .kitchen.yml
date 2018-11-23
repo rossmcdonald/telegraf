@@ -27,3 +27,5 @@ platforms:
 
 suites:
   - name: default
+  - name: rpm-install
+    playbook: rpm-install.yml
