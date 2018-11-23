@@ -67,5 +67,5 @@ workflows:
     jobs:
       - ubuntu-default-tests
       - centos-default-tests
-      - ubuntu-custom-tests
-      - centos-custom-tests
+      #- ubuntu-custom-tests
+      #- centos-custom-tests

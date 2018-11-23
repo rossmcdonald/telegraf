@@ -2,6 +2,11 @@
 driver:
   name: docker
 
+verifier:
+  name: serverspec
+  use_sudo: yes
+  sudo_path: true
+
 provisioner:
   name: ansible_playbook
   hosts: all
@@ -27,6 +32,10 @@ platforms:
 
 suites:
   - name: default
+    verifier:
+      default_pattern: true
+      bundler_path: '/usr/local/bin'
+      rspec_path: '/usr/local/bin'
   - name: rpm-install
     playbook: rpm-install.yml
   # add test for `telegraf_install_url var`
