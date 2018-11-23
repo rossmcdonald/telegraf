@@ -1,4 +1,12 @@
 ---
+
+- name: Install any necessary dependencies
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - awscli
+
 - name: Install any necessary dependencies [Debian/Ubuntu]
   package:
     name: "{{ item }}"
