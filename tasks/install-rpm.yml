@@ -1,5 +1,9 @@
 ---
 
+- easy_install:
+    name: pip
+    state: latest
+
 - name: Install any necessary dependencies
   pip:
     name: "{{ item }}"

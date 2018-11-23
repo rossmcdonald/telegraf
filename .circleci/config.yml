@@ -3,10 +3,6 @@ bundle-install: &bundle-install
   run:
     command: bundle install
 
-pip-install: &pip-install
-  run:
-    command: curl -sL https://bootstrap.pypa.io/get-pip.py | python -
-
 version: 2
 jobs:
   ubuntu-default-tests:
@@ -46,7 +42,6 @@ jobs:
     steps:
       - checkout
       - *bundle-install
-      - *pip-install
       - run:
           name: Tests Ubuntu RPM
           command: |
@@ -61,7 +56,6 @@ jobs:
     steps:
       - checkout
       - *bundle-install
-      - *pip-install
       - run:
           name: Tests Centos RPM
           command: |
