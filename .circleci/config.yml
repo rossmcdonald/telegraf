@@ -1,7 +1,7 @@
 # Python CircleCI 2.0 configuration file
 version: 2
 jobs:
-  build:
+  ubuntu-default-tests:
     working_directory: ~/telegraf
     machine:
       enabled: true
@@ -18,17 +18,62 @@ jobs:
           command: |
             kitchen test default-ubuntu
 
+  centos-default-tests:
+    working_directory: ~/telegraf
+    machine:
+      enabled: true
+    environment:
+      AWS_DEFAULT_REGION: us-west-2
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: |
+            bundle install
       - run:
           name: Tests Centos Defaults
           command: |
             kitchen test default-centos-72
 
+  ubuntu-custom-tests:
+    working_directory: ~/telegraf
+    machine:
+      enabled: true
+    environment:
+      AWS_DEFAULT_REGION: us-west-2
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: |
+            bundle install
       - run:
           name: Tests Ubuntu RPM
           command: |
             kitchen test rpm-install-ubuntu
 
+  centos-custom-tests:
+    working_directory: ~/telegraf
+    machine:
+      enabled: true
+    environment:
+      AWS_DEFAULT_REGION: us-west-2
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: |
+            bundle install
       - run:
           name: Tests Centos RPM
           command: |
             kitchen test rpm-install-centos-72
+
+workflows:
+  version: 2
+  telegraf-ansible-role-tests:
+    jobs:
+      - ubuntu-default-tests
+      - centos-default-tests
+      - ubuntu-custom-tests
+      - centos-custom-tests
