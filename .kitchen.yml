@@ -1,32 +1,25 @@
 ---
 driver:
   name: docker
-  use_sudo: false
 
 provisioner:
   name: ansible_playbook
   playbook: tests/default.yml
   hosts: all
-  ansible_verbose: true
-  require_ansible_repo: false
-  require_ansible_omnibus: true
-  ansible_version: 2.2.0
-  idempotency_test: true
+  require_ansible_repo: true
+  #require_ansible_omnibus: true
+  # this version doesn't have ansible-playbook binary by some reason
+  #ansible_version: 2.2.0
+  #idempotency_test true
 
 platforms:
-  - name: ubuntu
+  - name: ubuntu-16.04
     driver_config:
-      # provision_command:
-      #   - apt-get install -y python-netaddr
       image: ubuntu:16.04
       platform: ubuntu
-
-  # - name: amazon-linux
-  #   driver_config:
-  #     # provision_command:
-  #     #   - apt-get install -y python-netaddr
-  #     image: amazonlinux:2018.03
-  #     platform: amazonlinux
+  #- name: centos-7.2
 
 suites:
   - name: default
+    run_list:
+    attributes:
