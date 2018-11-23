@@ -13,13 +13,15 @@ provisioner:
   idempotency_test: true
 
 platforms:
-  - name: ubuntu-16.04
+  - name: ubuntu
     driver_config:
       image: ubuntu:16.04
       platform: ubuntu
   - name: centos-7.2
+  - name: amazonlinux
+    driver_config:
+      image: amazonlinux:2018.03
+      platform: rhel
 
 suites:
   - name: default
-    run_list:
-    attributes:
