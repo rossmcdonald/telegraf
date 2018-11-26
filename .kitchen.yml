@@ -1,0 +1,41 @@
+---
+driver:
+  name: docker
+
+verifier:
+  name: serverspec
+  use_sudo: yes
+  sudo_path: true
+
+provisioner:
+  name: ansible_playbook
+  hosts: all
+  require_ansible_repo: true
+  ansible_verbose: true
+  #require_ansible_omnibus: true
+  # this version doesn't have ansible-playbook binary by some reason
+  #ansible_version: 2.2.0
+  idempotency_test: true
+  require_chef_for_busser: false
+
+platforms:
+  - name: ubuntu
+    driver_config:
+      image: ubuntu:16.04
+      platform: ubuntu
+  - name: centos-7.2
+  # TODO: add and fix
+  # - name: amazonlinux
+  #   driver_config:
+  #     image: amazonlinux:2018.03
+  #     platform: rhel
+
+suites:
+  - name: default
+    verifier:
+      default_pattern: true
+      bundler_path: '/usr/local/bin'
+      rspec_path: '/usr/local/bin'
+  - name: rpm-install
+    playbook: rpm-install.yml
+  # add test for `telegraf_install_url var`

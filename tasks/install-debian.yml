@@ -10,6 +10,7 @@
     - python-apt
     - curl
     - apt-transport-https
+  changed_when: false
 
 - name: add influx repo
   shell: |
@@ -17,6 +18,7 @@
     source /etc/lsb-release
     echo "deb https://repos.influxdata.com/ubuntu trusty stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
     apt-get update
+  changed_when: false
 
 # by some reason update_cache flag doesn't work well
 - name: Install Telegraf packages [Debian/Ubuntu]
@@ -26,6 +28,7 @@
     update_cache: yes
     cache_valid_time: 3600
   when: telegraf_install_url is not defined or telegraf_install_url == None
+  changed_when: false
 
 - name: Download Telegraf package via URL [Debian/Ubuntu]
   command: curl -o /tmp/telegraf-ansible-download.deb {{ telegraf_install_url }}

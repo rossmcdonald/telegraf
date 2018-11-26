@@ -32,12 +32,18 @@ More advanced configuration options are stored in the `vars/main.yml` file, whic
 Dependencies
 ------------
 
-No other Ansible dependencies are required. This role was tested and developed with Ansible 1.9.4.
+No other Ansible dependencies are required. This role was tested and developed with Ansible 2.2.0.
 
-Example Playbook
+Tests
 ----------------
 
-An example playbook is included in the `test.yml` file. There is also a `Vagrantfile`, which can be used for quick local testing leveraging [Vagrant](https://www.vagrantup.com/).
+We're using test-kitchen, and circleci. See `.circleci/config.yml` for details
+
+Tests can be performed locally as well:
+```
+bundle install
+kitchen test
+```
 
 Contributions and Feedback
 --------------------------
@@ -53,4 +59,3 @@ Author
 ------
 
 Created by [Ross McDonald](https://github.com/rossmcdonald).
-

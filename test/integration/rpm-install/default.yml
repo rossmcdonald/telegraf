@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  become: yes
+  vars:
+    #telegraf_install_url
+    telegraf_install_s3_path: 's3://genpop-dev-01-audits-01-cfn-pqq7r4l5j0pu/infra-vault/bin/telegraf/telegraf-1.9.0-0.rc2.x86_64.rpm'
+  roles:
+    - telegraf
