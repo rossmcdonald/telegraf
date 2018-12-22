@@ -152,7 +152,7 @@
 {% endif %}
 {% else %}
 {% if value == "true" or value == "false" or value is number %}
-    {{ key }} = {{ value }}
+    {{ key }} = {{ value | lower }}
 {% else %}
     {{ key }} = "{{ value }}"
 {% endif %}
@@ -171,7 +171,7 @@
 {% endif %}
 {% else %}
 {% if lv2_value == "true" or lv2_value == "false" or lv2_value is number %}
-      {{ lv2_key }} = {{ lv2_value }}
+      {{ lv2_key }} = {{ lv2_value | lower }}
 {% else %}
       {{ lv2_key }} = "{{ lv2_value }}"
 {% endif %}
