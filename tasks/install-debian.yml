@@ -31,7 +31,9 @@
   when: telegraf_install_url is not defined or telegraf_install_url == None
 
 - name: Download Telegraf package via URL [Debian/Ubuntu]
-  command: curl -o /tmp/telegraf-ansible-download.deb {{ telegraf_install_url }}
+  get_url:
+    url: "{{ telegraf_install_url }}"
+    dest: /tmp/telegraf-ansible-download.deb
   when: telegraf_install_url is defined and telegraf_install_url != None
 
 - name: Install downloaded Telegraf package [Debian/Ubuntu]

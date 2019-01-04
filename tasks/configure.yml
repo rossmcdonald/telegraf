@@ -34,11 +34,17 @@
   register: telegraf_sysvinit_script
 
 - name: Modify user Telegraf should run as [sysvinit]
-  command: sed -i s/USER=.*/USER={{ telegraf_runas_user }}/ /etc/init.d/telegraf
+  replace:
+    path: /etc/init.d/telegraf
+    regexp: USER=.*
+    replace: USER={{ telegraf_runas_user }}
   when: telegraf_runas_user != "telegraf" and telegraf_sysvinit_script.stat.exists
 
 - name: Modify group Telegraf should run as [sysvinit]
-  command: sed -i s/GROUP=.*/GROUP={{ telegraf_runas_group }}/ /etc/init.d/telegraf
+  replace:
+    path: /etc/init.d/telegraf
+    regexp: GROUP=.*
+    replace: GROUP={{ telegraf_runas_group }}
   when: telegraf_runas_group != "telegraf" and telegraf_sysvinit_script.stat.exists
 
 - name: Create systemd service directory [systemd]
@@ -55,5 +61,6 @@
   register: telegraf_unit_file_updated
 
 - name: Reload systemd configuration [systemd]
-  command: systemctl daemon-reload
+  systemd:
+    daemon_reload: yes
   when: telegraf_unit_file_updated is defined and telegraf_unit_file_updated.changed

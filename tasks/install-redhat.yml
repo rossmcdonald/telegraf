@@ -1,9 +1,4 @@
 ---
-- name: Install any necessary dependencies [RedHat/CentOS]
-  yum:
-    name: curl
-    state: present
-
 - name: Add InfluxData repository file [RHEL/CentOS]
   template:
     src: etc/yum.repos.d/influxdata.repo.j2
