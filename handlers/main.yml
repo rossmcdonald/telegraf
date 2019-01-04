@@ -9,7 +9,7 @@
 
 - name: pause
   pause:
-    seconds: "{{telegraf_start_delay}}"
+    seconds: "{{ telegraf_start_delay }}"
   when: telegraf_start_service
 
 ## After version 2.2 of ansible 'listen' could be used to
