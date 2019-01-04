@@ -9,6 +9,10 @@
     state: present
     update_cache: yes
     cache_valid_time: 3600
+  register: apt_result
+  until: apt_result is success
+  retries: 2
+  delay: 5
 
 - name: Import InfluxData GPG signing key [Debian/Ubuntu]
   apt_key:
@@ -28,6 +32,10 @@
     state: latest
     update_cache: yes
     cache_valid_time: 3600
+  register: apt_result
+  until: apt_result is success
+  retries: 2
+  delay: 5
   when: telegraf_install_url is not defined or telegraf_install_url == None
 
 - name: Download Telegraf package via URL [Debian/Ubuntu]
@@ -40,4 +48,8 @@
   apt:
     deb: /tmp/telegraf-ansible-download.deb
     state: present
+  register: apt_result
+  until: apt_result is success
+  retries: 2
+  delay: 5
   when: telegraf_install_url is defined and telegraf_install_url != None

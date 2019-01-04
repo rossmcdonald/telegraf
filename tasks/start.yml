@@ -1,4 +1,4 @@
-
+---
 - name: Start the Telegraf service
   service:
     name: telegraf
