@@ -1,10 +1,8 @@
 ---
 - name: Install any necessary dependencies [RedHat/CentOS]
   yum:
-    name: "{{ item }}"
+    name: curl
     state: present
-  with_items:
-    - curl
 
 - name: Add InfluxData repository file [RHEL/CentOS]
   template:
