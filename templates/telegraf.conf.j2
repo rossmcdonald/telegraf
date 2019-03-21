@@ -1,7 +1,7 @@
 # Telegraf configuration
 
 # Telegraf is entirely plugin driven. All metrics are gathered from the
-# declared plugins.
+# declared input plugins.
 
 # Even if a plugin has no configuration, it must be declared in here
 # to be active. Declaring a plugin means just specifying the name
@@ -136,13 +136,13 @@
 {% endif %}
 
 ###############################################################################
-#                                  PLUGINS                                    #
+#                                  INPUTS                                     #
 ###############################################################################
 
-{% for plugin in telegraf_plugins %}
-[[inputs.{{ plugin.name }}]]
-{% if plugin.options is defined %}
-{% for key, value in plugin.options.items() %}
+{% for input in telegraf_inputs %}
+[[inputs.{{ input.name }}]]
+{% if input.options is defined %}
+{% for key, value in input.options.items() %}
 {% if value is not mapping %}
 {% if value is sequence and value is not string %}
 {% if value[0] is number %}
@@ -159,9 +159,9 @@
 {% endif %}
 {% endif %}
 {% endfor %}
-{% for key, value in plugin.options.items() %}
+{% for key, value in input.options.items() %}
 {% if value is mapping %}
-    [inputs.{{ plugin.name }}.{{ key }}]
+    [inputs.{{ input.name }}.{{ key }}]
 {% for lv2_key, lv2_value in value.items() %}
 {% if lv2_value is sequence and lv2_value is not string %}
 {% if lv2_value[0] is number %}

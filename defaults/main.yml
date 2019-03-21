@@ -45,7 +45,7 @@ telegraf_influxdb_password:
 telegraf_influxdb_user_agent:
 telegraf_influxdb_udp_payload:
 
-telegraf_plugins_base:
+telegraf_inputs_base:
   - name: mem
   - name: system
   - name: cpu
@@ -70,6 +70,6 @@ telegraf_plugins_base:
       interfaces:
         - "eth0"
 
-telegraf_plugins: "{{ telegraf_plugins_base }} + {{ telegraf_plugins_extra | default([]) }}"
+telegraf_inputs: "{{ telegraf_inputs_base }} + {{ telegraf_inputs_extra | default([]) }}"
 
 telegraf_influxdata_base_url: "https://repos.influxdata.com"
