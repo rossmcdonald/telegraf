@@ -1,25 +1,14 @@
 # Telegraf configuration
 
-# Telegraf is entirely plugin driven. All metrics are gathered from the
-# declared input plugins.
-
-# Even if a plugin has no configuration, it must be declared in here
-# to be active. Declaring a plugin means just specifying the name
-# as a section with no variables. To deactivate a plugin, comment
-# out the name and any variables.
+# For more information look at:
+# https://github.com/influxdata/telegraf/blob/master/etc/telegraf.conf
 
 # Use 'telegraf -config telegraf.toml -test' to see what metrics a config
 # file would generate.
 
-# One rule that plugins conform to is wherever a connection string
-# can be passed, the values '' and 'localhost' are treated specially.
-# They indicate to the plugin to use their own builtin configuration to
-# connect to the local system.
-
 # NOTE: The configuration has a few required parameters. They are marked
 # with 'required'. Be sure to edit those to make this configuration work.
 
-# Tags can also be specified via a normal map, but only one form at a time:
 [global_tags]
 {% if telegraf_tags is defined and telegraf_tags != None %}
 {% for key, value in telegraf_tags.items()%}
@@ -34,150 +23,85 @@
 
 # Configuration for telegraf agent
 [agent]
-  ## Default data collection interval for all inputs
   interval = "{{ telegraf_agent_interval }}"
-  ## Rounds collection interval to 'interval'
-  ## ie, if interval="10s" then always collect on :00, :10, :20, etc.
-  round_interval = {{ telegraf_round_interval }}
-
-  ## Telegraf will send metrics to outputs in batches of at
-  ## most metric_batch_size metrics.
-  metric_batch_size = {{ telegraf_metric_batch_size }}
-  ## For failed writes, telegraf will cache metric_buffer_limit metrics for each
-  ## output, and will flush this buffer on a successful write. Oldest metrics
-  ## are dropped first when this buffer fills.
-  metric_buffer_limit = {{ telegraf_metric_buffer_limit }}
-
-  ## Collection jitter is used to jitter the collection by a random amount.
-  ## Each plugin will sleep for a random time within jitter before collecting.
-  ## This can be used to avoid many plugins querying things like sysfs at the
-  ## same time, which can have a measurable effect on the system.
-  collection_jitter = "{{ telegraf_collection_jitter }}"
-
-  ## Default flushing interval for all outputs. You shouldn't set this below
-  ## interval. Maximum flush_interval will be flush_interval + flush_jitter
-  flush_interval = "{{ telegraf_flush_interval }}"
-  ## Jitter the flush interval by a random amount. This is primarily to avoid
-  ## large write spikes for users running a large number of telegraf instances.
-  ## ie, a jitter of 5s and interval 10s means flushes will happen every 10-15s
-  flush_jitter = "{{ telegraf_flush_jitter }}"
-
-  ## Run telegraf in debug mode
-  debug = {{ telegraf_debug }}
-  ## Run telegraf in quiet mode
-  quiet = {{ telegraf_quiet }}
-
-  # Override default hostname, if empty use os.Hostname()
+  round_interval = {{ telegraf_agent_round_interval }}
+  metric_batch_size = {{ telegraf_agent_metric_batch_size }}
+  metric_buffer_limit = {{ telegraf_agent_metric_buffer_limit }}
+  collection_jitter = "{{ telegraf_agent_collection_jitter }}"
+  flush_interval = "{{ telegraf_agent_flush_interval }}"
+  flush_jitter = "{{ telegraf_agent_flush_jitter }}"
+  precision = "{{ telegraf_agent_precision }}"
+  debug = {{ telegraf_agent_debug | lower }}
+  quiet = {{ telegraf_agent_quiet | lower }}
+  logfile = "{{ telegraf_agent_logfile }}"
 {% if telegraf_hostname is defined and telegraf_hostname != None %}
-  hostname = "{{ telegraf_hostname }}"
+  hostname = "{{ telegraf_agent_hostname }}"
 {% else %}
   hostname = "{{ ansible_hostname }}"
 {% endif %}
-
-  ## If set to true, do no set the "host" tag in the telegraf agent.
-  omit_hostname = {{ telegraf_omit_hostname }}
+  omit_hostname = {{ telegraf_agent_omit_hostname | lower }}
 
 ###############################################################################
 #                                  OUTPUTS                                    #
 ###############################################################################
 
-[outputs]
-
-# Configuration for influxdb server to send metrics to
-[[outputs.influxdb]]
-  # The full HTTP or UDP endpoint URL for your InfluxDB instance.
-  # Multiple urls can be specified but it is assumed that they are part of the same
-  # cluster, this means that only ONE of the urls will be written to each interval.
-  # urls = ["udp://localhost:8089"] # UDP endpoint example
-  urls = [ "{{ telegraf_influxdb_urls|join('","') }}" ] # required
-  # The target database for metrics (telegraf will create it if not exists)
-  database = "{{ telegraf_influxdb_database }}" # required
-  # Precision of writes, valid values are n, u, ms, s, m, and h
-  # note: using second precision greatly helps InfluxDB compression
-  precision = "{{ telegraf_influxdb_precision }}"
-
-  ## Retention policy to write to.
-  retention_policy = "{{ telegraf_influxdb_retention_policy }}"
-  ## Write consistency (clusters only), can be: "any", "one", "quorom", "all"
-  write_consistency = "{{ telegraf_influxdb_write_consistency }}"
-
-  # Connection timeout (for the connection with InfluxDB), formatted as a string.
-  # If not provided, will default to 0 (no timeout)
-  timeout = "{{ telegraf_influxdb_timeout }}"
-{% if telegraf_influxdb_username is defined and telegraf_influxdb_username != None %}
-  username = "{{ telegraf_influxdb_username }}"
-{% endif %}
-{% if telegraf_influxdb_password is defined and telegraf_influxdb_password != None %}
-  password = "{{ telegraf_influxdb_password }}"
-{% endif %}
-  # Set the user agent for HTTP POSTs (can be useful for log differentiation)
-{% if telegraf_influxdb_user_agent is defined and telegraf_influxdb_user_agent != None %}
-  user_agent = "{{ telegraf_influxdb_user_agent }}"
-{% endif %}
-  # Set UDP payload size, defaults to InfluxDB UDP Client default (512 bytes)
-{% if telegraf_influxdb_udp_payload is defined and telegraf_influxdb_udp_payload != None %}
-  udp_payload = {{ telegraf_influxdb_udp_payload }}
+{% if telegraf_plugins_outputs is defined and telegraf_plugins_outputs is iterable %}
+  {% for output in telegraf_plugins_outputs %}
+    [[outputs.{{ output.name }}]]
+    # Output config
+    {% for option in output.options %}
+        {{ option }}
+    {% endfor %}
+    # TagPass
+    {% if output.tagpass is defined and output.tagpass is iterable %}
+      [outputs.{{ output.type }}.tagpass]
+      {% for items in output.tagpass %}
+          {{ items }}
+      {% endfor %}
+    {% endif %}
+    # TagDrop
+    {% if output.tagdrop is defined and output.tagdrop is iterable %}
+      [outputs.{{ output.type }}.tagdrop]
+      {% for items in output.tagdrop %}
+          {{ items }}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
 {% endif %}
 
-  ## Optional SSL Config
-{% if telegraf_influxdb_ssl_ca is defined and telegraf_influxdb_ssl_ca != None %}
-  # ssl_ca = "{{ telegraf_influxdb_ssl_ca }}"
-{% endif %}
-{% if telegraf_influxdb_ssl_cert is defined and telegraf_influxdb_ssl_cert != None %}
-  # ssl_cert = "{{ telegraf_influxdb_ssl_cert }}"
-{% endif %}
-{% if telegraf_influxdb_ssl_key is defined and telegraf_influxdb_ssl_key != None %}
-  # ssl_key = "{{ telegraf_influxdb_ssl_key }}"
-{% endif %}
 
-{% if telegraf_influxdb_insecure_skip_verify is defined and telegraf_influxdb_insecure_skip_verify != None %}
-  ## Use SSL but skip chain & host verification
-  insecure_skip_verify = {{ telegraf_influxdb_insecure_skip_verify }}
-{% endif %}
 
 ###############################################################################
 #                                  INPUTS                                     #
 ###############################################################################
-
-{% for input in telegraf_inputs %}
-[[inputs.{{ input.name }}]]
-{% if input.options is defined %}
-{% for key, value in input.options.items() %}
-{% if value is not mapping %}
-{% if value is sequence and value is not string %}
-{% if value[0] is number %}
-    {{ key }} = [ {{ value|join(', ') }} ]
-{% else %}
-    {{ key }} = [ "{{ value|join('", "') }}" ]
+{% if telegraf_plugins_inputs is defined and telegraf_plugins_inputs is iterable %}
+  {% for input in telegraf_plugins_inputs %}
+    [[inputs.{{ input.name }}]]
+    {% if input.interval is defined %}
+        interval = "{{ input.interval }}s"
+    {% endif %}
+    {% if input.options is defined and input.options is iterable %}
+      {% for option in input.options %}
+          {{ option }}
+      {% endfor %}
+    {% endif %}
+    {% if input.tags is defined and input.tags is iterable %}
+      [inputs.{{ input.plugin }}.tags]
+      {% for items in input.tags %}
+          {{ items }}
+      {% endfor %}
+    {% endif %}
+    {% if input.tagpass is defined and input.tagpass is iterable %}
+      [inputs.{{ input.plugin }}.tagpass]
+      {% for items in input.tagpass %}
+          {{ items }}
+      {% endfor %}
+    {% endif %}
+    {% if input.tagdrop is defined and input.tagdrop is iterable %}
+      [inputs.{{ input.plugin }}.tagdrop]
+      {% for items in input.tagdrop %}
+          {{ items }}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
 {% endif %}
-{% else %}
-{% if value == "true" or value == "false" or value is number %}
-    {{ key }} = {{ value | lower }}
-{% else %}
-    {{ key }} = "{{ value }}"
-{% endif %}
-{% endif %}
-{% endif %}
-{% endfor %}
-{% for key, value in input.options.items() %}
-{% if value is mapping %}
-    [inputs.{{ input.name }}.{{ key }}]
-{% for lv2_key, lv2_value in value.items() %}
-{% if lv2_value is sequence and lv2_value is not string %}
-{% if lv2_value[0] is number %}
-      {{ lv2_key }} = [ {{ lv2_value|join(', ') }} ]
-{% else %}
-      {{ lv2_key }} = [ "{{ lv2_value|join('", "') }}" ]
-{% endif %}
-{% else %}
-{% if lv2_value == "true" or lv2_value == "false" or lv2_value is number %}
-      {{ lv2_key }} = {{ lv2_value | lower }}
-{% else %}
-      {{ lv2_key }} = "{{ lv2_value }}"
-{% endif %}
-{% endif %}
-{% endfor %}
-{% endif %}
-{% endfor %}
-{% endif %}
-{% endfor %}
