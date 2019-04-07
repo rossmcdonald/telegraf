@@ -6,7 +6,7 @@
     src: telegraf.conf.j2
     dest: "{{ telegraf_configuration_dir }}/telegraf.conf"
   notify:
-    - 'restart telegraf'
+    - "restart telegraf"
 
 - name: Output destination file name for custom Telegraf config
   debug:
@@ -19,12 +19,10 @@
     dest: "{{ telegraf_configuration_dir }}/telegraf.d/{{ (telegraf_custom_config_file|basename).split('.')|first }}.conf"
   when: telegraf_custom_config_file is defined
   notify:
-    - 'restart telegraf'
+    - "restart telegraf"
 
-- name: Register telegraf deamon to start on bootup
-  service:
+- name: Check status and register telegraf daemon
+  systemd:
     name: telegraf
-    enabled: yes
-
-- name: Check status
-  command: service telegraf status
+    state: started
+    enabled: True
