@@ -78,69 +78,12 @@
   omit_hostname = {{ telegraf_omit_hostname }}
 
 ###############################################################################
-#                                  OUTPUTS                                    #
+#                            OUTPUT PLUGINS                                   #
 ###############################################################################
 
 [outputs]
-
-# Configuration for influxdb server to send metrics to
-[[outputs.influxdb]]
-  # The full HTTP or UDP endpoint URL for your InfluxDB instance.
-  # Multiple urls can be specified but it is assumed that they are part of the same
-  # cluster, this means that only ONE of the urls will be written to each interval.
-  # urls = ["udp://localhost:8089"] # UDP endpoint example
-  urls = [ "{{ telegraf_influxdb_urls|join('","') }}" ] # required
-  # The target database for metrics (telegraf will create it if not exists)
-  database = "{{ telegraf_influxdb_database }}" # required
-  # Precision of writes, valid values are n, u, ms, s, m, and h
-  # note: using second precision greatly helps InfluxDB compression
-  precision = "{{ telegraf_influxdb_precision }}"
-
-  ## Retention policy to write to.
-  retention_policy = "{{ telegraf_influxdb_retention_policy }}"
-  ## Write consistency (clusters only), can be: "any", "one", "quorom", "all"
-  write_consistency = "{{ telegraf_influxdb_write_consistency }}"
-
-  # Connection timeout (for the connection with InfluxDB), formatted as a string.
-  # If not provided, will default to 0 (no timeout)
-  timeout = "{{ telegraf_influxdb_timeout }}"
-{% if telegraf_influxdb_username is defined and telegraf_influxdb_username != None %}
-  username = "{{ telegraf_influxdb_username }}"
-{% endif %}
-{% if telegraf_influxdb_password is defined and telegraf_influxdb_password != None %}
-  password = "{{ telegraf_influxdb_password }}"
-{% endif %}
-  # Set the user agent for HTTP POSTs (can be useful for log differentiation)
-{% if telegraf_influxdb_user_agent is defined and telegraf_influxdb_user_agent != None %}
-  user_agent = "{{ telegraf_influxdb_user_agent }}"
-{% endif %}
-  # Set UDP payload size, defaults to InfluxDB UDP Client default (512 bytes)
-{% if telegraf_influxdb_udp_payload is defined and telegraf_influxdb_udp_payload != None %}
-  udp_payload = {{ telegraf_influxdb_udp_payload }}
-{% endif %}
-
-  ## Optional SSL Config
-{% if telegraf_influxdb_ssl_ca is defined and telegraf_influxdb_ssl_ca != None %}
-  # ssl_ca = "{{ telegraf_influxdb_ssl_ca }}"
-{% endif %}
-{% if telegraf_influxdb_ssl_cert is defined and telegraf_influxdb_ssl_cert != None %}
-  # ssl_cert = "{{ telegraf_influxdb_ssl_cert }}"
-{% endif %}
-{% if telegraf_influxdb_ssl_key is defined and telegraf_influxdb_ssl_key != None %}
-  # ssl_key = "{{ telegraf_influxdb_ssl_key }}"
-{% endif %}
-
-{% if telegraf_influxdb_insecure_skip_verify is defined and telegraf_influxdb_insecure_skip_verify != None %}
-  ## Use SSL but skip chain & host verification
-  insecure_skip_verify = {{ telegraf_influxdb_insecure_skip_verify }}
-{% endif %}
-
-###############################################################################
-#                                  PLUGINS                                    #
-###############################################################################
-
-{% for plugin in telegraf_plugins %}
-[[inputs.{{ plugin.name }}]]
+{% for plugin in telegraf_outputs %}
+[[outputs.{{ plugin.name }}]]
 {% if plugin.options is defined %}
 {% for key, value in plugin.options.items() %}
 {% if value is not mapping %}
@@ -183,5 +126,132 @@
 {% endfor %}
 
 ###############################################################################
-#                              service PLUGINS                                #
+#                            PROCESSOR PLUGINS                                #
 ###############################################################################
+
+# TODO: implement same structure for proccessors
+# [[processors.regex]]
+#   namepass = ["nginx_requests"]
+
+#   # Tag and field conversions defined in a separate sub-tables
+#   [[processors.regex.tags]]
+#     ## Tag to change
+#     key = "resp_code"
+#     ## Regular expression to match on a tag value
+#     pattern = "^(\\d)\\d\\d$"
+#     ## Pattern for constructing a new value (${1} represents first subgroup)
+#     replacement = "${1}xx"
+
+#   [[processors.regex.fields]]
+#     key = "request"
+#     ## All the power of the Go regular expressions available here
+#     ## For example, named subgroups
+#     pattern = "^/api(?P<method>/[\\w/]+)\\S*"
+#     replacement = "${method}"
+#     ## If result_key is present, a new field will be created
+#     ## instead of changing existing field
+#     result_key = "method"
+
+#   # Multiple conversions may be applied for one field sequentially
+#   # Let's extract one more value
+#   [[processors.regex.fields]]
+#     key = "request"
+#     pattern = ".*category=(\\w+).*"
+#     replacement = "${1}"
+#     result_key = "search_category"
+
+###############################################################################
+#                            AGGREGATOR PLUGINS                               #
+###############################################################################
+
+{% if telegraf_aggregators is defined and telegraf_tags != None %}
+{% for plugin in telegraf_aggregators %}
+[[aggregators.{{ plugin.name }}]]
+{% if plugin.options is defined %}
+{% for key, value in plugin.options.items() %}
+{% if value is not mapping %}
+{% if value is sequence and value is not string %}
+{% if value[0] is number %}
+    {{ key }} = [ {{ value|join(', ') }} ]
+{% else %}
+    {{ key }} = [ "{{ value|join('", "') }}" ]
+{% endif %}
+{% else %}
+{% if value == "true" or value == "false" or value is number %}
+    {{ key }} = {{ value | lower }}
+{% else %}
+    {{ key }} = "{{ value }}"
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% for key, value in plugin.options.items() %}
+{% if value is mapping %}
+    [inputs.{{ plugin.name }}.{{ key }}]
+{% for lv2_key, lv2_value in value.items() %}
+{% if lv2_value is sequence and lv2_value is not string %}
+{% if lv2_value[0] is number %}
+      {{ lv2_key }} = [ {{ lv2_value|join(', ') }} ]
+{% else %}
+      {{ lv2_key }} = [ "{{ lv2_value|join('", "') }}" ]
+{% endif %}
+{% else %}
+{% if lv2_value == "true" or lv2_value == "false" or lv2_value is number %}
+      {{ lv2_key }} = {{ lv2_value | lower }}
+{% else %}
+      {{ lv2_key }} = "{{ lv2_value }}"
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+###############################################################################
+#                            INPUT PLUGINS                                    #
+###############################################################################
+
+{% for plugin in telegraf_inputs %}
+[[inputs.{{ plugin.name }}]]
+{% if plugin.options is defined %}
+{% for key, value in plugin.options.items() %}
+{% if value is not mapping %}
+{% if value is sequence and value is not string %}
+{% if value[0] is number %}
+    {{ key }} = [ {{ value|join(', ') }} ]
+{% else %}
+    {{ key }} = [ "{{ value|join('", "') }}" ]
+{% endif %}
+{% else %}
+{% if value == "true" or value == "false" or value is number %}
+    {{ key }} = {{ value | lower }}
+{% else %}
+    {{ key }} = "{{ value }}"
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% for key, value in plugin.options.items() %}
+{% if value is mapping %}
+    [inputs.{{ plugin.name }}.{{ key }}]
+{% for lv2_key, lv2_value in value.items() %}
+{% if lv2_value is sequence and lv2_value is not string %}
+{% if lv2_value[0] is number %}
+      {{ lv2_key }} = [ {{ lv2_value|join(', ') }} ]
+{% else %}
+      {{ lv2_key }} = [ "{{ lv2_value|join('", "') }}" ]
+{% endif %}
+{% else %}
+{% if lv2_value == "true" or lv2_value == "false" or lv2_value is number %}
+      {{ lv2_key }} = {{ lv2_value | lower }}
+{% else %}
+      {{ lv2_key }} = "{{ lv2_value }}"
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
