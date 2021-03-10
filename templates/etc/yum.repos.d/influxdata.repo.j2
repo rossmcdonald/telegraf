@@ -4,6 +4,8 @@ name = InfluxDB Repository - {{ ansible_distribution }} $releasever
 baseurl = "{{ telegraf_influxdata_base_url }}/centos/6/amd64/{{ telegraf_install_version }}"
 {% elif ansible_distribution|lower == "redhat" %}
 baseurl = {{ telegraf_influxdata_base_url }}/rhel/$releasever/$basearch/{{ telegraf_install_version }}
+{% elif ansible_distribution|lower == "oraclelinux" %}
+baseurl = {{ telegraf_influxdata_base_url }}/rhel/$releasever/$basearch/{{ telegraf_install_version }}
 {% else %}
 baseurl = {{ telegraf_influxdata_base_url }}/{{ ansible_distribution|lower }}/$releasever/$basearch/{{ telegraf_install_version }}
 {% endif %}
