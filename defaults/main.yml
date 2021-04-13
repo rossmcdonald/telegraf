@@ -28,24 +28,8 @@ telegraf_hostname:
 telegraf_omit_hostname: "false"
 telegraf_install_url:
 
-telegraf_influxdb_urls:
-  - http://localhost:8086
-telegraf_influxdb_database: telegraf
-telegraf_influxdb_precision: s
-telegraf_influxdb_retention_policy: autogen
-telegraf_influxdb_write_consistency: any
-telegraf_influxdb_ssl_ca:
-telegraf_influxdb_ssl_cert:
-telegraf_influxdb_ssl_key:
-telegraf_influxdb_insecure_skip_verify:
-
-telegraf_influxdb_timeout: 5s
-telegraf_influxdb_username:
-telegraf_influxdb_password:
-telegraf_influxdb_user_agent:
-telegraf_influxdb_udp_payload:
-
-telegraf_plugins_base:
+# Input plugin configuration
+telegraf_input_plugin_base:
   - name: mem
   - name: system
   - name: cpu
@@ -70,6 +54,23 @@ telegraf_plugins_base:
       interfaces:
         - "eth0"
 
-telegraf_plugins: "{{ telegraf_plugins_base }} + {{ telegraf_plugins_extra | default([]) }}"
+# Output plugin configuration
+telegraf_output_plugin_base:
+  - name: influxdb
+    options:
+      urls: ["http://localhost:8086"]
+      database: telegraf
+      precision: s
+      retention_policy: autogen
+      write_consistency: any
+      timeout: 5s
+
+telegraf_aggregator_plugin_base:
+
+telegraf_inputs: "{{ telegraf_input_plugin_base }} + {{ telegraf_input_plugin_extra | default([]) }}"
+telegraf_outputs: "{{ telegraf_output_plugin_base }} + {{ telegraf_output_plugin_extra | default([]) }}"
+telegraf_aggregators: "{{ telegraf_aggregator_plugin_base | default([]) }} + {{ telegraf_aggregator_plugin_extra | default([]) }}"
 
 telegraf_influxdata_base_url: "https://repos.influxdata.com"
+
+...
