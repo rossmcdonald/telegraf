@@ -15,37 +15,41 @@ telegraf_aws_tags: false
 telegraf_aws_tags_prefix:
 
 telegraf_agent_interval: 10s
-telegraf_round_interval: "true"
-telegraf_metric_batch_size: "1000"
-telegraf_metric_buffer_limit: "10000"
+telegraf_agent_round_interval: "true"
+telegraf_agent_metric_batch_size: "1000"
+telegraf_agent_metric_buffer_limit: "10000"
+telegraf_agent_collection_jitter: 0s
+telegraf_agent_flush_interval: 10s
+telegraf_agent_flush_jitter: 0s
+telegraf_agent_precision:
+telegraf_agent_debug: false
+telegraf_agent_quiet: false
+telegraf_agent_logfile:
+telegraf_agent_hostname:
+telegraf_agent_omit_hostname: false
 
-telegraf_collection_jitter: 0s
-telegraf_flush_interval: 10s
-telegraf_flush_jitter: 0s
-telegraf_debug: "false"
-telegraf_quiet: "false"
-telegraf_hostname:
-telegraf_omit_hostname: "false"
 telegraf_install_url:
 
-telegraf_influxdb_urls:
-  - http://localhost:8086
-telegraf_influxdb_database: telegraf
-telegraf_influxdb_precision: s
-telegraf_influxdb_retention_policy: autogen
-telegraf_influxdb_write_consistency: any
-telegraf_influxdb_ssl_ca:
-telegraf_influxdb_ssl_cert:
-telegraf_influxdb_ssl_key:
-telegraf_influxdb_insecure_skip_verify:
+telegraf_plugins_outputs:
+  - name: influxdb
+    otptions:
+      urls:
+        - http://localhost:8086
+      database: telegraf
+      precision: s
+      retention_policy: autogen
+      write_consistency: any
+      ssl_ca:
+      ssl_cert:
+      ssl_key:
+      insecure_skip_verify:
+      timeout: 5s
+      username:
+      password:
+      user_agent:
+      udp_payload:
 
-telegraf_influxdb_timeout: 5s
-telegraf_influxdb_username:
-telegraf_influxdb_password:
-telegraf_influxdb_user_agent:
-telegraf_influxdb_udp_payload:
-
-telegraf_plugins_base:
+telegraf_plugins_inputs:
   - name: mem
   - name: system
   - name: cpu
@@ -69,7 +73,5 @@ telegraf_plugins_base:
     options:
       interfaces:
         - "eth0"
-
-telegraf_plugins: "{{ telegraf_plugins_base }} + {{ telegraf_plugins_extra | default([]) }}"
 
 telegraf_influxdata_base_url: "https://repos.influxdata.com"
