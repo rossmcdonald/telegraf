@@ -84,6 +84,7 @@
 [outputs]
 
 # Configuration for influxdb server to send metrics to
+{% if telegraf_influxdb_v2 != true %}
 [[outputs.influxdb]]
   # The full HTTP or UDP endpoint URL for your InfluxDB instance.
   # Multiple urls can be specified but it is assumed that they are part of the same
@@ -134,7 +135,24 @@
   ## Use SSL but skip chain & host verification
   insecure_skip_verify = {{ telegraf_influxdb_insecure_skip_verify }}
 {% endif %}
+{% endif %}
 
+{%  if telegraf_influxdb_v2 == true %}
+[[outputs.influxdb_v2]]
+  urls = [ "{{ telegraf_influxdb_urls|join('","') }}" ]
+ ## Token for authentication.
+{% if telegraf_influxdb_token is defined and telegraf_influxdb_token != None %}
+  token = "{{ telegraf_influxdb_token }}"
+{% endif %}
+ ## Organization is the name of the organization you wish to write to; must exist.
+{% if telegraf_influxdb_organization is defined and telegraf_influxdb_organization != None %}
+  organization = "{{ telegraf_influxdb_organization }}"
+{% endif %}
+ ## Destination bucket to write into.
+{% if telegraf_influxdb_bucket is defined and telegraf_influxdb_bucket != None %}
+  bucket = "{{ telegraf_influxdb_bucket }}"
+{% endif %}
+{% endif %}
 ###############################################################################
 #                                  PLUGINS                                    #
 ###############################################################################

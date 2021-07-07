@@ -45,6 +45,12 @@ telegraf_influxdb_password:
 telegraf_influxdb_user_agent:
 telegraf_influxdb_udp_payload:
 
+# for v2 output
+telegraf_influxdb_v2: false
+telegraf_influxdb_token:
+telegraf_influxdb_organization:
+telegraf_influxdb_bucket:
+
 telegraf_plugins_base:
   - name: mem
   - name: system
