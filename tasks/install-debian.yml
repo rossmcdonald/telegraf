@@ -2,7 +2,6 @@
 - name: Install any necessary dependencies [Debian/Ubuntu]
   apt:
     name:
-      - python-httplib2
       - python-apt
       - curl
       - apt-transport-https
