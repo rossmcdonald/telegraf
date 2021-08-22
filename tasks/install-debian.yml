@@ -2,7 +2,7 @@
 - name: Install any necessary dependencies [Debian/Ubuntu]
   apt:
     name:
-      - python-apt
+      - python3-apt
       - curl
       - apt-transport-https
     state: present
