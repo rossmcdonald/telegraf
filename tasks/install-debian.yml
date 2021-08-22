@@ -3,7 +3,6 @@
   apt:
     name:
       - python3-apt
-      - curl
       - apt-transport-https
     state: present
     update_cache: yes
