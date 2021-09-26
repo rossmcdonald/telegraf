@@ -6,7 +6,8 @@ An Ansible role to install, configure, and manage [Telegraf](https://github.com/
 Requirements
 ------------
 
-Prior knowledge/experience with InfluxDB and Telegraf is highly recommended. Full documentation is available [here](https://docs.influxdata.com).
+- Module [toml](https://pypi.org/project/toml/) installed on the host running Ansible.
+- Prior knowledge/experience with InfluxDB and Telegraf is highly recommended. Full documentation is available [here](https://docs.influxdata.com).
 
 Installation
 ------------

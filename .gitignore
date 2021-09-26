@@ -5,3 +5,4 @@ venv/
 *deb
 *rpm
 playbooks/
+__pycache__

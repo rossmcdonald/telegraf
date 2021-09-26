@@ -157,48 +157,8 @@
 #                                  PLUGINS                                    #
 ###############################################################################
 
-{% for plugin in telegraf_plugins %}
-[[inputs.{{ plugin.name }}]]
-{% if plugin.options is defined %}
-{% for key, value in plugin.options.items() %}
-{% if value is not mapping %}
-{% if value is sequence and value is not string %}
-{% if value[0] is number %}
-    {{ key }} = [ {{ value|join(', ') }} ]
-{% else %}
-    {{ key }} = [ "{{ value|join('", "') }}" ]
-{% endif %}
-{% else %}
-{% if value == "true" or value == "false" or value is number %}
-    {{ key }} = {{ value | lower }}
-{% else %}
-    {{ key }} = "{{ value }}"
-{% endif %}
-{% endif %}
-{% endif %}
-{% endfor %}
-{% for key, value in plugin.options.items() %}
-{% if value is mapping %}
-    [inputs.{{ plugin.name }}.{{ key }}]
-{% for lv2_key, lv2_value in value.items() %}
-{% if lv2_value is sequence and lv2_value is not string %}
-{% if lv2_value[0] is number %}
-      {{ lv2_key }} = [ {{ lv2_value|join(', ') }} ]
-{% else %}
-      {{ lv2_key }} = [ "{{ lv2_value|join('", "') }}" ]
-{% endif %}
-{% else %}
-{% if lv2_value == "true" or lv2_value == "false" or lv2_value is number %}
-      {{ lv2_key }} = {{ lv2_value | lower }}
-{% else %}
-      {{ lv2_key }} = "{{ lv2_value }}"
-{% endif %}
-{% endif %}
-{% endfor %}
-{% endif %}
-{% endfor %}
-{% endif %}
-{% endfor %}
+{% set inputs = dict(inputs=telegraf_plugins) %}
+{{ inputs | to_toml | replace('[inputs]', '') }}
 
 ###############################################################################
 #                              service PLUGINS                                #
