@@ -5,7 +5,7 @@
       - python3-apt
       - apt-transport-https
     state: present
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
   register: apt_result
   until: apt_result is success
@@ -27,8 +27,8 @@
 - name: Install Telegraf packages [Debian/Ubuntu]
   apt:
     name: telegraf
-    state: latest
-    update_cache: yes
+    state: present
+    update_cache: true
     cache_valid_time: 3600
   register: apt_result
   until: apt_result is success

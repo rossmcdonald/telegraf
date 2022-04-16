@@ -15,8 +15,8 @@
   template:
     src: "{{ telegraf_configuration_template }}"
     dest: "{{ telegraf_configuration_dir }}/telegraf.conf"
-    force: yes
-    backup: yes
+    force: true
+    backup: true
     owner: telegraf
     group: telegraf
     mode: 0744
@@ -51,16 +51,18 @@
   file:
     path: /etc/systemd/system/telegraf.service.d
     state: directory
+    mode: 0744
   when: telegraf_runas_user != "telegraf" and not telegraf_sysvinit_script.stat.exists
 
 - name: Modify user Telegraf should run as [systemd]
   template:
     src: systemd/system/telegraf.service.d/override.conf
     dest: /etc/systemd/system/telegraf.service.d/override.conf
+    mode: 0744
   when: telegraf_runas_user != "telegraf" and not telegraf_sysvinit_script.stat.exists
   register: telegraf_unit_file_updated
 
 - name: Reload systemd configuration [systemd]
   systemd:
-    daemon_reload: yes
+    daemon_reload: true
   when: telegraf_unit_file_updated is defined and telegraf_unit_file_updated.changed

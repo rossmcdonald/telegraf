@@ -18,7 +18,7 @@
   command: service telegraf status
   args:
     warn: false
-  ignore_errors: yes
+  ignore_errors: true
   register: telegraf_service_status
   become: true
   when: telegraf_start_service

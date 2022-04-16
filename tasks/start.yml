@@ -3,7 +3,7 @@
   service:
     name: telegraf
     state: started
-    enabled: yes
+    enabled: true
   # Only care to check the status if the state changed to 'started'
   notify:
     - "pause"
