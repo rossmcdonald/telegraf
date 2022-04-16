@@ -19,6 +19,6 @@ galaxy_info:
       versions:
         - jessie
         - wheezy
-  categories:
+  galaxy_tags:
     - monitoring
 dependencies: []

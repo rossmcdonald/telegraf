@@ -3,15 +3,16 @@
   template:
     src: etc/yum.repos.d/influxdata.repo.j2
     dest: /etc/yum.repos.d/influxdata.repo
-    force: yes
-    backup: yes
+    force: true
+    backup: true
+    mode: 0644
   when: telegraf_install_url is not defined or telegraf_install_url == None
 
 - name: Install Telegraf packages [RHEL/CentOS]
   yum:
     name: telegraf
-    state: latest
-    update_cache: yes
+    state: present
+    update_cache: true
   when: telegraf_install_url is not defined or telegraf_install_url == None
 
 - name: Install Telegraf from URL [RHEL/CentOS]
