@@ -52,30 +52,28 @@ telegraf_influxdb_organization:
 telegraf_influxdb_bucket:
 
 telegraf_plugins_base:
-  - name: mem
-  - name: system
-  - name: cpu
-    options:
-      percpu: "true"
-      totalcpu: "true"
+  mem: [{}]
+  system: [{}]
+  cpu:
+    - percpu: true
+      totalcpu: true
       fielddrop:
         - "time_*"
-  - name: disk
-    options:
-      mountpoints:
+  disk:
+    - mountpoints:
         - "/"
-  - name: diskio
-    options:
-      skip_serial_number: "true"
-  - name: procstat
-    options:
-      exe: "influxd"
+  diskio:
+    - skip_serial_number: true
+  procstat:
+    - exe: "influxd"
       prefix: "influxdb"
-  - name: net
-    options:
-      interfaces:
+  net:
+    - interfaces:
         - "eth0"
 
-telegraf_plugins: "{{ telegraf_plugins_base }} + {{ telegraf_plugins_extra | default([]) }}"
+telegraf_plugins_extra:
+
+# The `combine()` filter requires Ansible 2.0
+telegraf_plugins: "{{ telegraf_plugins_base | combine(telegraf_plugins_extra) }}"
 
 telegraf_influxdata_base_url: "https://repos.influxdata.com"
