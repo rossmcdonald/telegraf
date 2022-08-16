@@ -9,7 +9,10 @@
       when: ansible_os_family == 'Debian'
 
     - name: Install test dependencies (Debian).
-      apt: name=gpg state=present
+      ansible.builtin.package:
+        name:
+          - gpg
+          - gpg-agent
       when: ansible_os_family == 'Debian'
 
     - name: Install test dependencies (RedHat).
