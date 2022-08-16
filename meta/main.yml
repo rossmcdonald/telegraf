@@ -1,7 +1,7 @@
 ---
 galaxy_info:
-  author: Ross McDonald
-  description: Install and configure Telegraf, the plugin-driven server agent for reporting metrics into InfluxDB
+  author: filviu
+  description: Install and configure Telegraf, the plugin-driven server agent for reporting metrics into InfluxDB. Original by Ross McDonald. Forked to speedup needed fixes and development.
   company: InfluxData
   license: MIT
   min_ansible_version: 1.2
@@ -12,13 +12,13 @@ galaxy_info:
         - 7
     - name: Ubuntu
       versions:
-        - trusty
-        - utopic
-        - vivid
+        - jammy
+        - focal
+        - bionic
     - name: Debian
       versions:
-        - jessie
-        - wheezy
+        - bullseye
+        - buster
   galaxy_tags:
     - monitoring
 dependencies: []
