@@ -1,0 +1,10 @@
+---
+warn_list:
+  - '106'
+  - '503'
+  - experimental
+skip_list:
+  - risky-file-permissions
+  - 'role-name'
+  - 'fqcn-builtins'
+  
