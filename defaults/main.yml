@@ -76,6 +76,6 @@ telegraf_plugins_base:
       interfaces:
         - "eth0"
 
-telegraf_plugins: "{{ telegraf_plugins_base }} + {{ telegraf_plugins_extra | default([]) }}"
+telegraf_plugins: "{{ telegraf_plugins_base + telegraf_plugins_extra | default([]) }}"
 
 telegraf_influxdata_base_url: "https://repos.influxdata.com"
