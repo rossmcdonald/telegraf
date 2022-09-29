@@ -6,7 +6,7 @@ driver:
 platforms:
   - name: instance
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
-    ansible.builtin.command: ${MOLECULE_DOCKER_COMMAND:-""}
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
