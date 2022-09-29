@@ -1,7 +1,7 @@
 ---
 # The order here matters
 - name: restart telegraf
-  service:
+  ansible.builtin.service:
     name: telegraf
     state: restarted
   become: true
@@ -15,7 +15,7 @@
 ## After version 2.2 of ansible 'listen' could be used to
 ## group 'check status' and 'assert running' into a single listener
 - name: check status
-  command: service telegraf status
+  ansible.builtin.command: service telegraf status
   args:
     warn: false
   ignore_errors: true
@@ -24,7 +24,7 @@
   when: telegraf_start_service
 
 - name: assert running
-  assert:
+  ansible.builtin.assert:
     that:
       - "telegraf_service_status.rc == 0"
   when: telegraf_start_service

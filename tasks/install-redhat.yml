@@ -1,6 +1,6 @@
 ---
 - name: Add InfluxData repository file [RHEL/CentOS]
-  template:
+  ansible.builtin.template:
     src: etc/yum.repos.d/influxdata.repo.j2
     dest: /etc/yum.repos.d/influxdata.repo
     force: true

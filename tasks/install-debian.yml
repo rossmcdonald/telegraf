@@ -1,6 +1,6 @@
 ---
 - name: Install any necessary dependencies [Debian/Ubuntu]
-  apt:
+  ansible.builtin.apt:
     name:
       - python3-apt
       - apt-transport-https
@@ -25,7 +25,7 @@
   when: telegraf_install_url is not defined or telegraf_install_url == None
 
 - name: Install Telegraf packages [Debian/Ubuntu]
-  apt:
+  ansible.builtin.apt:
     name: telegraf
     state: present
     update_cache: true
@@ -43,7 +43,7 @@
   when: telegraf_install_url is defined and telegraf_install_url != None
 
 - name: Install downloaded Telegraf package [Debian/Ubuntu]
-  apt:
+  ansible.builtin.apt:
     deb: /tmp/telegraf-ansible-download.deb
     state: present
   register: apt_result
