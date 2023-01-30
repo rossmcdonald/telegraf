@@ -14,7 +14,7 @@
 
 - name: Import InfluxData GPG signing key [Debian/Ubuntu]
   apt_key:
-    url: "{{ telegraf_influxdata_base_url }}/influxdb.key"
+    url: "{{ telegraf_influxdata_base_url }}/influxdata-archive_compat.key"
     state: present
   when: telegraf_install_url is not defined or telegraf_install_url == None
 
