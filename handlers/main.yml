@@ -15,9 +15,8 @@
 ## After version 2.2 of ansible 'listen' could be used to
 ## group 'check status' and 'assert running' into a single listener
 - name: check status
-  ansible.builtin.command: service telegraf status
-  args:
-    warn: false
+  ansible.builtin.command: 
+    cmd: service telegraf status
   ignore_errors: true
   register: telegraf_service_status
   become: true
