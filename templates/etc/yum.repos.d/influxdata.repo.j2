@@ -17,5 +17,5 @@ baseurl = {{ telegraf_influxdata_base_url }}/{{ ansible_distribution|lower }}/$r
 {% endif %}
 enabled = 1
 gpgcheck = 1
-gpgkey = {{ telegraf_influxdata_base_url }}/influxdb.key
+gpgkey = {{ telegraf_influxdata_base_url }}/influxdata-archive_compat.key
 sslverify = 1
