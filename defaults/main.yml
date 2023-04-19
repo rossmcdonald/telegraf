@@ -8,6 +8,7 @@ telegraf_runas_group: telegraf
 
 # Configuration Template
 telegraf_configuration_template: telegraf.conf.j2
+telegraf_configuration_backup: true
 
 # Configuration Variables
 telegraf_tags:
