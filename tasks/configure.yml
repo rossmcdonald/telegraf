@@ -16,7 +16,7 @@
     src: "{{ telegraf_configuration_template }}"
     dest: "{{ telegraf_configuration_dir }}/telegraf.conf"
     force: true
-    backup: true
+    backup: "{{ telegraf_configuration_backup }}"
     owner: telegraf
     group: telegraf
     mode: 0744
