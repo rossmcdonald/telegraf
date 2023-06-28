@@ -1,0 +1,11 @@
+---
+warn_list:
+  - '106'
+  - '503'
+  - experimental
+  - name[template] # at least for now we won't deal with this
+skip_list:
+  - risky-file-permissions
+  - 'role-name'
+  - 'fqcn-builtins'
+  

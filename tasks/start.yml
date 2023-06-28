@@ -1,6 +1,6 @@
 ---
 - name: Start the Telegraf service
-  service:
+  ansible.builtin.service:
     name: telegraf
     state: started
     enabled: true

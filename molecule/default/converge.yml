@@ -1,0 +1,23 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  pre_tasks:
+    - name: Update apt cache.
+      ansible.builtin.apt: update_cache=true cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+
+    - name: Install test dependencies (Debian).
+      ansible.builtin.package:
+        name:
+          - gpg
+          - gpg-agent
+      when: ansible_os_family == 'Debian'
+
+    - name: Install test dependencies (RedHat).
+      ansible.builtin.package: name=which state=present
+      when: ansible_os_family == 'RedHat'
+
+  roles:
+    - role: filviu.telegraf

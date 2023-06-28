@@ -8,6 +8,7 @@ telegraf_runas_group: telegraf
 
 # Configuration Template
 telegraf_configuration_template: telegraf.conf.j2
+telegraf_configuration_backup: true
 
 # Configuration Variables
 telegraf_tags:
@@ -76,6 +77,6 @@ telegraf_plugins_base:
       interfaces:
         - "eth0"
 
-telegraf_plugins: "{{ telegraf_plugins_base }} + {{ telegraf_plugins_extra | default([]) }}"
+telegraf_plugins: "{{ telegraf_plugins_base + telegraf_plugins_extra | default([]) }}"
 
 telegraf_influxdata_base_url: "https://repos.influxdata.com"

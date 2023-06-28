@@ -12,11 +12,11 @@
   register: ec2_tags
 
 - name: Set templatized Telegraf configuration
-  template:
+  ansible.builtin.template:
     src: "{{ telegraf_configuration_template }}"
     dest: "{{ telegraf_configuration_dir }}/telegraf.conf"
     force: true
-    backup: true
+    backup: "{{ telegraf_configuration_backup }}"
     owner: telegraf
     group: telegraf
     mode: 0744
@@ -29,33 +29,33 @@
     - "assert running"
 
 - name: Test for sysvinit script
-  stat:
+  ansible.builtin.stat:
     path: /etc/init.d/telegraf
   register: telegraf_sysvinit_script
 
 - name: Modify user Telegraf should run as [sysvinit]
-  replace:
+  ansible.builtin.replace:
     path: /etc/init.d/telegraf
     regexp: USER=.*
-    replace: USER={{ telegraf_runas_user }}
+    ansible.builtin.replace: USER={{ telegraf_runas_user }}
   when: telegraf_runas_user != "telegraf" and telegraf_sysvinit_script.stat.exists
 
 - name: Modify group Telegraf should run as [sysvinit]
-  replace:
+  ansible.builtin.replace:
     path: /etc/init.d/telegraf
     regexp: GROUP=.*
-    replace: GROUP={{ telegraf_runas_group }}
+    ansible.builtin.replace: GROUP={{ telegraf_runas_group }}
   when: telegraf_runas_group != "telegraf" and telegraf_sysvinit_script.stat.exists
 
 - name: Create systemd service directory [systemd]
-  file:
+  ansible.builtin.file:
     path: /etc/systemd/system/telegraf.service.d
     state: directory
     mode: 0744
   when: telegraf_runas_user != "telegraf" and not telegraf_sysvinit_script.stat.exists
 
 - name: Modify user Telegraf should run as [systemd]
-  template:
+  ansible.builtin.template:
     src: systemd/system/telegraf.service.d/override.conf
     dest: /etc/systemd/system/telegraf.service.d/override.conf
     mode: 0744

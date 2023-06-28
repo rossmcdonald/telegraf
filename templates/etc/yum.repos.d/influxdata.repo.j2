@@ -6,6 +6,8 @@ baseurl = "{{ telegraf_influxdata_base_url }}/centos/6/amd64/{{ telegraf_install
 baseurl = {{ telegraf_influxdata_base_url }}/rhel/$releasever/$basearch/{{ telegraf_install_version }}
 {% elif ansible_distribution|lower == "oraclelinux" %}
 baseurl = {{ telegraf_influxdata_base_url }}/rhel/$releasever/$basearch/{{ telegraf_install_version }}
+{% elif ansible_distribution|lower == "almalinux" %}
+baseurl = {{ telegraf_influxdata_base_url }}/rhel/$releasever/$basearch/{{ telegraf_install_version }}
 {% elif ansible_distribution|lower == "rocky" %}
 baseurl = {{ telegraf_influxdata_base_url }}/rhel/$releasever/$basearch/{{ telegraf_install_version }}
 {% elif ansible_distribution|lower == "fedora" %}
@@ -15,5 +17,5 @@ baseurl = {{ telegraf_influxdata_base_url }}/{{ ansible_distribution|lower }}/$r
 {% endif %}
 enabled = 1
 gpgcheck = 1
-gpgkey = {{ telegraf_influxdata_base_url }}/influxdb.key
+gpgkey = {{ telegraf_influxdata_base_url }}/influxdata-archive_compat.key
 sslverify = 1
